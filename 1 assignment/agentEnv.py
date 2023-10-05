@@ -108,7 +108,8 @@ def line_segments_intersect(linea,lineb):
     return 0<=ca<=1
 
 # Test cases:
-# assert line_segments_intersect(((0,0),(1,1)),((1,0),(0,1)))
-# assert not line_segments_intersect(((0,0),(1,1)),((1,0),(0.6,0.4)))
-# assert line_segments_intersect(((0,0),(1,1)),((1,0),(0.4,0.6)))
+print("test")
+assert line_segments_intersect(((0,0),(1,1)),((1,0),(0,1)))
+assert not line_segments_intersect(((0,0),(1,1)),((1,0),(0.6,0.4)))
+assert line_segments_intersect(((0,0),(1,1)),((1,0),(0.4,0.6)))
 
