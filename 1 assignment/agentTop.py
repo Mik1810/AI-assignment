@@ -14,6 +14,7 @@ import matplotlib
 from agentMiddle import Rob_middle_layer
 from agents import Environment
 import matplotlib.pyplot as plt
+import math
 
 
 class Rob_top_layer(Environment):
@@ -33,11 +34,23 @@ class Rob_top_layer(Environment):
         actions is of the form {'visit':list_of_locations}
         It visits the locations in turn.
         """
+
         to_do = plan['visit']
-        for loc in to_do:
-            position = self.locations[loc]
-            arrived = self.middle.do({'go_to': position, 'timeout': self.timeout})
-            self.display(1, "Arrived at", loc, arrived)
+        to_do_length = len(to_do)
+        for i in range(to_do_length):
+            rob_x, rob_y = self.middle.env.rob_x, self.middle.env.rob_y
+            print(f"Rob x: {rob_x}, Rob y: {rob_y}")
+            distance_list = [self.euclidean_distance(rob_x, rob_y, *self.locations[pos]) for pos in to_do]
+            print("Distance List: ", distance_list)
+            next_pos_index = distance_list.index(min(distance_list))
+            print("Position", self.locations[to_do[next_pos_index]], "To do: ", to_do, "Locations: ",self.locations)
+            arrived = self.middle.do({'go_to': self.locations[to_do[next_pos_index]], 'timeout': self.timeout})
+            self.display(1, "Arrived at", to_do[next_pos_index], arrived)
+            if arrived:
+                to_do.pop(next_pos_index)
+
+    def euclidean_distance(self, x1, y1, x2, y2):
+        return math.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 class Plot_env(object):
     def __init__(self, body, top):
@@ -71,17 +84,26 @@ class Plot_env(object):
 
 from agentEnv import Rob_body, Rob_env
 
-env = Rob_env({((20, 0), (30, 20)), ((70, -5), (70, 25))})
+#env = Rob_env({((20, 0), (30, 20)), ((70, -5), (70, 25))})
+
+"""
+    New environment defined by us
+    1. Create a new different environment.
+"""
+env = Rob_env({((20, 0), (20, 20)),
+               ((40, 20), (40, 50)),
+              ((70, 30), (120, 30)),
+               ((70, 0),(70, 15))}) # ,((70, 30), (120, 30))
 body = Rob_body(env)
 middle = Rob_middle_layer(body)
 top = Rob_top_layer(middle)
 
 # try:
 pl = Plot_env(body, top)
-top.do({'visit': ['o109', 'storage', 'o109', 'o103']})
+top.do({'visit': ['o109', 'storage', 'o103', 'mail']})
 pl.plot_run()
 # You can directly control the middle layer:
-middle.do({'go_to': (30, -10), 'timeout': 200})
+# middle.do({'go_to': (30, -10), 'timeout': 200})
 # Can you make it crash?
 
 # Robot Trap for which the current controller cannot escape:
