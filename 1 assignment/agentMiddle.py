@@ -12,6 +12,7 @@ from agents import Environment
 import math
 
 class Rob_middle_layer(Environment):
+    timer=20
     def __init__(self,env):
         self.env=env
         self.percepts = env.initial_percepts()
@@ -35,7 +36,14 @@ class Rob_middle_layer(Environment):
             remaining = -1    # will never reach 0
         target_pos = action['go_to']
         arrived = self.close_enough(target_pos)
+
         while not arrived and remaining != 0:
+
+            if self.timer == 0:
+                #self.env.env.walls.pop()
+                print("Popped: ",self.env.env.walls.add(((23, 15),(100, 40))))
+             # print("aggiorna muri")
+            self.timer-=1
             self.percepts = self.env.do({"steer":self.steer(target_pos)})
             remaining -= 1
             arrived = self.close_enough(target_pos)

@@ -15,6 +15,7 @@ from agentMiddle import Rob_middle_layer
 from agents import Environment
 import matplotlib.pyplot as plt
 import math
+import time
 
 
 class Rob_top_layer(Environment):
@@ -90,10 +91,12 @@ from agentEnv import Rob_body, Rob_env
     New environment defined by us
     1. Create a new different environment.
 """
+
 env = Rob_env({((20, 0), (20, 20)),
                ((40, 20), (40, 50)),
               ((70, 30), (120, 30)),
-               ((70, 0), (70, 15))}) # ,((70, 30), (120, 30))
+               ((70, 0), (70, 15)) ,
+               ((50, 30), (120, 50))})
 body = Rob_body(env)
 middle = Rob_middle_layer(body)
 top = Rob_top_layer(middle)
@@ -102,6 +105,7 @@ top = Rob_top_layer(middle)
 pl = Plot_env(body, top)
 top.do({'visit': ['o109', 'storage', 'o103', 'mail']})
 pl.plot_run()
+
 # You can directly control the middle layer:
 # middle.do({'go_to': (30, -10), 'timeout': 200})
 # Can you make it crash?
