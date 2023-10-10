@@ -93,7 +93,7 @@ from agentEnv import Rob_body, Rob_env
 env = Rob_env({((20, 0), (20, 20)),
                ((40, 20), (40, 50)),
               ((70, 30), (120, 30)),
-               ((70, 0),(70, 15))}) # ,((70, 30), (120, 30))
+               ((70, 0), (70, 15))}) # ,((70, 30), (120, 30))
 body = Rob_body(env)
 middle = Rob_middle_layer(body)
 top = Rob_top_layer(middle)
@@ -107,12 +107,12 @@ pl.plot_run()
 # Can you make it crash?
 
 # Robot Trap for which the current controller cannot escape:
-trap_env = Rob_env({((10, -21), (10, 0)), ((10, 10), (10, 31)), ((30, -10), (30, 0)),
-                    ((30, 10), (30, 20)), ((50, -21), (50, 31)), ((10, -21), (50, -21)),
-                    ((10, 0), (30, 0)), ((10, 10), (30, 10)), ((10, 31), (50, 31))})
-trap_body = Rob_body(trap_env, init_pos=(-1, 0, 90))
-trap_middle = Rob_middle_layer(trap_body)
-trap_top = Rob_top_layer(trap_middle, locations={'goal': (71, 0)})
+#trap_env = Rob_env({((10, -21), (10, 0)), ((10, 10), (10, 31)), ((30, -10), (30, 0)),
+#                    ((30, 10), (30, 20)), ((50, -21), (50, 31)), ((10, -21), (50, -21)),
+#                    ((10, 0), (30, 0)), ((10, 10), (30, 10)), ((10, 31), (50, 31))})
+#trap_body = Rob_body(trap_env, init_pos=(-1, 0, 90))
+#trap_middle = Rob_middle_layer(trap_body)
+#trap_top = Rob_top_layer(trap_middle, locations={'goal': (71, 0)})
 
 # Robot trap exercise:
 #pl = Plot_env(trap_body, trap_top)

@@ -36,7 +36,7 @@ class Rob_body(Environment):
         self.whisker_angle = 30   # angle of whisker relative to robot
         self.crashed = False
         # The following control how it is plotted
-        self.plotting = False      # whether the trace is being plotted
+        self.plotting = True      # whether the trace is being plotted
         self.sleep_time = 0.05     # time between actions (for real-time plotting)
         # The following are data structures maintained:
         self.history = [(self.rob_x, self.rob_y)] # history of (x,y) positions
