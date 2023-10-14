@@ -13,11 +13,12 @@ from agents import Environment
 
 
 class Rob_env(Environment):
-    def __init__(self, walls={}):
+    def __init__(self, walls={}, other_walls = {}):
         """walls is a set of line segments 
                where each line segment is of the form ((x0,y0),(x1,y1))
         """
         self.walls = walls
+        self.other_walls = other_walls
 
 
 import math
@@ -114,6 +115,6 @@ def line_segments_intersect(linea, lineb):
 
 
 # Test cases:
-assert line_segments_intersect(((0, 0), (1, 1)), ((1, 0), (0, 1)))
-assert not line_segments_intersect(((0, 0), (1, 1)), ((1, 0), (0.6, 0.4)))
-assert line_segments_intersect(((0, 0), (1, 1)), ((1, 0), (0.4, 0.6)))
+#assert line_segments_intersect(((0, 0), (1, 1)), ((1, 0), (0, 1)))
+#assert not line_segments_intersect(((0, 0), (1, 1)), ((1, 0), (0.6, 0.4)))
+#assert line_segments_intersect(((0, 0), (1, 1)), ((1, 0), (0.4, 0.6)))

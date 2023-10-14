@@ -13,14 +13,15 @@ import matplotlib
 
 from agentMiddle import Rob_middle_layer
 from agents import Environment
+from Distance import euclidean_distance
 import matplotlib.pyplot as plt
 import math
 import time
 
 
 class Rob_top_layer(Environment):
-    def __init__(self, middle, timeout=200, locations={'mail': (-5, 10),
-                                                       'o103': (50, 10), 'o109': (100, 10), 'storage': (101, 51)}):
+    def __init__(self, middle, timeout=200,
+                 locations = {'mail': (-5, 10), 'o103': (50, 10), 'o109': (100, 10), 'storage': (101, 51)}):
         """middle is the middle layer
         timeout is the number of steps the middle layer goes before giving up
         locations is a loc:pos dictionary 
@@ -41,17 +42,15 @@ class Rob_top_layer(Environment):
         for i in range(to_do_length):
             rob_x, rob_y = self.middle.env.rob_x, self.middle.env.rob_y
             print(f"Rob x: {rob_x}, Rob y: {rob_y}")
-            distance_list = [self.euclidean_distance(rob_x, rob_y, *self.locations[pos]) for pos in to_do]
+            distance_list = [euclidean_distance(rob_x, rob_y, *self.locations[pos]) for pos in to_do]
             print("Distance List: ", distance_list)
             next_pos_index = distance_list.index(min(distance_list))
-            print("Position", self.locations[to_do[next_pos_index]], "To do: ", to_do, "Locations: ",self.locations)
+            print("Position", self.locations[to_do[next_pos_index]], "To do: ", to_do, "Locations: ", self.locations)
             arrived = self.middle.do({'go_to': self.locations[to_do[next_pos_index]], 'timeout': self.timeout})
             self.display(1, "Arrived at", to_do[next_pos_index], arrived)
             if arrived:
                 to_do.pop(next_pos_index)
 
-    def euclidean_distance(self, x1, y1, x2, y2):
-        return math.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 class Plot_env(object):
     def __init__(self, body, top):
@@ -71,7 +70,6 @@ class Plot_env(object):
         plt.plot([body.rob_x], [body.rob_y], "go")
         plt.draw()
 
-
     def plot_run(self):
         """plots the history after the agent has finished.
         This is typically only used if body.plotting==False
@@ -85,18 +83,21 @@ class Plot_env(object):
 
 from agentEnv import Rob_body, Rob_env
 
-#env = Rob_env({((20, 0), (30, 20)), ((70, -5), (70, 25))})
+# env = Rob_env({((20, 0), (30, 20)), ((70, -5), (70, 25))})
 
 """
     New environment defined by us
     1. Create a new different environment.
 """
 
-env = Rob_env({((20, 0), (20, 20)),
+env = Rob_env(walls=
+              {((20, 0), (20, 20)),
                ((40, 20), (40, 50)),
-              ((70, 30), (120, 30)),
-               ((70, 0), (70, 15)) ,
-               ((50, 30), (120, 50))})
+               ((70, 30), (120, 30)),
+               ((70, 0), (70, 15))},
+              other_walls=
+              {((40, 0), (50, 30)),
+               ((80, 40), (120, 30))})
 body = Rob_body(env)
 middle = Rob_middle_layer(body)
 top = Rob_top_layer(middle)
@@ -111,13 +112,13 @@ pl.plot_run()
 # Can you make it crash?
 
 # Robot Trap for which the current controller cannot escape:
-#trap_env = Rob_env({((10, -21), (10, 0)), ((10, 10), (10, 31)), ((30, -10), (30, 0)),
+# trap_env = Rob_env({((10, -21), (10, 0)), ((10, 10), (10, 31)), ((30, -10), (30, 0)),
 #                    ((30, 10), (30, 20)), ((50, -21), (50, 31)), ((10, -21), (50, -21)),
 #                    ((10, 0), (30, 0)), ((10, 10), (30, 10)), ((10, 31), (50, 31))})
-#trap_body = Rob_body(trap_env, init_pos=(-1, 0, 90))
-#trap_middle = Rob_middle_layer(trap_body)
-#trap_top = Rob_top_layer(trap_middle, locations={'goal': (71, 0)})
+# trap_body = Rob_body(trap_env, init_pos=(-1, 0, 90))
+# trap_middle = Rob_middle_layer(trap_body)
+# trap_top = Rob_top_layer(trap_middle, locations={'goal': (71, 0)})
 
 # Robot trap exercise:
-#pl = Plot_env(trap_body, trap_top)
-#trap_top.do({'visit':['goal']})
+# pl = Plot_env(trap_body, trap_top)
+# trap_top.do({'visit':['goal']})
