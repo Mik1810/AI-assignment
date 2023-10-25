@@ -20,7 +20,7 @@ class Plot_env:
 
         for i in range(1, 9):
             self.ax.text(i - 0.5, -0.5, str(i), fontsize=12, ha='center', va='center')
-            self.ax.text(- 0.5,i - 0.5, str(i), fontsize=12, ha='center', va='center')
+            self.ax.text(-0.5, i - 0.5, str(i), fontsize=12, ha='center', va='center')
 
         # Set limits for the axes
         self.ax.set_xlim(0, 8)

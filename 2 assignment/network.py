@@ -1,40 +1,53 @@
-# Example1
 import networkx as nx
 # importing matplotlib.pyplot
 import matplotlib.pyplot as plt
 
-g = nx.Graph()
 
-g.add_edge(1, 2)
-g.add_edge(2, 3)
-g.add_edge(3, 4)
-g.add_edge(1, 4)
-g.add_edge(1, 5)
-
-
-
-#A => pA' | qA | q | p
-#A' => ppA
-
-nx.draw(g)
-plt.savefig("filename.png")
 
 # Example2
 # importing networkx
 # importing matplotlib.pyplot
 
 g = nx.Graph()
+# creazione grafico completo 8x8
+for i in range(1,65):
+    g.add_edge(i, i+1)
+    g.add_edge(i, i+8)
 
-g.add_edge(1, 2)
-g.add_edge(2, 3)
-g.add_edge(3, 4)
-g.add_edge(1, 4)
-g.add_edge(1, 5)
+# rimozione dei nodi non presenti sulla griglia originale
+g.remove_node(23)
+g.remove_node(19)
+g.remove_node(26)
+for x in range (35,40):
+    g.remove_node(x)
+#rimozione dei nodi in più
+for j in range(65, 73):
+    g.remove_node(j)
 
-nx.draw(g, with_labels=True)
+#rimozione degli archi in più
+cont=9
+while(cont<=58):
+    g.remove_edge(cont,cont-1)
+    print("cont: " + str(cont) + "cont-1: " + str(cont-1))
+    cont+=8
+
+node_positions = {}
+
+for i in range(1, 9):
+    for j in range(1, 9):
+        node_positions[i + 8 * (j - 1)] = (i,j)
+for i in range(1,65):
+    nx.set_node_attributes(g,i,("("+str(i)+")"",("+str(i+1)+")"))
+# Disegna il grafo utilizzando le posizioni definite
+label = node_positions
+nx.draw(g,pos=node_positions, with_labels=True)
 plt.show()
+
+
+
+
 """
-# plt.savefig("filename.png")
+ plt.savefig("filename.png")
 
 # Example3 (saving figures to files)
 # importing networkx
@@ -60,7 +73,7 @@ plt.savefig("filename1.png")
 # clearing the current plot
 plt.clf()
 
-# drawing in planar layout
+#drawing in planar layout
 nx.draw_planar(g, with_labels=True)
 plt.savefig("filename2.png")
 
