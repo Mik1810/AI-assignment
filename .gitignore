@@ -3,3 +3,4 @@
 ./*.idea
 ./1 assignment/__pycache__/
 __pycache__
+*.png
