@@ -1,127 +1,50 @@
-import json
-
 import networkx as nx
+# importing matplotlib.pyplot
 import matplotlib.pyplot as plt
 
 
-class Graph:
 
-    def __init__(self, size,  start, goal, walls):
-        self.g = nx.Graph()
-        self.x_size, self.y_size = size
-        self.walls = walls
-        self.start = start
-        self.goal = goal
-        self.positions = {}
+# Example2
+# importing networkx
+# importing matplotlib.pyplot
 
-        plt.figure(2, figsize=(7, 6))
-
-        #Draw edge
-        for x in range(1,self.x_size + 1):
-            for y in range(1, self.y_size + 1):
-                self.g.add_node(f"({x}, {y})")
-                self.positions[f"({x}, {y})"] = (x, y)
-
-        print(self.positions)
-        with open("position.json", "w") as file:
-            json.dump(self.positions, file)
-
-        #Draw edges between the nodes
-        for i in range(1, self.y_size + 1):
-            self.make_vertical_parent(i, self.y_size)
-            self.make_horizontal_parent(i, self.x_size)
-
-        #Remove nodew where the are walls
-        for (x, y) in self.walls:
-            self.g.remove_node(f"({x}, {y})")
-
-        # Colouring start node with green
-        color_map = []
-        for node in self.g:
-            if node == str(self.start):
-                color_map.append('green')
-            elif node == str(self.goal):
-                color_map.append('blue')
-            else:
-                color_map.append('white')
-
-        print(self.g)
-        nx.draw(self.g, pos=self.positions, node_color=color_map, node_size=550, font_size=7, with_labels=True, width=3, edgecolors="black")
-        plt.show()
-        plt.pause(20)
-
-    def make_vertical_parent(self, x, limit):
-        for y in range(1, limit + 1):
-            if y == limit:
-                return
-            self.g.add_edge(f"({x}, {y})", f"({x}, {y+1})")
-
-    def make_horizontal_parent(self, y, limit):
-        for x in range(1, limit + 1):
-            if x == limit:
-                return
-            self.g.add_edge(f"({x}, {y})", f"({x+1}, {y})")
-
-        """
-        for i in range(1, 65):
-            self.g.add_edge(i, i + 1)
-            self.g.add_edge(i, i + 8)
-
-        for i in range(1, self.x_size+1):
-            for j in range(1, self.y_size+1):
-                self.positions[i + 8 * (j - 1)] = (i, j)
-
-        print(self.positions)
-
-        for i in range(1, 65):
-            nx.set_node_attributes(self.g, i, f"({i}, {i + 1})")
-
-
-
-
-        for couple in self.walls:
-            x, y = couple
-
-        #
-        nx.draw(self.g, pos=self.positions, node_size = 500, font_size=7, with_labels=True)
-        plt.show()
-        plt.pause(20)
-        
-# creazione grafico frocio completo 8x8
-for i in range(1, 65):
-    g.add_edge(i, i + 1)
-    g.add_edge(i, i + 8)
+g = nx.Graph()
+# creazione grafico completo 8x8
+for i in range(1,65):
+    g.add_edge(i, i+1)
+    g.add_edge(i, i+8)
 
 # rimozione dei nodi non presenti sulla griglia originale
 g.remove_node(23)
 g.remove_node(19)
 g.remove_node(26)
-for x in range(35, 40):
+for x in range (35,40):
     g.remove_node(x)
-# rimozione dei nodi in più
+#rimozione dei nodi in più
 for j in range(65, 73):
     g.remove_node(j)
 
-# rimozione degli archi in più
-cont = 9
-while (cont <= 58):
-    g.remove_edge(cont, cont - 1)
-    print("cont: " + str(cont) + "cont-1: " + str(cont - 1))
-    cont += 8
-
+#rimozione degli archi in più
+cont=9
+while(cont<=58):
+    g.remove_edge(cont,cont-1)
+    print("cont: " + str(cont) + "cont-1: " + str(cont-1))
+    cont+=8
 node_positions = {}
-
 for i in range(1, 9):
     for j in range(1, 9):
-        node_positions[i + 8 * (j - 1)] = (i, j)
-for i in range(1, 65):
-    nx.set_node_attributes(g, i, ("(" + str(i) + ")"",(" + str(i + 1) + ")"))
+        node_positions[i + 8 * (j - 1)] = (i,j)
+for i in range(1,65):
+    nx.set_node_attributes(g,i,("("+str(i)+")"",("+str(i+1)+")"))
 # Disegna il grafo utilizzando le posizioni definite
 label = node_positions
-nx.draw(g, pos=node_positions, with_labels=True)
+nx.draw(g,pos=node_positions, with_labels=True)
 plt.show()
+
+
+
+
 """
-        """
  plt.savefig("filename.png")
 
 # Example3 (saving figures to files)
