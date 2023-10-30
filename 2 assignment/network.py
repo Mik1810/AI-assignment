@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 
 
 class Graph:
-
+    def get_Graph(self):
+        return self.g
     def __init__(self, size,  start, goal, walls):
         self.g = nx.Graph()
         self.x_size, self.y_size = size
@@ -45,10 +46,10 @@ class Graph:
             else:
                 color_map.append('white')
 
-        print(self.g)
+
         nx.draw(self.g, pos=self.positions, node_color=color_map, node_size=550, font_size=7, with_labels=True, width=3, edgecolors="black")
         plt.show()
-        plt.pause(20)
+        plt.pause(5)
 
     def make_vertical_parent(self, x, limit):
         for y in range(1, limit + 1):
@@ -61,6 +62,29 @@ class Graph:
             if x == limit:
                 return
             self.g.add_edge(f"({x}, {y})", f"({x+1}, {y})")
+    def dfs(self):
+        current_node_x, current_node_y = self.start
+        neighbors = list(self.g.neighbors(str(self.start)))
+        while not f"({current_node_x}, {current_node_y})" == str(self.goal):
+             if f"({current_node_x}, {current_node_y+1})" in neighbors:
+                current_node_y+=1
+                yield f"({current_node_x}, {current_node_y})"
+             elif f"({current_node_x-1}, {current_node_y})" in neighbors:
+                current_node_x-=1
+                yield f"({current_node_x}, {current_node_y})"
+             elif f"({current_node_x+1}, {current_node_y})" in neighbors:
+                current_node_x+=1
+                yield f"({current_node_x}, {current_node_y})"
+             elif f"({current_node_x}, {current_node_y-1})" in neighbors:
+                current_node_y-=1
+                yield f"({current_node_x}, {current_node_y})"
+
+
+        z = list(self.g.neighbors("(1, 1)")).pop()
+        x = int(z[1])
+        y = int(z[4])
+        #print(x, y)
+
 
         """
         for i in range(1, 65):
