@@ -4,6 +4,7 @@ class Displayable(object):
 	"""
 	max_display_level = 4 # can be overridden in subclasses
 
+
 	def display(self,level,*args,**nargs):
 		"""print the arguments if level is less than or equal to the
 		current max_display_level.

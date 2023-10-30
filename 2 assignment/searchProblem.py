@@ -171,6 +171,7 @@ problem3 = Search_problem_from_explicit_graph(
     start = 'g',
     goals = {'k','g'})
 
+
 acyclic_delivery_problem = Search_problem_from_explicit_graph(
     {'a','b','c','d','e','f'},
      [Arc('a','c',6),
