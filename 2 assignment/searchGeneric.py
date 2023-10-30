@@ -166,3 +166,4 @@ if __name__ == "__main__":
 # searcher3.search()  # find first path with DFS. What do you expect to happen?
 # searcher4 = AStarSearcher(searchProblem.cyclic_delivery_problem)    # A*
 # searcher4.search()  # find first path
+
