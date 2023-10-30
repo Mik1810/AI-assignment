@@ -61,4 +61,4 @@ class Plot:
         self.ax.add_patch(plt.Rectangle((x - 1, y - 1), 1, 1, facecolor=color, fill=True, edgecolor="black"))
         self.fig.canvas.draw()
         #plt.show()
-        #plt.pause(2)
+        plt.pause(2)

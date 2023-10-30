@@ -11,9 +11,17 @@ if __name__ == "__main__":
     env.draw_grid()
 
     graph = Graph(size=size, start=start, goal=goal, walls=walls)
-    print(list(graph.dfs()))
+    graph.do()
 
-    #env.draw_cell(3, 3, "red")
+    gen = graph.get_next_node()
+    cont = 0
+    while cont <= 10:
+        a = next(gen)
+        print("Next: ", a)
+        x, y = int(a[1]), int(a[4])
+        env.draw_cell(x, y, "red")
+        cont += 1
+
     #env.draw_cell(5, 7, "blue")
 
 
