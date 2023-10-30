@@ -9,5 +9,3 @@ from searchProblem import Search_problem_from_explicit_graph as Problem
 if __name__ == "__main__":
     searcher1 = Searcher(Problem(None, None, None, None, None, None))  # DFS
     searcher1.search()  # find first path
-
-
