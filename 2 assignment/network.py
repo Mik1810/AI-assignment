@@ -5,8 +5,10 @@ import matplotlib.pyplot as plt
 
 
 class Graph:
+    def get_Graph(self):
+        return self.g
 
-    def __init__(self, size,  start, goal, walls):
+    def __init__(self, size, start, goal, walls):
         self.g = nx.Graph()
         self.x_size, self.y_size = size
         self.walls = walls
@@ -16,8 +18,8 @@ class Graph:
 
         plt.figure(2, figsize=(7, 6))
 
-        #Draw edge
-        for x in range(1,self.x_size + 1):
+        # Draw edge
+        for x in range(1, self.x_size + 1):
             for y in range(1, self.y_size + 1):
                 self.g.add_node(f"({x}, {y})")
                 self.positions[f"({x}, {y})"] = (x, y)
@@ -26,12 +28,12 @@ class Graph:
         with open("position.json", "w") as file:
             json.dump(self.positions, file)
 
-        #Draw edges between the nodes
+        # Draw edges between the nodes
         for i in range(1, self.y_size + 1):
             self.make_vertical_parent(i, self.y_size)
             self.make_horizontal_parent(i, self.x_size)
 
-        #Remove nodew where the are walls
+        # Remove nodew where the are walls
         for (x, y) in self.walls:
             self.g.remove_node(f"({x}, {y})")
 
@@ -45,22 +47,44 @@ class Graph:
             else:
                 color_map.append('white')
 
-        print(self.g)
-        nx.draw(self.g, pos=self.positions, node_color=color_map, node_size=550, font_size=7, with_labels=True, width=3, edgecolors="black")
+        nx.draw(self.g, pos=self.positions, node_color=color_map, node_size=550, font_size=7, with_labels=True, width=3,
+                edgecolors="black")
         plt.show()
-        plt.pause(20)
+        plt.pause(5)
 
     def make_vertical_parent(self, x, limit):
         for y in range(1, limit + 1):
             if y == limit:
                 return
-            self.g.add_edge(f"({x}, {y})", f"({x}, {y+1})")
+            self.g.add_edge(f"({x}, {y})", f"({x}, {y + 1})")
 
     def make_horizontal_parent(self, y, limit):
         for x in range(1, limit + 1):
             if x == limit:
                 return
-            self.g.add_edge(f"({x}, {y})", f"({x+1}, {y})")
+            self.g.add_edge(f"({x}, {y})", f"({x + 1}, {y})")
+
+    def dfs(self):
+        current_node_x, current_node_y = self.start
+        neighbors = list(self.g.neighbors(str(self.start)))
+        while not f"({current_node_x}, {current_node_y})" == str(self.goal):
+            if f"({current_node_x}, {current_node_y + 1})" in neighbors:
+                current_node_y += 1
+                yield f"({current_node_x}, {current_node_y})"
+            elif f"({current_node_x - 1}, {current_node_y})" in neighbors:
+                current_node_x -= 1
+                yield f"({current_node_x}, {current_node_y})"
+            elif f"({current_node_x + 1}, {current_node_y})" in neighbors:
+                current_node_x += 1
+                yield f"({current_node_x}, {current_node_y})"
+            elif f"({current_node_x}, {current_node_y - 1})" in neighbors:
+                current_node_y -= 1
+                yield f"({current_node_x}, {current_node_y})"
+
+        z = list(self.g.neighbors("(1, 1)")).pop()
+        x = int(z[1])
+        y = int(z[4])
+        # print(x, y)
 
         """
         for i in range(1, 65):
@@ -86,7 +110,7 @@ class Graph:
         nx.draw(self.g, pos=self.positions, node_size = 500, font_size=7, with_labels=True)
         plt.show()
         plt.pause(20)
-        
+
 # creazione grafico frocio completo 8x8
 for i in range(1, 65):
     g.add_edge(i, i + 1)

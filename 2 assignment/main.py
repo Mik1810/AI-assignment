@@ -11,6 +11,9 @@ if __name__ == "__main__":
     env.draw_grid()
 
     graph = Graph(size=size, start=start, goal=goal, walls=walls)
+    print(list(graph.dfs()))
 
     #env.draw_cell(3, 3, "red")
     #env.draw_cell(5, 7, "blue")
+
+
