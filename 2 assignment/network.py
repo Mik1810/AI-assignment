@@ -28,7 +28,7 @@ class Graph:
                 self.g.add_node(f"({x}, {y})")
                 self.positions[f"({x}, {y})"] = (x, y)
 
-        #print(self.positions)
+        # print(self.positions)
         with open("position.json", "w") as file:
             json.dump(self.positions, file)
 
@@ -76,16 +76,13 @@ class Graph:
         visited = set()
         self.path.append(str(self.start))
         self.stack.put(str(self.start))
-        print("Stack: ",self.stack.queue)
+        print("Stack: ", self.stack.queue)
         print("Explored: ", self.path)
 
         node = self.stack.get()
-        cont = 0
-        while cont <= 10:
-        #while node is not str(self.goal):
-            cont+=1
 
-            #visited.add(node)
+        while node != str(self.goal):
+
             a = list(node)
             current_node_x, current_node_y = int(a[1]), int(a[4])
 
@@ -108,78 +105,25 @@ class Graph:
                 if f"({current_node_x}, {current_node_y + 1})" not in visited:
                     self.stack.put(f"({current_node_x}, {current_node_y + 1})")
 
-            print("Stack: ",self.stack.queue)
+            print("Stack: ", self.stack.queue)
 
-            if all(map(lambda x : x in visited, list(self.g.neighbors(f"({current_node_x}, {current_node_y})")))):
+            if all(map(lambda x: x in visited, list(self.g.neighbors(f"({current_node_x}, {current_node_y})")))):
                 for node in list(self.g.neighbors(f"({current_node_x}, {current_node_y})")):
                     self.path.append(node)
 
             node = self.stack.get()
             self.path.append(node)
             print("Explored: ", self.path)
-            #time.sleep(1)
-
-
-
-            """
-            
-        
-        
-        
-        
-           
-        
-            
-        
-           
-
-        #neighbors = list(self.g.neighbors(f"({current_node_x}, {current_node_y})"))
-
-        #print(f"({current_node_x}, {current_node_y})", type(f"({current_node_x}, {current_node_y})"))
-        #print(str(self.goal), type(str(self.goal)))
-        if f"({current_node_x}, {current_node_y})" is str(self.goal):
-                return "porcoddio"
-        #return self.path.append("goal")
-        if node not in visited:
-
-            visited.add(node)
-            neighbors = list(self.g.neighbors(f"({current_node_x}, {current_node_y})"))
-            for node in reversed(list(neighbors)):
-
-                if f"({current_node_x}, {current_node_y + 1})" in neighbors:
-                    neighbors.remove(f"({current_node_x}, {current_node_y + 1})")
-                    current_node_y += 1
-                    print(f"({current_node_x}, {current_node_y})")
-                    self.path.append(f"({current_node_x}, {current_node_y})")
-                    return self.dfs(f"({current_node_x}, {current_node_y})", visited)
-                if f"({current_node_x - 1}, {current_node_y})" in neighbors:
-                    neighbors.remove(f"({current_node_x - 1}, {current_node_y})")
-                    current_node_x -= 1
-                    print(f"({current_node_x}, {current_node_y})")
-                    self.path.append(f"({current_node_x}, {current_node_y})")
-                    return self.dfs(f"({current_node_x}, {current_node_y})", visited)
-                if f"({current_node_x + 1}, {current_node_y})" in neighbors:
-                    neighbors.remove(f"({current_node_x - 1}, {current_node_y})")
-                    current_node_x += 1
-                    print(f"({current_node_x}, {current_node_y})")
-                    self.path.append(f"({current_node_x}, {current_node_y})")
-                    return self.dfs(f"({current_node_x}, {current_node_y})", visited)
-                if f"({current_node_x}, {current_node_y - 1})" in neighbors:
-                    neighbors.remove(f"({current_node_x - 1}, {current_node_y})")
-                    current_node_y -= 1
-                    print(f"({current_node_x}, {current_node_y})")
-                    self.path.append(f"({current_node_x}, {current_node_y})")
-                    return self.dfs(f"({current_node_x}, {current_node_y})", visited)
-"""
+            # time.sleep(1)
 
     def get_next_node(self):
-        for item in self.path:
-            yield item
-        #yield self.path.pop()
+        for node in self.path:
+            yield node, list(self.g.neighbors(node))
+            # yield self.path.pop()
 
-        #z = list(self.g.neighbors("(1, 1)")).pop()
-        #x = int(z[1])
-        #y = int(z[4])
+        # z = list(self.g.neighbors("(1, 1)")).pop()
+        # x = int(z[1])
+        # y = int(z[4])
         # print(x, y)
 
         """

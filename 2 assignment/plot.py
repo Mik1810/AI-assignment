@@ -60,5 +60,8 @@ class Plot:
         # Add a colored cell
         self.ax.add_patch(plt.Rectangle((x - 1, y - 1), 1, 1, facecolor=color, fill=True, edgecolor="black"))
         self.fig.canvas.draw()
-        #plt.show()
-        plt.pause(2)
+        plt.pause(0.5)
+
+    def draw_frontier(self, x, y, color):
+        self.ax.add_patch(plt.Rectangle((x - 1, y - 1), 1, 1, facecolor=color, fill=True, edgecolor="black"))
+        self.fig.canvas.draw()
