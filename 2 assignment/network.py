@@ -64,7 +64,7 @@ class Graph:
             self.g.add_edge(f"({x}, {y})", f"({x+1}, {y})")
     def dfs(self):
         current_node_x, current_node_y = self.start
-        neighbors = list(self.g.neighbors(str(f"({current_node_x}, {current_node_y}")))
+        neighbors = list(self.g.neighbors(str(f"({current_node_x}, {current_node_ygit }")))
         while not f"({current_node_x}, {current_node_y})" == self.goal:
              if f"({current_node_x}, {current_node_y+1})" in neighbors:
                 current_node_y+=1

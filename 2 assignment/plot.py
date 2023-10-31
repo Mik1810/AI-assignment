@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 class Plot:
 
+
     def __init__(self, size=(8, 8), start=(0, 0), goal=(8, 8), walls=None):
         if walls is None:
             walls = []
