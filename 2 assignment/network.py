@@ -12,7 +12,7 @@ class Graph:
         self.x_size, self.y_size = size
         self.walls = walls
         self.start = start
-        self.goal = goal
+        self.goal = str(goal)
         self.positions = {}
 
         plt.figure(2, figsize=(7, 6))
@@ -64,8 +64,8 @@ class Graph:
             self.g.add_edge(f"({x}, {y})", f"({x+1}, {y})")
     def dfs(self):
         current_node_x, current_node_y = self.start
-        neighbors = list(self.g.neighbors(str(self.start)))
-        while not f"({current_node_x}, {current_node_y})" == str(self.goal):
+        neighbors = list(self.g.neighbors(str(f"({current_node_x}, {current_node_y}")))
+        while not f"({current_node_x}, {current_node_y})" == self.goal:
              if f"({current_node_x}, {current_node_y+1})" in neighbors:
                 current_node_y+=1
                 yield f"({current_node_x}, {current_node_y})"
