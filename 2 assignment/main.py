@@ -1,4 +1,4 @@
-from plot import Plot
+from plot import Plot, pause
 from network import Graph
 
 size = (8, 8)
@@ -17,19 +17,19 @@ if __name__ == "__main__":
 
     while True:
         try:
-            a, b = next(gen)
-            print("Next: ", a)
-            print("Next2: ", b)
-            x, y = int(a[1]), int(a[4])
-            z, w = x, y
-            graph.draw_node2(z, w, "red")
-            env.draw_cell(x, y, "red")
-            for item in b:
-                x1, y1 = int(item[1]), int(item[4])
-                z1, w1 = x1, y1
+            node, neighbors = next(gen)
+            x, y = int(node[1]), int(node[4])
+
+            graph.draw_node(x, y, "red", neighbors, "orange")
+
+            for node in neighbors:
+                x1, y1 = int(node[1]), int(node[4])
                 env.draw_frontier(x1, y1, "orange")
-            env.draw_frontier(x, y, "orange")
+
+            env.draw_cell(x, y, "red")
+
         except StopIteration:
+            pause()
             break
 
 
