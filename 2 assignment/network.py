@@ -1,5 +1,4 @@
 import json
-import time
 
 from queue import LifoQueue
 import networkx as nx
