@@ -11,7 +11,26 @@ if __name__ == "__main__":
     env.draw_grid()
 
     graph = Graph(size=size, start=start, goal=goal, walls=walls)
-    print(list(graph.dfs()))
+    graph.dfs()
 
-    #env.draw_cell(3, 3, "red")
-    #env.draw_cell(5, 7, "blue")
+    gen = graph.get_next_node()
+
+    while True:
+        try:
+            a, b = next(gen)
+            print("Next: ", a)
+            print("Next2: ", b)
+            x, y = int(a[1]), int(a[4])
+            z, w = x, y
+            graph.draw_node2(z, w, "red")
+            env.draw_cell(x, y, "red")
+            for item in b:
+                x1, y1 = int(item[1]), int(item[4])
+                z1, w1 = x1, y1
+                env.draw_frontier(x1, y1, "orange")
+            env.draw_frontier(x, y, "orange")
+        except StopIteration:
+            break
+
+
+
