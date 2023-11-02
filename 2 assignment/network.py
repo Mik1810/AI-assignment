@@ -20,7 +20,8 @@ class Graph:
         self.positions = {}
         self.frontier_color = set()
 
-        plt.figure(2, figsize=(7, 6))
+        f = plt.figure(2, figsize=(7, 6))
+        f.canvas.manager.set_window_title('Network')
 
         # Draw edge
         for x in range(1, self.x_size + 1):

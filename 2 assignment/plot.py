@@ -20,6 +20,7 @@ class Plot:
     def draw_grid(self):
 
         self.fig, self.ax = plt.subplots()
+        self.fig.canvas.manager.set_window_title('Environment')
 
         # Make an 8x8 grid
         for x in range(self.x_size):
