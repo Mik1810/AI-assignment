@@ -94,21 +94,35 @@ def meet_at(p1,p2):
     meets.__name__ = "meet_at("+str(p1)+','+str(p2)+')'
     return meets
 
-one_across = Variable('one_across', {'ant', 'big', 'bus', 'car', 'has'}, position=(0.3,0.9))
-one_down = Variable('one_down', {'book', 'buys', 'hold', 'lane', 'year'}, position=(0.1,0.7))
-two_down = Variable('two_down', {'ginger', 'constraint', 'symbol', 'syntax'}, position=(0.9,0.8))
-three_across = Variable('three_across', {'book', 'buys', 'hold', 'land', 'year'}, position=(0.1,0.3))
-four_across = Variable('four_across',{'ant', 'big', 'bus', 'car', 'has'}, position=(0.7,0.0))
+one_across = Variable('one_across', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+one_down = Variable('one_down', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+two_down = Variable('two_down', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+three_down = Variable('three_down', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+four_across = Variable('four_across', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+five_across = Variable('five_across', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
 crossword1 = CSP("crossword1",
-                  {one_across, one_down, two_down, three_across, four_across},
-                  [Constraint([one_across,one_down], meet_at(0,0)),
-                   Constraint([one_across,two_down], meet_at(2,0)),
-                   Constraint([three_across,two_down], meet_at(2,2)),
-                   Constraint([three_across,one_down], meet_at(0,2)),
-                   Constraint([four_across,two_down], meet_at(0,4))])
+                  {one_across, one_down, two_down, three_down, five_across, four_across},
+                [
+                Constraint([one_across,one_down], meet_at(0,0)),
+                Constraint([one_across,two_down], meet_at(1,0)),
+                Constraint([one_across,three_down], meet_at(2,0)),
 
-words = {'ant', 'big', 'bus', 'car', 'has','book', 'buys', 'hold',
-         'lane', 'year', 'ginger', 'constraint', 'symbol', 'syntax'}
+                Constraint([four_across, one_down], meet_at(0,1)),
+                Constraint([four_across,two_down], meet_at(1,1)),
+                Constraint([four_across,three_down], meet_at(2,1)),
+
+                Constraint([five_across,one_down], meet_at(0,2)),
+                Constraint([five_across,two_down], meet_at(1,2)),
+                Constraint([five_across,three_down], meet_at(2,2))])
+
+words = {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}
            
 def is_word(*letters, words=words):
     """is true if the letters concatenated form a word in words"""
@@ -176,12 +190,14 @@ def test_csp(CSP_solver, csp=csp0):
     solutions is the list of all solutions to csp
     This tests whether the solution returned by CSP_solver is a solution.
     """
-    print("Testing csp with",CSP_solver.__doc__)
-    sol0 = CSP_solver(csp)
+    print("Testing csp with")
+    #print(CSP_solver.__doc__)
+    print("CSP: ",CSP_solver)
+    sol0 = CSP_solver #(csp)
     print("Solution found:",sol0)
     #assert sol0 in solutions, "Solution not correct for "+str(csp)
     #print("Passed unit test")
 
 #csp0.show()
 #csp4.show()
-#crossword1.show()
+crossword1.show()

@@ -128,3 +128,4 @@ class CSP(object):
             x,y = var.position
             plt.text(x,y,var.name,bbox=var_bbox,ha='center')
 
+        plt.pause(20)

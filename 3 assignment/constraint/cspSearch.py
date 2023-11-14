@@ -57,7 +57,7 @@ def solver_from_searcher(csp):
         return None
 
 if __name__ == "__main__":
-    test_csp(solver_from_searcher(crossword1))
+    test_csp(solver_from_searcher(crossword1), crossword1)
 
 ## Test Solving CSPs with Search:
 searcher1 = Searcher(Search_from_CSP(csp1))
