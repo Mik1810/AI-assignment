@@ -57,6 +57,9 @@ def solver_from_searcher(csp):
         return None
 
 if __name__ == "__main__":
+    with open("terminal.txt", "w") as file:
+        file.write("")
+    file.close()
     test_csp(solver_from_searcher(crossword1), crossword1)
 
 ## Test Solving CSPs with Search:

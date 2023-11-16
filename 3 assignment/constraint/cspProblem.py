@@ -109,7 +109,6 @@ class CSP(object):
         plt.ion()   # interactive
         ax = plt.figure().gca()
         ax.set_axis_off()
-        plt.title(self.title)
         var_bbox = dict(boxstyle="round4,pad=1.0,rounding_size=0.5")
         con_bbox = dict(boxstyle="square,pad=1.0",color="green")
         for var in self.variables:
@@ -119,6 +118,7 @@ class CSP(object):
             if con.position is None:
                 con.position = tuple(sum(var.position[i] for var in con.scope)/len(con.scope)
                                          for i in range(2))
+
             bbox = dict(boxstyle="square,pad=1.0",color="green")
             for var in con.scope:
                 ax.annotate(con.string, var.position, xytext=con.position,
@@ -127,5 +127,6 @@ class CSP(object):
         for var in self.variables:
             x,y = var.position
             plt.text(x,y,var.name,bbox=var_bbox,ha='center')
-
+        plt.gcf().tight_layout()
+        plt.savefig("image.png", bbox_inches='tight', dpi=100)
         plt.pause(20)

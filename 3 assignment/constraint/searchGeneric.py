@@ -43,21 +43,19 @@ class Searcher(Displayable):
         """
         while not self.empty_frontier():
             path = self.frontier.pop()
-            self.display(2, "Expanding:",path,"(cost:",path.cost,")")
+            self.display(2, f"Expanding: {path} (cost: {path.cost}")
             self.num_expanded += 1
             if self.problem.is_goal(path.end()):    # solution found
-                self.display(1, self.num_expanded, "paths have been expanded and",
-                            len(self.frontier), "paths remain in the frontier")
+                self.display(1, f"{self.num_expanded} paths have been expanded and {len(self.frontier)} paths remain in the frontier")
                 self.solution = path   # store the solution found
                 return path
             else:
                 neighs = self.problem.neighbors(path.end())
-                self.display(3,"Neighbors are", neighs)
+                self.display(3, f"Neighbors are {neighs}")
                 for arc in reversed(list(neighs)):
-                    self.add_to_frontier(Path(path,arc))
-                self.display(3,"Frontier:",self.frontier)
-        self.display(1,"No (more) solutions. Total of",
-                     self.num_expanded,"paths expanded.")
+                    self.add_to_frontier(Path(path, arc))
+                self.display(3, f"Frontier: {self.frontier}")
+        self.display(1, "No (more) solutions. Total of {self.num_expanded} paths expanded.")
 
 class FrontierPQ(object):
     """A frontier consists of a priority queue (heap), frontierpq, of

@@ -95,31 +95,31 @@ def meet_at(p1,p2):
     return meets
 
 one_across = Variable('one_across', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
-          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}, position=(0, 0))
 one_down = Variable('one_down', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
-          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}, position=(0, 0.3))
 two_down = Variable('two_down', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
-          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}, position=(0, 0.6))
 three_down = Variable('three_down', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
-          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}, position=(0, 0.9))
 four_across = Variable('four_across', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
-          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}, position=(0, 1.2))
 five_across = Variable('five_across', {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
-          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'})
+          'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}, position=(0, 1.5))
 crossword1 = CSP("crossword1",
                   {one_across, one_down, two_down, three_down, five_across, four_across},
                 [
-                Constraint([one_across,one_down], meet_at(0,0)),
-                Constraint([one_across,two_down], meet_at(1,0)),
-                Constraint([one_across,three_down], meet_at(2,0)),
+                Constraint([one_across,one_down], meet_at(0,0), position=(1, 0.1)),
+                Constraint([one_across,two_down], meet_at(1,0), position=(1, 0.3)),
+                Constraint([one_across,three_down], meet_at(2,0), position=(1, 0.5)),
 
-                Constraint([four_across, one_down], meet_at(0,1)),
-                Constraint([four_across,two_down], meet_at(1,1)),
-                Constraint([four_across,three_down], meet_at(2,1)),
+                Constraint([four_across, one_down], meet_at(0,1), position=(1, 0.7)),
+                Constraint([four_across,two_down], meet_at(1,1), position=(1, 0.9)),
+                Constraint([four_across,three_down], meet_at(2,1), position=(1, 1.1)),
 
-                Constraint([five_across,one_down], meet_at(0,2)),
-                Constraint([five_across,two_down], meet_at(1,2)),
-                Constraint([five_across,three_down], meet_at(2,2))])
+                Constraint([five_across,one_down], meet_at(0,2), position=(1, 1.3)),
+                Constraint([five_across,two_down], meet_at(1,2), position=(1, 1.5)),
+                Constraint([five_across,three_down], meet_at(2,2), position=(1, 1.7))])
 
 words = {'add', 'age', 'aid', 'aim', 'air', 'are', 'arm', 'art', 'bad', 'bat', 'bee',
           'boa', 'dim', 'ear', 'eel', 'eft', 'lee', 'oaf'}
