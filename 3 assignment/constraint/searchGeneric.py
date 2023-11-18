@@ -43,7 +43,7 @@ class Searcher(Displayable):
         """
         while not self.empty_frontier():
             path = self.frontier.pop()
-            self.display(2, f"Expanding: {path} (cost: {path.cost}")
+            self.display(2, f"Expanding: {path} (cost: {path.cost})")
             self.num_expanded += 1
             if self.problem.is_goal(path.end()):    # solution found
                 self.display(1, f"{self.num_expanded} paths have been expanded and {len(self.frontier)} paths remain in the frontier")
@@ -124,9 +124,6 @@ class AStarSearcher(Searcher):
         value = path.cost+self.problem.heuristic(path.end())
         self.frontier.add(path, value)
 
-import searchProblem as sp
-searcher1= Searcher(sp.problem1)
-searcher1.search()    
 #try the following:
 #searcher2=AStarSearcher(sp.problem1)
 #searcher2.constraint()

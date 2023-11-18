@@ -7,9 +7,12 @@
 # This work is licensed under a Creative Commons
 # Attribution-NonCommercial-ShareAlike 4.0 International License.
 # See: http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en
-
+"""
+Michael: In questo file è presente la logica per risolvere i problemi. Infatti sfrutta
+le ricerche presente nel file searchGeneric (difatto, er trovare una soluzione si sfrutta una DFS)
+"""
 from searchProblem import Arc, Search_problem
-from cspExamples import csp1,csp2,test_csp, crossword1, crossword1d
+from cspExamples import test_csp, crossword1, crossword1d
 from searchGeneric import Searcher
 #from utilities import dict_union
 
@@ -57,18 +60,20 @@ def solver_from_searcher(csp):
         return None
 
 if __name__ == "__main__":
-    with open("terminal.txt", "w") as file:
+    # Clean the output file
+    with open("ac_not_finishing.txt", "w") as file:
         file.write("")
     file.close()
     test_csp(solver_from_searcher(crossword1), crossword1)
 
+
 ## Test Solving CSPs with Search:
-searcher1 = Searcher(Search_from_CSP(csp1))
+#searcher1 = Searcher(Search_from_CSP(csp1))
 #print(searcher1.constraint())  # get next solution
-searcher2 = Searcher(Search_from_CSP(csp2))
+#searcher2 = Searcher(Search_from_CSP(csp2))
 #print(searcher2.constraint())  # get next solution
-searcher3 = Searcher(Search_from_CSP(crossword1))
+#searcher3 = Searcher(Search_from_CSP(crossword1))
 #print(searcher3.constraint())  # get next solution
-searcher4 = Searcher(Search_from_CSP(crossword1d))
+#searcher4 = Searcher(Search_from_CSP(crossword1d))
 #print(searcher4.constraint())  # get next solution (warning: slow)
 
