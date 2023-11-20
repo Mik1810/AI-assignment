@@ -1,0 +1,309 @@
+Performing AC with domains {p10: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p01: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p11: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p20: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p21: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p00: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p02: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p12: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}, p22: {'p', 'f', 'i', 'y', 'q', 'v', 'j', 'e', 'w', 'k', 's', 'h', 'm', 't', 'a', 'l', 'c', 'n', 'b', 'x', 'g', 'o', 'z', 'u', 'r', 'd'}}
+Processing arc (p10, is_word[p10, p11, p12])
+Arc: (p10, is_word[p10, p11, p12]) is inconsistent
+Domain pruned dom(p10) = {'b', 'e', 'o', 'a', 'l', 'd'} due to is_word[p10, p11, p12]
+  adding nothing to to_do
+Arc: (p10, is_word[p10, p11, p12]) now consistent
+Processing arc (p10, is_word[p00, p10, p20])
+Arc: (p10, is_word[p00, p10, p20]) is inconsistent
+Domain pruned dom(p10) = {'o', 'a', 'e', 'd'} due to is_word[p00, p10, p20]
+  adding nothing to to_do
+Arc: (p10, is_word[p00, p10, p20]) now consistent
+Processing arc (p21, is_word[p20, p21, p22])
+Arc: (p21, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p21) = {'f', 'i', 'g', 'e', 'o', 'r', 'a', 'd'} due to is_word[p20, p21, p22]
+  adding nothing to to_do
+Arc: (p21, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p01, p02])
+Arc: (p00, is_word[p00, p01, p02]) is inconsistent
+Domain pruned dom(p00) = {'b', 'e', 'o', 'a', 'l', 'd'} due to is_word[p00, p01, p02]
+  adding {(p10, is_word[p00, p10, p20])} to to_do
+Arc: (p00, is_word[p00, p01, p02]) now consistent
+Processing arc (p20, is_word[p00, p10, p20])
+Arc: (p20, is_word[p00, p10, p20]) is inconsistent
+Domain pruned dom(p20) = {'f', 'e', 't', 'r', 'a', 'l', 'd'} due to is_word[p00, p10, p20]
+  adding {(p21, is_word[p20, p21, p22])} to to_do
+Arc: (p20, is_word[p00, p10, p20]) now consistent
+Processing arc (p22, is_word[p20, p21, p22])
+Arc: (p22, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p22) = {'t', 'e', 'm', 'r', 'l', 'd'} due to is_word[p20, p21, p22]
+  adding nothing to to_do
+Arc: (p22, is_word[p20, p21, p22]) now consistent
+Processing arc (p12, is_word[p02, p12, p22])
+Arc: (p12, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p12) = {'f', 'i', 'g', 'e', 'r', 'a', 'd'} due to is_word[p02, p12, p22]
+  adding {(p10, is_word[p10, p11, p12])} to to_do
+Arc: (p12, is_word[p02, p12, p22]) now consistent
+Processing arc (p01, is_word[p00, p01, p02])
+Arc: (p01, is_word[p00, p01, p02]) is inconsistent
+Domain pruned dom(p01) = {'f', 'i', 'g', 'e', 'o', 'r', 'a', 'd'} due to is_word[p00, p01, p02]
+  adding nothing to to_do
+Arc: (p01, is_word[p00, p01, p02]) now consistent
+Processing arc (p02, is_word[p02, p12, p22])
+Arc: (p02, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p02) = {'b', 'e', 'a', 'l', 'd'} due to is_word[p02, p12, p22]
+  adding {(p01, is_word[p00, p01, p02]), (p00, is_word[p00, p01, p02])} to to_do
+Arc: (p02, is_word[p02, p12, p22]) now consistent
+Processing arc (p02, is_word[p00, p01, p02])
+Arc: (p02, is_word[p00, p01, p02]) is inconsistent
+Domain pruned dom(p02) = {'a', 'l', 'e', 'd'} due to is_word[p00, p01, p02]
+  adding {(p12, is_word[p02, p12, p22])} to to_do
+Arc: (p02, is_word[p00, p01, p02]) now consistent
+Processing arc (p21, is_word[p01, p11, p21])
+Arc: (p21, is_word[p01, p11, p21]) is inconsistent
+Domain pruned dom(p21) = {'f', 'r', 'e', 'd'} due to is_word[p01, p11, p21]
+  adding {(p22, is_word[p20, p21, p22])} to to_do
+Arc: (p21, is_word[p01, p11, p21]) now consistent
+Processing arc (p12, is_word[p10, p11, p12])
+Arc: (p12, is_word[p10, p11, p12]) is inconsistent
+Domain pruned dom(p12) = {'f', 'r', 'e', 'd'} due to is_word[p10, p11, p12]
+  adding {(p02, is_word[p02, p12, p22])} to to_do
+Arc: (p12, is_word[p10, p11, p12]) now consistent
+Processing arc (p20, is_word[p20, p21, p22])
+Arc: (p20, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p20) = {'a', 'l', 'e'} due to is_word[p20, p21, p22]
+  adding nothing to to_do
+Arc: (p20, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p10, p20])
+Arc: (p00, is_word[p00, p10, p20]) is inconsistent
+Domain pruned dom(p00) = {'e', 'l', 'b'} due to is_word[p00, p10, p20]
+  adding {(p02, is_word[p00, p01, p02])} to to_do
+Arc: (p00, is_word[p00, p10, p20]) now consistent
+Processing arc (p11, is_word[p01, p11, p21])
+Arc: (p11, is_word[p01, p11, p21]) is inconsistent
+Domain pruned dom(p11) = {'i', 'g', 'r', 'a', 'd'} due to is_word[p01, p11, p21]
+  adding {(p12, is_word[p10, p11, p12])} to to_do
+Arc: (p11, is_word[p01, p11, p21]) now consistent
+Processing arc (p11, is_word[p10, p11, p12])
+Arc: (p11, is_word[p10, p11, p12]) now consistent
+Processing arc (p01, is_word[p01, p11, p21])
+Arc: (p01, is_word[p01, p11, p21]) is inconsistent
+Domain pruned dom(p01) = {'o', 'a', 'e'} due to is_word[p01, p11, p21]
+  adding nothing to to_do
+Arc: (p01, is_word[p01, p11, p21]) now consistent
+Processing arc (p10, is_word[p10, p11, p12])
+Arc: (p10, is_word[p10, p11, p12]) is inconsistent
+Domain pruned dom(p10) = {'o', 'a', 'e'} due to is_word[p10, p11, p12]
+  adding {(p00, is_word[p00, p10, p20]), (p20, is_word[p00, p10, p20])} to to_do
+Arc: (p10, is_word[p10, p11, p12]) now consistent
+Processing arc (p10, is_word[p00, p10, p20])
+Arc: (p10, is_word[p00, p10, p20]) is inconsistent
+Domain pruned dom(p10) = {'o', 'e'} due to is_word[p00, p10, p20]
+  adding {(p11, is_word[p10, p11, p12])} to to_do
+Arc: (p10, is_word[p00, p10, p20]) now consistent
+Processing arc (p21, is_word[p20, p21, p22])
+Arc: (p21, is_word[p20, p21, p22]) now consistent
+Processing arc (p22, is_word[p02, p12, p22])
+Arc: (p22, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p22) = {'e', 'm', 't', 'l', 'd'} due to is_word[p02, p12, p22]
+  adding {(p20, is_word[p20, p21, p22]), (p21, is_word[p20, p21, p22])} to to_do
+Arc: (p22, is_word[p02, p12, p22]) now consistent
+Processing arc (p00, is_word[p00, p01, p02])
+Arc: (p00, is_word[p00, p01, p02]) now consistent
+Processing arc (p22, is_word[p20, p21, p22])
+Arc: (p22, is_word[p20, p21, p22]) now consistent
+Processing arc (p20, is_word[p00, p10, p20])
+Arc: (p20, is_word[p00, p10, p20]) now consistent
+Processing arc (p12, is_word[p02, p12, p22])
+Arc: (p12, is_word[p02, p12, p22]) now consistent
+Processing arc (p01, is_word[p00, p01, p02])
+Arc: (p01, is_word[p00, p01, p02]) now consistent
+Processing arc (p02, is_word[p02, p12, p22])
+Arc: (p02, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p02) = {'a', 'l', 'e'} due to is_word[p02, p12, p22]
+  adding {(p01, is_word[p00, p01, p02]), (p00, is_word[p00, p01, p02])} to to_do
+Arc: (p02, is_word[p02, p12, p22]) now consistent
+Processing arc (p02, is_word[p00, p01, p02])
+Arc: (p02, is_word[p00, p01, p02]) now consistent
+Processing arc (p12, is_word[p10, p11, p12])
+Arc: (p12, is_word[p10, p11, p12]) is inconsistent
+Domain pruned dom(p12) = {'f', 'r'} due to is_word[p10, p11, p12]
+  adding {(p22, is_word[p02, p12, p22]), (p02, is_word[p02, p12, p22])} to to_do
+Arc: (p12, is_word[p10, p11, p12]) now consistent
+Processing arc (p20, is_word[p20, p21, p22])
+Arc: (p20, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p10, p20])
+Arc: (p00, is_word[p00, p10, p20]) now consistent
+Processing arc (p11, is_word[p10, p11, p12])
+Arc: (p11, is_word[p10, p11, p12]) is inconsistent
+Domain pruned dom(p11) = {'a'} due to is_word[p10, p11, p12]
+  adding {(p01, is_word[p01, p11, p21]), (p21, is_word[p01, p11, p21])} to to_do
+Arc: (p11, is_word[p10, p11, p12]) now consistent
+Processing arc (p01, is_word[p01, p11, p21])
+Arc: (p01, is_word[p01, p11, p21]) is inconsistent
+Domain pruned dom(p01) = {'o', 'e'} due to is_word[p01, p11, p21]
+  adding {(p02, is_word[p00, p01, p02])} to to_do
+Arc: (p01, is_word[p01, p11, p21]) now consistent
+Processing arc (p21, is_word[p20, p21, p22])
+Arc: (p21, is_word[p20, p21, p22]) now consistent
+Processing arc (p22, is_word[p02, p12, p22])
+Arc: (p22, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p22) = {'m', 't', 'e'} due to is_word[p02, p12, p22]
+  adding {(p20, is_word[p20, p21, p22]), (p21, is_word[p20, p21, p22])} to to_do
+Arc: (p22, is_word[p02, p12, p22]) now consistent
+Processing arc (p01, is_word[p00, p01, p02])
+Arc: (p01, is_word[p00, p01, p02]) now consistent
+Processing arc (p02, is_word[p02, p12, p22])
+Arc: (p02, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p02) = {'a', 'e'} due to is_word[p02, p12, p22]
+  adding {(p01, is_word[p00, p01, p02])} to to_do
+Arc: (p02, is_word[p02, p12, p22]) now consistent
+Processing arc (p02, is_word[p00, p01, p02])
+Arc: (p02, is_word[p00, p01, p02]) now consistent
+Processing arc (p21, is_word[p20, p21, p22])
+Arc: (p21, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p21) = {'f', 'r', 'e'} due to is_word[p20, p21, p22]
+  adding {(p11, is_word[p01, p11, p21]), (p01, is_word[p01, p11, p21])} to to_do
+Arc: (p21, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p01, p02])
+Arc: (p00, is_word[p00, p01, p02]) is inconsistent
+Domain pruned dom(p00) = {'l', 'b'} due to is_word[p00, p01, p02]
+  adding {(p10, is_word[p00, p10, p20]), (p20, is_word[p00, p10, p20])} to to_do
+Arc: (p00, is_word[p00, p01, p02]) now consistent
+Processing arc (p21, is_word[p01, p11, p21])
+Arc: (p21, is_word[p01, p11, p21]) is inconsistent
+Domain pruned dom(p21) = {'f', 'r'} due to is_word[p01, p11, p21]
+  adding {(p22, is_word[p20, p21, p22])} to to_do
+Arc: (p21, is_word[p01, p11, p21]) now consistent
+Processing arc (p20, is_word[p20, p21, p22])
+Arc: (p20, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p20) = {'a', 'e'} due to is_word[p20, p21, p22]
+  adding {(p00, is_word[p00, p10, p20])} to to_do
+Arc: (p20, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p10, p20])
+Arc: (p00, is_word[p00, p10, p20]) now consistent
+Processing arc (p11, is_word[p01, p11, p21])
+Arc: (p11, is_word[p01, p11, p21]) now consistent
+Processing arc (p01, is_word[p00, p01, p02])
+Arc: (p01, is_word[p00, p01, p02]) now consistent
+Processing arc (p22, is_word[p20, p21, p22])
+Arc: (p22, is_word[p20, p21, p22]) now consistent
+Processing arc (p01, is_word[p01, p11, p21])
+Arc: (p01, is_word[p01, p11, p21]) now consistent
+Processing arc (p10, is_word[p00, p10, p20])
+Arc: (p10, is_word[p00, p10, p20]) now consistent
+Processing arc (p20, is_word[p00, p10, p20])
+Arc: (p20, is_word[p00, p10, p20]) now consistent
+AC done. Reduced domains {p10: {'o', 'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}}
+Expanding: {p10: {'o', 'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}} (cost: 0)
+Splitting p10 into {'o'} and {'e'}
+Performing AC with domains {p10: {'o'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}}
+Processing arc (p12, is_word[p10, p11, p12])
+Arc: (p12, is_word[p10, p11, p12]) is inconsistent
+Domain pruned dom(p12) = {'f'} due to is_word[p10, p11, p12]
+  adding {(p22, is_word[p02, p12, p22]), (p02, is_word[p02, p12, p22])} to to_do
+Arc: (p12, is_word[p10, p11, p12]) now consistent
+Processing arc (p22, is_word[p02, p12, p22])
+Arc: (p22, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p22) = {'t'} due to is_word[p02, p12, p22]
+  adding {(p20, is_word[p20, p21, p22]), (p21, is_word[p20, p21, p22])} to to_do
+Arc: (p22, is_word[p02, p12, p22]) now consistent
+Processing arc (p20, is_word[p00, p10, p20])
+Arc: (p20, is_word[p00, p10, p20]) is inconsistent
+Domain pruned dom(p20) = {'a'} due to is_word[p00, p10, p20]
+  adding {(p22, is_word[p20, p21, p22])} to to_do
+Arc: (p20, is_word[p00, p10, p20]) now consistent
+Processing arc (p20, is_word[p20, p21, p22])
+Arc: (p20, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p10, p20])
+Arc: (p00, is_word[p00, p10, p20]) is inconsistent
+Domain pruned dom(p00) = {'b'} due to is_word[p00, p10, p20]
+  adding {(p02, is_word[p00, p01, p02]), (p01, is_word[p00, p01, p02])} to to_do
+Arc: (p00, is_word[p00, p10, p20]) now consistent
+Processing arc (p11, is_word[p10, p11, p12])
+Arc: (p11, is_word[p10, p11, p12]) now consistent
+Processing arc (p01, is_word[p00, p01, p02])
+Arc: (p01, is_word[p00, p01, p02]) now consistent
+Processing arc (p02, is_word[p02, p12, p22])
+Arc: (p02, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p02) = {'e'} due to is_word[p02, p12, p22]
+  adding {(p01, is_word[p00, p01, p02]), (p00, is_word[p00, p01, p02])} to to_do
+Arc: (p02, is_word[p02, p12, p22]) now consistent
+Processing arc (p02, is_word[p00, p01, p02])
+Arc: (p02, is_word[p00, p01, p02]) now consistent
+Processing arc (p21, is_word[p20, p21, p22])
+Arc: (p21, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p21) = {'r'} due to is_word[p20, p21, p22]
+  adding {(p11, is_word[p01, p11, p21]), (p01, is_word[p01, p11, p21])} to to_do
+Arc: (p21, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p01, p02])
+Arc: (p00, is_word[p00, p01, p02]) now consistent
+Processing arc (p22, is_word[p20, p21, p22])
+Arc: (p22, is_word[p20, p21, p22]) now consistent
+Processing arc (p11, is_word[p01, p11, p21])
+Arc: (p11, is_word[p01, p11, p21]) now consistent
+Processing arc (p01, is_word[p00, p01, p02])
+Arc: (p01, is_word[p00, p01, p02]) is inconsistent
+Domain pruned dom(p01) = {'e'} due to is_word[p00, p01, p02]
+  adding {(p11, is_word[p01, p11, p21]), (p21, is_word[p01, p11, p21])} to to_do
+Arc: (p01, is_word[p00, p01, p02]) now consistent
+Processing arc (p01, is_word[p01, p11, p21])
+Arc: (p01, is_word[p01, p11, p21]) now consistent
+Processing arc (p21, is_word[p01, p11, p21])
+Arc: (p21, is_word[p01, p11, p21]) now consistent
+Processing arc (p11, is_word[p01, p11, p21])
+Arc: (p11, is_word[p01, p11, p21]) now consistent
+AC done. Reduced domains {p10: {'o'}, p01: {'e'}, p11: {'a'}, p20: {'a'}, p21: {'r'}, p00: {'b'}, p02: {'e'}, p12: {'f'}, p22: {'t'}}
+Performing AC with domains {p10: {'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}}
+Processing arc (p12, is_word[p10, p11, p12])
+Arc: (p12, is_word[p10, p11, p12]) is inconsistent
+Domain pruned dom(p12) = {'r'} due to is_word[p10, p11, p12]
+  adding {(p22, is_word[p02, p12, p22]), (p02, is_word[p02, p12, p22])} to to_do
+Arc: (p12, is_word[p10, p11, p12]) now consistent
+Processing arc (p22, is_word[p02, p12, p22])
+Arc: (p22, is_word[p02, p12, p22]) now consistent
+Processing arc (p20, is_word[p00, p10, p20])
+Arc: (p20, is_word[p00, p10, p20]) is inconsistent
+Domain pruned dom(p20) = {'e'} due to is_word[p00, p10, p20]
+  adding {(p21, is_word[p20, p21, p22]), (p22, is_word[p20, p21, p22])} to to_do
+Arc: (p20, is_word[p00, p10, p20]) now consistent
+Processing arc (p00, is_word[p00, p10, p20])
+Arc: (p00, is_word[p00, p10, p20]) now consistent
+Processing arc (p11, is_word[p10, p11, p12])
+Arc: (p11, is_word[p10, p11, p12]) now consistent
+Processing arc (p02, is_word[p02, p12, p22])
+Arc: (p02, is_word[p02, p12, p22]) is inconsistent
+Domain pruned dom(p02) = {'a'} due to is_word[p02, p12, p22]
+  adding {(p01, is_word[p00, p01, p02]), (p00, is_word[p00, p01, p02])} to to_do
+Arc: (p02, is_word[p02, p12, p22]) now consistent
+Processing arc (p21, is_word[p20, p21, p22])
+Arc: (p21, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p21) = {'f'} due to is_word[p20, p21, p22]
+  adding {(p11, is_word[p01, p11, p21]), (p01, is_word[p01, p11, p21])} to to_do
+Arc: (p21, is_word[p20, p21, p22]) now consistent
+Processing arc (p00, is_word[p00, p01, p02])
+Arc: (p00, is_word[p00, p01, p02]) is inconsistent
+Domain pruned dom(p00) = {'b'} due to is_word[p00, p01, p02]
+  adding {(p10, is_word[p00, p10, p20]), (p20, is_word[p00, p10, p20])} to to_do
+Arc: (p00, is_word[p00, p01, p02]) now consistent
+Processing arc (p22, is_word[p20, p21, p22])
+Arc: (p22, is_word[p20, p21, p22]) is inconsistent
+Domain pruned dom(p22) = {'t'} due to is_word[p20, p21, p22]
+  adding {(p12, is_word[p02, p12, p22]), (p02, is_word[p02, p12, p22])} to to_do
+Arc: (p22, is_word[p20, p21, p22]) now consistent
+Processing arc (p12, is_word[p02, p12, p22])
+Arc: (p12, is_word[p02, p12, p22]) now consistent
+Processing arc (p11, is_word[p01, p11, p21])
+Arc: (p11, is_word[p01, p11, p21]) now consistent
+Processing arc (p01, is_word[p00, p01, p02])
+Arc: (p01, is_word[p00, p01, p02]) is inconsistent
+Domain pruned dom(p01) = {'o'} due to is_word[p00, p01, p02]
+  adding {(p11, is_word[p01, p11, p21]), (p21, is_word[p01, p11, p21])} to to_do
+Arc: (p01, is_word[p00, p01, p02]) now consistent
+Processing arc (p02, is_word[p02, p12, p22])
+Arc: (p02, is_word[p02, p12, p22]) now consistent
+Processing arc (p01, is_word[p01, p11, p21])
+Arc: (p01, is_word[p01, p11, p21]) now consistent
+Processing arc (p10, is_word[p00, p10, p20])
+Arc: (p10, is_word[p00, p10, p20]) now consistent
+Processing arc (p21, is_word[p01, p11, p21])
+Arc: (p21, is_word[p01, p11, p21]) now consistent
+Processing arc (p20, is_word[p00, p10, p20])
+Arc: (p20, is_word[p00, p10, p20]) now consistent
+Processing arc (p11, is_word[p01, p11, p21])
+Arc: (p11, is_word[p01, p11, p21]) now consistent
+AC done. Reduced domains {p10: {'e'}, p01: {'o'}, p11: {'a'}, p20: {'e'}, p21: {'f'}, p00: {'b'}, p02: {'a'}, p12: {'r'}, p22: {'t'}}
+Neighbors are [{p10: {'o', 'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}} --> {p10: {'o'}, p01: {'e'}, p11: {'a'}, p20: {'a'}, p21: {'r'}, p00: {'b'}, p02: {'e'}, p12: {'f'}, p22: {'t'}}, {p10: {'o', 'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}} --> {p10: {'e'}, p01: {'o'}, p11: {'a'}, p20: {'e'}, p21: {'f'}, p00: {'b'}, p02: {'a'}, p12: {'r'}, p22: {'t'}}]
+Frontier: [{p10: {'o', 'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}} --> {p10: {'e'}, p01: {'o'}, p11: {'a'}, p20: {'e'}, p21: {'f'}, p00: {'b'}, p02: {'a'}, p12: {'r'}, p22: {'t'}}, {p10: {'o', 'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}} --> {p10: {'o'}, p01: {'e'}, p11: {'a'}, p20: {'a'}, p21: {'r'}, p00: {'b'}, p02: {'e'}, p12: {'f'}, p22: {'t'}}]
+Expanding: {p10: {'o', 'e'}, p01: {'o', 'e'}, p11: {'a'}, p20: {'a', 'e'}, p21: {'f', 'r'}, p00: {'l', 'b'}, p02: {'a', 'e'}, p12: {'f', 'r'}, p22: {'m', 't', 'e'}} --> {p10: {'o'}, p01: {'e'}, p11: {'a'}, p20: {'a'}, p21: {'r'}, p00: {'b'}, p02: {'e'}, p12: {'f'}, p22: {'t'}} (cost: 1)
+2 paths have been expanded and 1 paths remain in the frontier

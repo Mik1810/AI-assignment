@@ -3,7 +3,6 @@
 from display import Displayable
 from searchProblem import Arc, Search_problem
 from searchGeneric import Searcher
-from cspExamples import test_csp, crossword1
 
 
 class Con_solver(Displayable):
@@ -138,9 +137,7 @@ def select(iterable):
 
 def ac_solver(csp):
     "arc consistency (solve_one)"
-    a = Con_solver(csp).solve_one()
-    print(type(a))
-    return a
+    return Con_solver(csp).solve_one()
 
 
 
@@ -193,7 +190,7 @@ if __name__ == "__main__":
     with open("terminal.txt", "w") as file:
         file.write("")
     file.close()
-    test_csp(ac_solver, crossword1)
+    #test_csp(ac_solver, crossword1)
 
 
 ## Test Solving CSPs with Arc consistency and domain splitting:
