@@ -63,7 +63,7 @@ if __name__ == "__main__":
     with open("ac_not_finishing.txt", "w") as file:
         file.write("")
     file.close()
-    test_csp(solver_from_searcher(crossword1), crossword1)
+    #test_csp(solver_from_searcher(crossword1), crossword1)
 
 
 ## Test Solving CSPs with Search:

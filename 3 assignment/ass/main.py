@@ -10,14 +10,14 @@
 
 """
 Michael: In questo file vengono definiti i problemi da risolvere attraverso i vincoli e le variabili.
-Infine, è presente un test cases per verificare se la solzione ottenuta è ammissibile
 
 """
-
+import copy
+import time
+from cspConsistency import Search_with_AC_from_CSP
 from cspProblem import Variable, CSP, Constraint
 from searchGeneric import Searcher
-from cspConsistency import Search_with_AC_from_CSP, Con_solver
-from cspSearch import Search_from_CSP
+
 
 def meet_at(p1, p2):
     """returns a function of two words that is true
@@ -117,22 +117,58 @@ def test_csp(CSP_solver, csp):
     assert sol0 in solutions_c1, "Solution not correct for "+str(csp)
     print("Passed unit test")
 
+def pre_process_letters(csp: CSP):
+
+    # Make a copy of the problem
+    problem = copy.deepcopy(csp)
+
+    # Build the useful literals dictionary
+    useful_letters = set()
+
+    for word in words:
+        for letter in letters:
+            if letter in word:
+                useful_letters.add(letter)
+
+    for variable in problem.variables:
+        variable.domain = useful_letters
+
+    return problem
+
+
+def do_average(problem: CSP):
+    times = []
+    for _ in range(100):
+        start = time.time()
+        Searcher(Search_with_AC_from_CSP(problem, True)).search(True)
+        stop = time.time()
+        times.append(stop - start)
+    media = 0
+    for e in times:
+        media += e
+    media = media / len(times)
+    return media
+
 if __name__ == "__main__":
+
+    with open("terminal.txt", "w") as file:
+        file.flush()
 
     """Found solution with Arc Consistency"""
     CSP_Searcher_with_AC = Searcher(Search_with_AC_from_CSP(crossword1d)).search()
+    print("Solutions: ", CSP_Searcher_with_AC.end())
+
+    """Average values of preprocessed problem or not"""
+    print("Computind averegas: ...")
+    average_1_rapresentation = do_average(crossword1)
+    average_2_rapresentation = do_average(crossword1d)
+    preprocesssed_problem = pre_process_letters(crossword1d)
+    average_preprocessing = do_average(preprocesssed_problem)
+    print("Media prima rappresentazione: ", average_1_rapresentation)
+    print("Media seconda rappresentazione: ", average_2_rapresentation)
+    print("Media seconda rappresentazione con preprocessing: ", average_preprocessing)
 
     """Found solution without Arc Consistency"""
-    """Don't do this, i svery slow (a run expanded 73k path on my laptop) """
-    #CSP_Searcher = Searcher(Search_from_CSP(crossword1d)).search()
-
-    """Non so cosa faccia"""
-    #solution = Con_solver(crossword1d).solve_one()
-    #test_csp(solver, crossword1)
-
-
-
-
-# csp0.show()
-# csp4.show()
-# crossword1.show()
+    """Don't do this, is very slow (a run expanded 73k path on my laptop) """
+    #CSP_Searcher = Searcher(Search_from_CSP(crossword1)).search()
+    #print("Solutions: ", CSP_Searcher.end())

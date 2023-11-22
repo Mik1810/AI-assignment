@@ -36,26 +36,27 @@ class Searcher(Displayable):
         self.frontier.append(path)
         
     @visualize
-    def search(self):
+    def search(self, testing=False):
         """returns (next) path from the problem's start node
         to a goal node. 
         Returns None if no path exists.
         """
+        assert isinstance(testing, bool), "You have to choose a boolean value!"
         while not self.empty_frontier():
             path = self.frontier.pop()
-            self.display(2, f"Expanding: {path} (cost: {path.cost})")
+            self.display(2, f"Expanding: {path} (cost: {path.cost})") if not testing else ""
             self.num_expanded += 1
             if self.problem.is_goal(path.end()):    # solution found
-                self.display(1, f"{self.num_expanded} paths have been expanded and {len(self.frontier)} paths remain in the frontier")
+                self.display(1, f"{self.num_expanded} paths have been expanded and {len(self.frontier)} paths remain in the frontier") if not testing else ""
                 self.solution = path   # store the solution found
                 return path
             else:
                 neighs = self.problem.neighbors(path.end())
-                self.display(3, f"Neighbors are {neighs}")
+                self.display(3, f"Neighbors are {neighs}") if not testing else ""
                 for arc in reversed(list(neighs)):
                     self.add_to_frontier(Path(path, arc))
-                self.display(3, f"Frontier: {self.frontier}")
-        self.display(1, "No (more) solutions. Total of {self.num_expanded} paths expanded.")
+                self.display(3, f"Frontier: {self.frontier}") if not testing else ""
+        self.display(1, "No (more) solutions. Total of {self.num_expanded} paths expanded.") if not testing else ""
 
 class FrontierPQ(object):
     """A frontier consists of a priority queue (heap), frontierpq, of

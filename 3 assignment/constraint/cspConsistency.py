@@ -185,9 +185,7 @@ def ac_search_solver(csp):
     sol = Searcher(Search_with_AC_from_CSP(csp)).search()
     if sol:
         return {v:select(d) for (v,d) in sol.end().items()}
-    
-#if __name__ == "__main__":
-#    test_csp(ac_search_solver)
+
 
 if __name__ == "__main__":
     with open("terminal.txt", "w") as file:
