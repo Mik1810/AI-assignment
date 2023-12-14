@@ -1,0 +1,764 @@
+Performing AC with domains {Action0: {mc_off, dc, mcc_cs, mcc_mr, mc_lab, pum, mcc_off, dm, mc_cs, puc, mc_mr, mcc_lab}, RLoc_0: {'off', 'cs', 'lab', 'mr'}, SWC_1: {False, True}, RHM_1: {False, True}, RLoc_1: {'off', 'cs', 'lab', 'mr'}, SWC_0: {False, True}, MW_0: {False, True}, RHC_0: {False, True}, RHC_1: {False, True}, MW_1: {False, True}, RHM_0: {False, True}}
+Processing arc (Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (Action0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (MW_1, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (MW_1, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is True(MW_0, Action0))
+Arc: (Action0, if x2 is pum then x1 is True(MW_0, Action0)) now consistent
+Processing arc (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, value_is_lab(RLoc_0,))
+Arc: (RLoc_0, value_is_lab(RLoc_0,)) is inconsistent
+Domain pruned dom(RLoc_0) = {'lab'} due to value_is_lab(RLoc_0,)
+  adding {(Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0)), (Action0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)), (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)), (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0)), (Action0, if x2 is dc then x1 is off(RLoc_0, Action0)), (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0))} to to_do
+Arc: (RLoc_0, value_is_lab(RLoc_0,)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_off, dc, mcc_cs, mc_lab, pum, mc_mr, mcc_off, mc_cs, puc, dm, mcc_lab} due to if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)
+  adding {(RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)), (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)), (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)), (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)), (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)), (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)), (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)), (MW_1, if x2 is pum then x1 is False(MW_1, Action0)), (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)), (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)), (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)), (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0)), (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)), (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))} to to_do
+Arc: (Action0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (Action0, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (Action0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1))
+Arc: (Action0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_off, dc, mcc_cs, mc_lab, pum, dm, mc_cs, puc, mc_mr, mcc_lab} due to if x2 is mcc_off then x1 is off(RLoc_0, Action0)
+  adding {(RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)), (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)), (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))} to to_do
+Arc: (Action0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_cs then x1 is off(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_cs then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RHC_0, value_is_False(RHC_0,))
+Arc: (RHC_0, value_is_False(RHC_0,)) is inconsistent
+Domain pruned dom(RHC_0) = {False} due to value_is_False(RHC_0,)
+  adding {(Action0, if x2 is puc then x1 is False(RHC_0, Action0)), (Action0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))} to to_do
+Arc: (RHC_0, value_is_False(RHC_0,)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is dm then x1 is off(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_off, dc, mcc_cs, mc_lab, pum, mc_cs, puc, mc_mr, mcc_lab} due to if x2 is dm then x1 is off(RLoc_0, Action0)
+  adding {(RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)), (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))} to to_do
+Arc: (Action0, if x2 is dm then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (SWC_0, value_is_True(SWC_0,))
+Arc: (SWC_0, value_is_True(SWC_0,)) is inconsistent
+Domain pruned dom(SWC_0) = {True} due to value_is_True(SWC_0,)
+  adding nothing to to_do
+Arc: (SWC_0, value_is_True(SWC_0,)) now consistent
+Processing arc (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (Action0, if x2 is dc then x1 is True(RHC_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_off, mcc_cs, mc_lab, pum, mc_cs, puc, mc_mr, mcc_lab} due to if x2 is dc then x1 is True(RHC_0, Action0)
+  adding {(RHM_1, if x2 is pum then x1 is True(RHM_1, Action0)), (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)), (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)), (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) is inconsistent
+Domain pruned dom(SWC_1) = {True} due to first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)
+  adding {(Action0, if x2 is dc then x1 is False(SWC_1, Action0))} to to_do
+Arc: (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (Action0, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (RHM_0, value_is_False(RHM_0,))
+Arc: (RHM_0, value_is_False(RHM_0,)) is inconsistent
+Domain pruned dom(RHM_0) = {False} due to value_is_False(RHM_0,)
+  adding {(Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))} to to_do
+Arc: (RHM_0, value_is_False(RHM_0,)) now consistent
+Processing arc (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (MW_0, value_is_True(MW_0,))
+Arc: (MW_0, value_is_True(MW_0,)) is inconsistent
+Domain pruned dom(MW_0) = {True} due to value_is_True(MW_0,)
+  adding {(Action0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)), (Action0, if x2 is pum then x1 is True(MW_0, Action0))} to to_do
+Arc: (MW_0, value_is_True(MW_0,)) now consistent
+Processing arc (Action0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_off, mc_lab, pum, puc, mc_cs, mc_mr, mcc_lab} due to if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)
+  adding {(SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)), (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)), (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)), (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)), (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0)), (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)), (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0))} to to_do
+Arc: (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_off, mc_lab, pum, puc, mc_cs, mcc_lab} due to if x2 is mc_mr then x1 is mr(RLoc_0, Action0)
+  adding {(RHC_1, if x2 is puc then x1 is True(RHC_1, Action0)), (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_1, value_is_off(RLoc_1,))
+Arc: (RLoc_1, value_is_off(RLoc_1,)) is inconsistent
+Domain pruned dom(RLoc_1) = {'off'} due to value_is_off(RLoc_1,)
+  adding {(Action0, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)), (Action0, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)), (Action0, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)), (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0)), (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)), (Action0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)), (Action0, if x2 is mc_cs then x1 is off(RLoc_1, Action0)), (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))} to to_do
+Arc: (RLoc_1, value_is_off(RLoc_1,)) now consistent
+Processing arc (RLoc_1, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_1, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (MW_0, if x2 is pum then x1 is True(MW_0, Action0))
+Arc: (MW_0, if x2 is pum then x1 is True(MW_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (Action0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (RHC_1, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_1, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (Action0, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_lab, pum, puc, mc_cs, mcc_lab} due to if x2 is mc_off then x1 is off(RLoc_0, Action0)
+  adding {(RLoc_1, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)), (RHC_1, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)), (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)), (MW_0, if x2 is pum then x1 is True(MW_0, Action0)), (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)), (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0))} to to_do
+Arc: (Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (Action0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mcc_lab, mc_lab, pum} due to if x2 is mc_cs then x1 is cs(RLoc_0, Action0)
+  adding {(RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)), (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)), (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (MW_1, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (MW_1, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_lab, mcc_lab, puc} due to if x2 is pum then x1 is mr(RLoc_0, Action0)
+  adding {(MW_1, if x2 is pum then x1 is False(MW_1, Action0)), (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)), (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)), (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) is inconsistent
+Domain pruned dom(MW_1) = {True} due to first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)
+  adding {(Action0, if x2 is pum then x1 is False(MW_1, Action0))} to to_do
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mcc_lab, mc_lab} due to if x2 is puc then x1 is cs(RLoc_0, Action0)
+  adding {(RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))} to to_do
+Arc: (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is True(MW_0, Action0))
+Arc: (Action0, if x2 is pum then x1 is True(MW_0, Action0)) now consistent
+Processing arc (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (Action0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1))
+Arc: (Action0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_cs then x1 is off(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_cs then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mcc_lab} due to if x2 is mc_lab then x1 is mr(RLoc_1, Action0)
+  adding {(RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)), (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)), (RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)), (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)), (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)), (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)), (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)), (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)), (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)), (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)), (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))} to to_do
+Arc: (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_1, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_1, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (MW_0, if x2 is pum then x1 is True(MW_0, Action0))
+Arc: (MW_0, if x2 is pum then x1 is True(MW_0, Action0)) now consistent
+Processing arc (RHC_1, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_1, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) is inconsistent
+Domain pruned dom(RHC_1) = {False} due to first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)
+  adding {(Action0, if x2 is dc then x1 is False(RHC_1, Action0)), (Action0, if x2 is puc then x1 is True(RHC_1, Action0))} to to_do
+Arc: (RHC_1, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) is inconsistent
+Domain pruned dom(RHM_1) = {False} due to first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)
+  adding {(Action0, if x2 is dm then x1 is False(RHM_1, Action0)), (Action0, if x2 is pum then x1 is True(RHM_1, Action0))} to to_do
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (MW_1, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (MW_1, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_0, first and third arguments are equal if action is not in {mc_off, mcc_cs, mcc_mr, mc_lab, mcc_off, mc_cs, mc_mr, mcc_lab}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_0, first and third arguments are equal if action is not in {dc, puc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (Action0, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (Action0, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+AC done. Reduced domains {Action0: {mcc_lab}, RLoc_0: {'lab'}, SWC_1: {True}, RHM_1: {False}, RLoc_1: {'off'}, SWC_0: {True}, MW_0: {True}, RHC_0: {False}, RHC_1: {False}, MW_1: {True}, RHM_0: {False}}
+solution:
+{Action0: mcc_lab, RLoc_0: 'lab', SWC_1: True, RHM_1: False, RLoc_1: 'off', SWC_0: True, MW_0: True, RHC_0: False, RHC_1: False, MW_1: True, RHM_0: False}
+Performing AC with domains {MW_0: {False, True}, Action0: {puc, mc_off, mcc_lab, dm, mcc_cs, mc_mr, mcc_off, dc, mc_lab, mcc_mr, pum, mc_cs}, RLoc_1: {'off', 'lab', 'cs', 'mr'}, MW_1: {False, True}, SWC_0: {False, True}, RLoc_0: {'off', 'lab', 'cs', 'mr'}, SWC_1: {False, True}, RHM_0: {False, True}, RHC_1: {False, True}, RHC_0: {False, True}, RHM_1: {False, True}}
+Processing arc (Action0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_1, value_is_off(RLoc_1,))
+Arc: (RLoc_1, value_is_off(RLoc_1,)) is inconsistent
+Domain pruned dom(RLoc_1) = {'off'} due to value_is_off(RLoc_1,)
+  adding {(Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))} to to_do
+Arc: (RLoc_1, value_is_off(RLoc_1,)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (Action0, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_0, value_is_lab(RLoc_0,))
+Arc: (RLoc_0, value_is_lab(RLoc_0,)) is inconsistent
+Domain pruned dom(RLoc_0) = {'lab'} due to value_is_lab(RLoc_0,)
+  adding {(RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)), (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)), (Action0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)), (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))} to to_do
+Arc: (RLoc_0, value_is_lab(RLoc_0,)) now consistent
+Processing arc (MW_0, value_is_True(MW_0,))
+Arc: (MW_0, value_is_True(MW_0,)) is inconsistent
+Domain pruned dom(MW_0) = {True} due to value_is_True(MW_0,)
+  adding {(MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))} to to_do
+Arc: (MW_0, value_is_True(MW_0,)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is dm then x1 is off(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mc_cs, mcc_lab, mc_off, mcc_cs, mc_mr, dc, mc_lab, mcc_mr, pum, mcc_off} due to if x2 is dm then x1 is off(RLoc_0, Action0)
+  adding {(RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)), (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)), (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)), (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)), (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)), (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0)), (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)), (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0)), (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)), (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)), (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is dm then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_0, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_0, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mcc_lab, mc_off, mcc_cs, mc_mr, dc, mcc_off, mcc_mr, pum, mc_cs} due to if x2 is mc_lab then x1 is mr(RLoc_1, Action0)
+  adding {(RLoc_0, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)), (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))} to to_do
+Arc: (Action0, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (Action0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mc_cs, mcc_lab, dc, mcc_cs, mc_mr, mcc_mr, pum, mcc_off} due to if x2 is mc_off then x1 is lab(RLoc_1, Action0)
+  adding nothing to to_do
+Arc: (Action0, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RHC_0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mcc_lab, dc, mcc_cs, mc_mr, mcc_off, pum, mc_cs} due to if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)
+  adding {(RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)), (RHC_0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)), (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0))} to to_do
+Arc: (Action0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_cs then x1 is off(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_cs then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mc_cs, mcc_lab, mcc_cs, dc, pum, mcc_off} due to if x2 is mc_mr then x1 is mr(RLoc_0, Action0)
+  adding {(RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)), (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)), (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (Action0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mcc_lab, dc, mcc_cs, mcc_off, mc_cs} due to if x2 is pum then x1 is mr(RLoc_0, Action0)
+  adding {(RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)), (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)), (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)), (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0))} to to_do
+Arc: (Action0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1))
+Arc: (Action0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {puc, mcc_lab, mcc_cs, dc, mc_cs} due to if x2 is mcc_off then x1 is off(RLoc_0, Action0)
+  adding {(RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))} to to_do
+Arc: (Action0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (MW_0, if x2 is pum then x1 is True(MW_0, Action0))
+Arc: (MW_0, if x2 is pum then x1 is True(MW_0, Action0)) now consistent
+Processing arc (SWC_0, value_is_True(SWC_0,))
+Arc: (SWC_0, value_is_True(SWC_0,)) is inconsistent
+Domain pruned dom(SWC_0) = {True} due to value_is_True(SWC_0,)
+  adding {(Action0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))} to to_do
+Arc: (SWC_0, value_is_True(SWC_0,)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (Action0, if x2 is dc then x1 is off(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mc_cs, puc, mcc_lab, mcc_cs} due to if x2 is dc then x1 is off(RLoc_0, Action0)
+  adding {(MW_0, if x2 is pum then x1 is True(MW_0, Action0)), (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (Action0, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mcc_lab, mcc_cs, mc_cs} due to if x2 is puc then x1 is cs(RLoc_0, Action0)
+  adding nothing to to_do
+Arc: (Action0, if x2 is puc then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (MW_1, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (MW_1, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is True(MW_0, Action0))
+Arc: (Action0, if x2 is pum then x1 is True(MW_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1))
+Arc: (Action0, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (Action0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (RHC_1, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_1, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (Action0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (RHM_0, value_is_False(RHM_0,))
+Arc: (RHM_0, value_is_False(RHM_0,)) is inconsistent
+Domain pruned dom(RHM_0) = {False} due to value_is_False(RHM_0,)
+  adding {(Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (Action0, if x2 is dm then x1 is True(RHM_0, Action0))} to to_do
+Arc: (RHM_0, value_is_False(RHM_0,)) now consistent
+Processing arc (Action0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (Action0, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (RHC_0, value_is_False(RHC_0,))
+Arc: (RHC_0, value_is_False(RHC_0,)) is inconsistent
+Domain pruned dom(RHC_0) = {False} due to value_is_False(RHC_0,)
+  adding {(RHC_1, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)), (Action0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)), (Action0, if x2 is puc then x1 is False(RHC_0, Action0)), (Action0, if x2 is dc then x1 is True(RHC_0, Action0))} to to_do
+Arc: (RHC_0, value_is_False(RHC_0,)) now consistent
+Processing arc (Action0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) is inconsistent
+Domain pruned dom(MW_1) = {True} due to first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)
+  adding {(Action0, if x2 is pum then x1 is False(MW_1, Action0))} to to_do
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mcc_lab, mc_cs} due to if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)
+  adding {(MW_1, if x2 is pum then x1 is False(MW_1, Action0)), (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)), (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0)), (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)), (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)), (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0)), (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)), (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)), (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0)), (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)), (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0)), (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)), (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)), (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))} to to_do
+Arc: (Action0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) is inconsistent
+Domain pruned dom(RHM_1) = {False} due to first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)
+  adding {(Action0, if x2 is pum then x1 is True(RHM_1, Action0)), (Action0, if x2 is dm then x1 is False(RHM_1, Action0))} to to_do
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (Action0, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) is inconsistent
+Domain pruned dom(SWC_1) = {True} due to first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)
+  adding {(Action0, if x2 is dc then x1 is False(SWC_1, Action0))} to to_do
+Arc: (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) is inconsistent
+Domain pruned dom(Action0) = {mcc_lab} due to if x2 is mc_cs then x1 is cs(RLoc_0, Action0)
+  adding {(RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)), (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)), (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)), (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)), (RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)), (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))} to to_do
+Arc: (Action0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (Action0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_cs then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_0, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is puc then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (RHC_1, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (RLoc_0, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_0, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (Action0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (RHC_0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_lab then x1 is mr(RLoc_1, Action0)) now consistent
+Processing arc (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (RHC_1, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_0, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_off then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_lab then x1 is lab(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_cs then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_cs then x1 is cs(RLoc_0, Action0)) now consistent
+Processing arc (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (RHC_0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (Action0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1))
+Arc: (Action0, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_lab then x1 is off(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (MW_0, if x2 is pum then x1 is True(MW_0, Action0))
+Arc: (MW_0, if x2 is pum then x1 is True(MW_0, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_mr then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (MW_1, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (MW_1, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (RHM_1, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_mr then x1 is lab(RLoc_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dm then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is True(RHC_0, Action0))
+Arc: (Action0, if x2 is dc then x1 is True(RHC_0, Action0)) now consistent
+Processing arc (RHC_1, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1))
+Arc: (RHC_1, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)) is inconsistent
+Domain pruned dom(RHC_1) = {False} due to first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)
+  adding {(Action0, if x2 is dc then x1 is False(RHC_1, Action0)), (Action0, if x2 is puc then x1 is True(RHC_1, Action0))} to to_do
+Arc: (RHC_1, first and third arguments are equal if action is not in {puc, dc}(RHC_0, Action0, RHC_1)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is True(RHM_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is True(RHM_1, Action0)) now consistent
+Processing arc (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mc_mr then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (Action0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (RHM_1, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mcc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dm then x1 is False(RHM_1, Action0))
+Arc: (Action0, if x2 is dm then x1 is False(RHM_1, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is dc then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is pum then x1 is False(MW_1, Action0))
+Arc: (Action0, if x2 is pum then x1 is False(MW_1, Action0)) now consistent
+Processing arc (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0))
+Arc: (RHM_0, if x2 is dm then x1 is True(RHM_0, Action0)) now consistent
+Processing arc (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_0, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0))
+Arc: (RLoc_1, if x2 is mcc_off then x1 is cs(RLoc_1, Action0)) now consistent
+Processing arc (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1))
+Arc: (MW_1, first and third arguments are equal if action is not in {pum}(MW_0, Action0, MW_1)) now consistent
+Processing arc (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is mc_off then x1 is off(RLoc_0, Action0)) now consistent
+Processing arc (Action0, if x2 is dc then x1 is False(RHC_1, Action0))
+Arc: (Action0, if x2 is dc then x1 is False(RHC_1, Action0)) now consistent
+Processing arc (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1))
+Arc: (RHM_1, first and third arguments are equal if action is not in {dm, pum}(RHM_0, Action0, RHM_1)) now consistent
+Processing arc (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0))
+Arc: (RHC_0, if x2 is puc then x1 is False(RHC_0, Action0)) now consistent
+Processing arc (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0))
+Arc: (RLoc_0, if x2 is pum then x1 is mr(RLoc_0, Action0)) now consistent
+Processing arc (RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1))
+Arc: (RLoc_1, first and third arguments are equal if action is not in {mc_cs, mc_off, mcc_lab, mcc_cs, mc_mr, mc_lab, mcc_mr, mcc_off}(RLoc_0, Action0, RLoc_1)) now consistent
+Processing arc (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1))
+Arc: (SWC_1, first and third arguments are equal if action is not in {dc}(SWC_0, Action0, SWC_1)) now consistent
+Processing arc (Action0, if x2 is puc then x1 is True(RHC_1, Action0))
+Arc: (Action0, if x2 is puc then x1 is True(RHC_1, Action0)) now consistent
+Processing arc (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0))
+Arc: (SWC_1, if x2 is dc then x1 is False(SWC_1, Action0)) now consistent
+AC done. Reduced domains {MW_0: {True}, Action0: {mcc_lab}, RLoc_1: {'off'}, MW_1: {True}, SWC_0: {True}, RLoc_0: {'lab'}, SWC_1: {True}, RHM_0: {False}, RHC_1: {False}, RHC_0: {False}, RHM_1: {False}}
+solution:
+{MW_0: True, Action0: mcc_lab, RLoc_1: 'off', MW_1: True, SWC_0: True, RLoc_0: 'lab', SWC_1: True, RHM_0: False, RHC_1: False, RHC_0: False, RHM_1: False}
