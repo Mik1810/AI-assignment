@@ -1,0 +1,16 @@
+yfinance
+pandas
+bottle
+plotly
+matplotlib
+numpy
+ta
+quantstats
+seaborn
+matplotlib
+scikit-learn
+xgboost
+lightgbm
+catboost
+optuna
+IPython
