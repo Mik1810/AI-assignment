@@ -5,21 +5,13 @@ import pickle
 import pandas as pd
 import numpy as np
 
-# Data Visualization
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-import plotly.graph_objs as go
-import matplotlib.ticker as mtick
-
 # Financial Data Analysis
 import yfinance as yf
 import ta
 import quantstats as qs
-from pandas import DataFrame
 
 # Machine Learning Metrics
-from sklearn.metrics import r2_score, mean_squared_error, confusion_matrix
+from sklearn.metrics import r2_score, mean_squared_error
 
 # Models
 from sklearn.linear_model import LinearRegression, Ridge
@@ -31,9 +23,6 @@ from sklearn.neighbors import KNeighborsRegressor
 
 # Feature Selection
 from sklearn.feature_selection import SelectKBest, f_regression
-
-# Feature Importance
-from sklearn.inspection import permutation_importance
 
 # Hyperparameter Tuning
 import optuna
@@ -182,6 +171,31 @@ def test_models(X_train, y_train, X_test, y_test):
     return ordered_r2_map, ordered_rmse_map
 
 
+# Funzione obbiettivo per il modello
+def objective(trial, X_train, y_train, X_test, y_test):
+
+    # Definizione di diversi parametri con cui verrà testato il modello
+    params = {
+        'loss': trial.suggest_categorical('loss', ['squared_error', 'absolute_error', 'huber', 'quantile']),
+        'n_estimators': trial.suggest_int('n_estimators', 100, 1000, step=50),
+        'learning_rate': trial.suggest_loguniform('learning_rate', 0.01, 0.1),
+        'max_depth': trial.suggest_int('max_depth', 3, 10),
+        'min_samples_split': trial.suggest_int('min_samples_split', 2, 20),
+        'min_samples_leaf': trial.suggest_int('min_samples_leaf', 2, 20),
+        'subsample': trial.suggest_uniform('subsample', 0.1, 1.0),
+        'random_state': 42
+    }
+
+    # Fitting and predicting
+    tuning = GradientBoostingRegressor(**params)
+    tuning.fit(X_train, y_train)
+    preds = tuning.predict(X_test)
+
+    # Computing RMSE score
+    rmse = np.round(mean_squared_error(y_test, preds, squared=False), 3)
+    return rmse  # Returining the score
+
+
 def main(model):
 
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
@@ -240,8 +254,6 @@ def main(model):
         # Il modello riceve in pasto i dati di allenamento
         model.fit(X_train, y_train)
 
-    else:
-        # Se sono qui vuol dire che ho già il modello preaddestrato
         # Il modello calcola i valori predetti sulla base dei dati di testing
         y_pred = model.predict(X_test)
 
@@ -253,16 +265,37 @@ def main(model):
         #plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
         #plots.draw_scatter_plot2(y_test, y_pred)
 
+        # Verifichiamo quanto sono state incisive le feature per i calcoli delle predizioni
+        #plots.draw_feature_importance_plot(model, X_test, y_test)
 
-    
-        y_pred= model.predict(X_test)
+        # Si può provare a migliorare il modello attaverso il tuning degli iperparametri
+        # L'obbiettivo è minimizzare dei valori di errore
+        study = optuna.create_study(direction='minimize')
+        study.optimize(lambda trial: objective(trial, X_train, y_train, X_test, y_test), n_trials=100, show_progress_bar=True)
+
+        # Estrai i risultati dallo studio
+        trials = study.trials
+
+        # Scrivi i risultati in un file di testo
+        with open('optuna_results.txt', 'w') as file:
+            for trial in trials:
+                file.write(f'Trial {trial.number}: Params - {trial.params}, Value - {trial.value}\n')
+
+        # Salvo il modello addestrato
+        with open('model3.pkl', 'wb') as file:
+            pickle.dump(model, file)
+
+    else:
+        # Se sono qui vuol dire che ho già il modello preaddestrato
+
+        y_pred = model.predict(X_test)
         print("y_pred: ", y_pred)
 
 
 if __name__ == "__main__":
 
     try:
-        with open('model2.pkl', 'rb') as file:
+        with open('modelNO.pkl', 'rb') as file:
             loaded_model = pickle.load(file)
             print(loaded_model)
         main(loaded_model)

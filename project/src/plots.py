@@ -1,13 +1,15 @@
-# Data Visualization
+# Visualizzazione dei grafici
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objs as go
-
 import matplotlib.ticker as mtick
-from plotly.offline import init_notebook_mode
 
+# Gestione dei dati
 import numpy as np
+
+# Libreria per calcolare l'importanza delle features
+from sklearn.inspection import permutation_importance
 
 
 def draw_candlestick_plot(stock):
@@ -63,11 +65,36 @@ def draw_scatter_plot(y_test, y_pred, r2, rmse):
     plt.show()
 
 def draw_scatter_plot2(y_test, y_pred):
+
     # Daily returns plot y_pred x y_test
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=np.arange(len(y_test)), y=y_test, mode='lines', name='True Values'))
     fig.add_trace(go.Scatter(x=np.arange(len(y_test)), y=y_pred, mode='lines', name='Predicted Values'))
     fig.update_layout(title='True vs. Predicted Values', xaxis_title='Index', yaxis_title='Values')
     fig.show()
+
+
+def draw_feature_importance_plot(model, X_test, y_test):
+
+    result = permutation_importance(model, X_test, y_test, n_repeats=10,
+                                    random_state=42)  # Computing feature importance
+
+    # Computing mean scores and obtaining features' names
+    importances = result.importances_mean
+    feature_names = X_test.columns
+
+    # Sorting Features importances and names
+    indices = importances.argsort()[::1]
+    sorted_features = feature_names[indices]
+    sorted_importances = importances[indices]
+
+    # Plotting Feature Importance plot
+    fig, ax = plt.subplots(figsize=(8, 15))
+    ax.barh(sorted_features, sorted_importances)
+    ax.set_yticklabels(sorted_features)
+    ax.set_ylabel('Features')
+    ax.set_xlabel('Importance')
+    ax.set_title('Feature Importance')
+    plt.show()
 
 
