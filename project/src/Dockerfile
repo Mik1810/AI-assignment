@@ -4,7 +4,7 @@ LABEL authors="michaelpic"
 
 WORKDIR /project
 
-COPY main.py .
+COPY main_with_bottle.py .
 COPY requirements.txt .
 
 # Aggiungo il pacchetto libgomp1 necessaria per un modello

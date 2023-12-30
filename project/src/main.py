@@ -1,12 +1,7 @@
-# Importing Libraries
+# Per caricare un modello preaddestrato
+import pickle
 
-# Bottle to set up a python server
-from bottle import route, run, template, response
-
-# Financial Data Analysis
-import yfinance as yf
-
-# Data Handling
+# Gestione dei dati
 import pandas as pd
 import numpy as np
 
@@ -15,14 +10,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objs as go
-
 import matplotlib.ticker as mtick
-from plotly.offline import init_notebook_mode
-# init_notebook_mode(connected=True)
 
-
+# Financial Data Analysis
+import yfinance as yf
 import ta
 import quantstats as qs
+from pandas import DataFrame
 
 # Machine Learning Metrics
 from sklearn.metrics import r2_score, mean_squared_error, confusion_matrix
@@ -32,7 +26,7 @@ from sklearn.linear_model import LinearRegression, Ridge
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
 from catboost import CatBoostRegressor
-from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor, ExtraTreesRegressor, GradientBoostingRegressor
+from sklearn.ensemble import AdaBoostRegressor, ExtraTreesRegressor, GradientBoostingRegressor
 from sklearn.neighbors import KNeighborsRegressor
 
 # Feature Selection
@@ -48,165 +42,236 @@ import optuna
 import warnings
 warnings.filterwarnings("ignore")
 
-# DataFrame that will contain the data downloaded from yfinance
-df = None
-brk = None
+import plots
 
 
-@route("/test")
-def test():
-    return "test"
+# Funzione che calcola ulteriori indici utili da quelli delle azioni
+def feature_engineering(df):
+
+    # high_low_ratio indica la volatilità misurata come il rapporto tra i prezzi più alti e più bassi.
+    df['high_low_ratio'] = df['High'] / df['Low']
+
+    # open_adjclose cattura la direzione complessiva del mercato confrontando i prezzi di apertura e chiusura.
+    df['open_adjclose_ratio'] = df['Open'] / df['Adj Close']
+
+    # candle_to_wick_ratio rappresenta la porzione dell'intervallo di prezzo coperto dal corpo della candela,
+    # che rappresenta la distanza tra i prezzi di apertura e chiusura di ogni giorno.
+    df['candle_to_wick_ratio'] = (df['Adj Close'] - df['Open']) / (df['High'] - df['Low'])
+    df['candle_to_wick_ratio'] = df['candle_to_wick_ratio'].replace([np.inf, -np.inf], 0)
+
+    # I seguenti indici rappresentano il prezzo di chiusura spostato idietro nel tempo di uno, due, tre e cinque giorni.
+    df['Close_lag1'] = df['Adj Close'].shift(1)
+    df['Close_lag2'] = df['Adj Close'].shift(2)
+    df['Close_lag3'] = df['Adj Close'].shift(3)
+    df['Close_lag5'] = df['Adj Close'].shift(5)
+
+    # I sequenti valori sono utili per catturare momentum e trend su un determinato arco temporale.
+    # Ad esempio, un rapporto superiore a 1 suggerirebbe un momentum rialzista.
+    df['Close_lag1_ratio'] = df['Adj Close'] / df['Close_lag1']
+    df['Close_lag2_ratio'] = df['Adj Close'] / df['Close_lag2']
+    df['Close_lag3_ratio'] = df['Adj Close'] / df['Close_lag3']
+    df['Close_lag5_ratio'] = df['Adj Close'] / df['Close_lag5']
+
+    # Indici che rappresentano la media mobile semplice calcota con finestre di grandezza 10, 20, 80 e 100
+    df['sma10'] = ta.trend.sma_indicator(df['Adj Close'], window=10)
+    df['sma20'] = ta.trend.sma_indicator(df['Adj Close'], window=20)
+    df['sma80'] = ta.trend.sma_indicator(df['Adj Close'], window=80)
+    df['sma100'] = ta.trend.sma_indicator(df['Adj Close'], window=100)
+
+    # Rappresentano i rapporti tra il prezzo di chiusura e ciascuna media mobile, indicando se il prezzo è al di sopra
+    # o al di sotto della media.
+    df['Close_sma10_ratio'] = df['Adj Close'] / df['sma10']
+    df['Close_sma20_ratio'] = df['Adj Close'] / df['sma20']
+    df['Close_sma80_ratio'] = df['Adj Close'] / df['sma80']
+    df['Close_sma100_ratio'] = df['Adj Close'] / df['sma100']
+
+    # Ulteriori indici che rappresentano i rapporti tra le varie medie mobili
+    df['sma10_sma20_ratio'] = df['sma10'] / df['sma20']
+    df['sma20_sma80_ratio'] = df['sma20'] / df['sma80']
+    df['sma80_sma100_ratio'] = df['sma80'] / df['sma100']
+    df['sma10_sma80_ratio'] = df['sma10'] / df['sma80']
+    df['sma20_sma100_ratio'] = df['sma20'] / df['sma100']
+
+    # Indicatori tecnici del mondo finanziario (analizzati all'interno del documento)
+    df['rsi'] = ta.momentum.RSIIndicator(df['Adj Close']).rsi()
+    df['rsi_overbought'] = (df['rsi'] >= 70).astype(int)
+    df['rsi_oversold'] = (df['rsi'] <= 30).astype(int)
+    df['cci'] = ta.trend.cci(df['High'], df['Low'], df['Adj Close'], window=20, constant=0.015)
+    df['obv'] = ta.volume.OnBalanceVolumeIndicator(close=df['Adj Close'], volume=df['Volume']).on_balance_volume()
+    df['obv_divergence_10_days'] = df['obv'].diff().rolling(10).sum() - df['Adj Close'].diff().rolling(10).sum()
+    df['obv_divergence_20_days'] = df['obv'].diff().rolling(20).sum() - df['Adj Close'].diff().rolling(20).sum()
+
+    # Rapppresenta i rendimenti giornalieri percentuali: calcola la variazione percentuale tra gli elementi successivi
+    # della colonna 'Adj Close'. La formula è (valore_corrente - valore_precedente) / valore_precedente.
+    df['returns_in_%'] = np.round((df['Adj Close'].pct_change()) * 100, 2)
+
+    # Variabile target (y) che rappresenta il ritorno in % ma spostato in avanti di un giorno al fine di indicare
+    # al modello a cosa puntare.
+    df['target'] = df['returns_in_%'].shift(-1)
+
+    # Rimuovi i valori null dal DataSet
+    df.dropna(inplace=True)
+
+    return df
+
+# Funzione che consente di selezionare le migliori features per addestrare il modello
+def select_features(X_train, y_train, X_test):
+    # Crea un selettore per le feature migliori utilizzando il test F
+    k_best = SelectKBest(score_func=f_regression, k=len(X_train.columns))
+
+    # Addestro (e trasformo) il selettettore sui dati di input
+    X_train_kbest = k_best.fit_transform(X_train, y_train)
+    X_test_kbest = k_best.transform(X_test)
+
+    # Prende gli indici e i nomi delle features
+    feature_indices = k_best.get_support(indices=True)
+    feature_names = X_train.columns[feature_indices]
+
+    # Salva i valori p, i quali corrispondono da una feature specifica e rappresenta la probabilità di osservare
+    # la statistica del test F osservata, o una statistica ancora più estrema, supponendo che l'ipotesi nulla sia vera.
+    p_values = k_best.pvalues_
+
+    # Creating features list
+    features = []
+
+    # Seleziona solo le features ceh hanno un valore p minore di 0.2
+    for feature, pvalue in zip(feature_names, p_values):
+        if pvalue < 0.2:
+            features.append(feature)
+
+    # In sintesi, il codice utilizza il test F per valutare la significatività delle feature rispetto alla variabile
+    # di output e seleziona solo quelle con valori p al di sotto di una determinata soglia. Questo processo aiuta a
+    # identificare le feature più rilevanti per il modello, contribuendo a semplificare e migliorare la precisione
+    # del modello stesso.
+
+    return features
 
 
-@route("/get_raws")
-def get_assets():
-    # Scarica i dati
-    brk = yf.download('BRK-B', end='2023-05-13')
+# Funzione che testa vari modelli di regressione lineare cercandone uno che minimizzi la radice dell'errore
+# quadratico medio e che massimizzi il valore R²
+def test_models(X_train, y_train, X_test, y_test):
 
-    # Costruisci la stringa HTML riga per riga
-    html_rows = ''
-    for _, row in brk.iterrows():
-        html_row = '<tr>'
-        for value in row:
-            html_row += f'<td>{value}</td>'
-        html_row += '</tr>'
-        html_rows += html_row
+    # random_state = 42 è un seed che convenzionalmente viene scelto al fine di riprodurre gli stessi risultati
+    # in caso di debug
+    regressors = [
+        LinearRegression(),
+        Ridge(random_state=42),
+        ExtraTreesRegressor(random_state=42),
+        GradientBoostingRegressor(random_state=42),
+        KNeighborsRegressor(),
+        XGBRegressor(random_state=42),
+        LGBMRegressor(random_state=42, verbose=-1),
+        CatBoostRegressor(random_state=42, verbose=False),
+        AdaBoostRegressor(random_state=42),
+    ]
 
-    # Costruisci la stringa HTML completa
-    html_string = f"""
-        <table border="1" class="dataframe table table-striped">
-          <thead>
-            <tr style="text-align: right;">
-              {"".join(f'<th>{col}</th>' for col in brk.columns)}
-            </tr>
-          </thead>
-          <tbody>
-            {html_rows}
-          </tbody>
-        </table>
-        """
+    r2_map, rmse_map = {}, {}
 
-    # Imposta l'intestazione Content-Type su "text/html"
-    response.headers['Content-Type'] = 'text/html'
+    # Iterating over algorithms and printing scores
+    for reg in regressors:
+        reg.fit(X_train, y_train)
+        y_pred = reg.predict(X_test)
+        r2 = r2_score(y_test, y_pred)
+        rmse = mean_squared_error(y_test, y_pred, squared=False)
+        # print(f'{type(reg).__name__}: R² = {r2:.2f}, Root Mean Squared Error = {rmse:.2f}')
+        r2_map[type(reg).__name__] = float(f'{r2:.2f}')
+        rmse_map[type(reg).__name__] = float(f'{rmse:.2f}')
 
-    # Restituisci la risposta come HTML
-    return html_string
-
-
-@route("/get_json")
-def get_json():
-    # Converti il DataFrame in JSON
-    json_data = df.to_json(orient='records')
-
-    # Restituisci la risposta come HTML
-    return {'data': json_data}
+    ordered_r2_map = dict(sorted(r2_map.items(), key=lambda item: item[1], reverse=True))
+    ordered_rmse_map = dict(sorted(rmse_map.items(), key=lambda item: item[1]))
+    return ordered_r2_map, ordered_rmse_map
 
 
-# Crea una route per visualizzare la tabella nel browser
-@route('/data_table')
-def show_data_table():
-    # Converti il DataFrame in un formato HTML utilizzando DataTables
-    table_html = df.to_html(classes='table table-striped table-bordered', index=False, escape=False, table_id='myTable')
+def main(model):
 
-    # Costruisci la pagina HTML direttamente in Python
-    html_content = f'''
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Data Table</title>
-        <!-- Includi le librerie DataTables -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-        <!-- Inizializza DataTables sulla tabella -->
-        <script>
-            $(document).ready( function () {{
-                $('#myTable').DataTable();
-            }} );
-        </script>
-    </head>
-    <body>
-        <h1>Data Table</h1>
-        {table_html}
-    </body>
-    </html>
-    '''
+    # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
+    brk = yf.download('BRK-B')
 
-    return template(html_content)
+    # Crea un grafico a candela delle azioni scaricate
+    # plots.draw_candlestick_plot(brk)
+
+    # Divide il DataSet in train e test
+    train = brk[brk.index.year <= 2016]
+    test = brk[brk.index.year >= 2017]
+
+    # Il DataSet ha bisogno di essere arricchito con ulteriori features in modo
+    # da migliorare il potere predittivo del modello
+    train = feature_engineering(train)
+    test = feature_engineering(test)
+
+    # Divide le variabili indipendenti (X) da quelle dipendendenti (y)
+    # axis = 1 indica che stiamo eliminando una colonna (1 per le colonne, 0 per le righe)
+    X_train = train.drop('target', axis=1)
+    y_train = train.target
+
+    X_test = test.drop('target', axis=1)
+    y_test = test.target
+
+    # A questo punto disponiamo di ben 39 features, molte delle quali rappresentano valori ridondanti o potrebbero
+    # causare overfitting, pertanto scegliamo fra queste le migliori
+    features = select_features(X_train, y_train, X_test)
+
+    # Crea un nuovo DataSet utilizzando solo le features selezionate
+    X_train_kbest = X_train[features]
+    X_test_kbest = X_test[features]
+
+    # A questo punto bisogna scegliere un modello adatto, testiamo vari modelli passando prima il DataSet aggiornato
+    # con le feature selezionate e poi il DataSet con tutte le features
+
+    # Se non esiste nessun modello preaddestrato
+    if model is None:
+        r2_mapk, rmse_mapk = test_models(X_train_kbest, y_train, X_test_kbest, y_test)
+        r2_map, rmse_map = test_models(X_train, y_train, X_test, y_test)
+
+        print("\nTest effettuato con il DataSet con feature selezionate: ")
+        print("R²: ", r2_mapk)
+        print("rmse: ", rmse_mapk)
+        print("\nTest effettuato sul DataSet con tutte le features: ")
+        print("R²: ", r2_map)
+        print("rmse: ", rmse_map)
+
+        # Dal primo test si nota che il LinearRegression, il Ridge e il GradientBoostingRegressor hanno gli stessi valori.
+        # Dal secondo test il GradientBoostingRegresso performa meglio di tutti gli altri modelli, pertanto sarà questo il
+        # modello scelto.
+
+        # Istanzio il modello di regressione
+        model = GradientBoostingRegressor(random_state=42)
+
+        # Il modello riceve in pasto i dati di allenamento
+        model.fit(X_train, y_train)
+
+    else:
+        # Se sono qui vuol dire che ho già il modello preaddestrato
+        # Il modello calcola i valori predetti sulla base dei dati di testing
+        y_pred = model.predict(X_test)
+
+        # Vengono calcolati di nuovo la radice dell'errore quadratico medio e R²
+        r2 = r2_score(y_test, y_pred)
+        rmse = mean_squared_error(y_test, y_pred, squared=False)
+
+        # Disegna dei grafici di dispersione per vedere come sono distribuiti le predizioni rispetto ai valori reali
+        #plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+        #plots.draw_scatter_plot2(y_test, y_pred)
 
 
-def download_actions():
-    global df, brk
-    brk = yf.download('BRK-B', end='2023-05-13')
-
-    # Converti i dati in un DataFrame
-    df = pd.DataFrame(brk)
-
-    # Aggiungi la colonna 'Date' al DataFrame
-    df['Date'] = df.index
-
-    # Riorganizza le colonne con 'Date' come prima colonna
-    df = df[['Date'] + [col for col in df.columns if col != 'Date']]
-
-
-@route("/plot_candlestick")
-def plot_candlestick():
-    global brk
-    # Creating a Candlestick chart for Berkshire Hathaway stocks
-    candlestick = go.Candlestick(x=brk.index,
-                                 open=brk['Open'],
-                                 high=brk['High'],
-                                 low=brk['Low'],
-                                 close=brk['Adj Close'],
-                                 increasing=dict(line=dict(color='black')),
-                                 decreasing=dict(line=dict(color='red')),
-                                 showlegend=False)
-
-    # Layout
-    layout = go.Layout(
-        title='Adjusted Berkshire Hathaway Class B Shares Price - 1996 to 2023',
-        yaxis=dict(title='Price (USD)'),
-        xaxis=dict(title='Date'),
-        template='ggplot2',
-        xaxis_rangeslider_visible=False,
-        yaxis_gridcolor='white',
-        xaxis_gridcolor='white',
-        yaxis_tickfont=dict(color='black'),
-        xaxis_tickfont=dict(color='black'),
-        margin=dict(t=50, l=50, r=50, b=50)
-    )
-
-    fig = go.Figure(data=[candlestick], layout=layout)
-
-    # Plotting annotation
-    fig.add_annotation(text='Berkshire Hathaway Class B (BRK-B)',
-                       font=dict(color='gray', size=30),
-                       xref='paper', yref='paper',
-                       x=0.5, y=0.5,
-                       showarrow=False,
-                       opacity=.85)
-
-    # Ottieni l'URL del plot
-    url = fig.to_html(full_html=False)
-    return url
+    
+        y_pred= model.predict(X_test)
+        print("y_pred: ", y_pred)
 
 
 if __name__ == "__main__":
-    download_actions()
-    run(host="0.0.0.0", debug=True, port=8080)
 
-"""matplotlib
-numpy
-ta
-quantstats
-seaborn
-matplotlib
-scikit-learn
-xgboost
-lightgbm
-catboost
-optuna
-IPython
-"""
+    try:
+        with open('model2.pkl', 'rb') as file:
+            loaded_model = pickle.load(file)
+            print(loaded_model)
+        main(loaded_model)
+    except FileNotFoundError:
+        main(None)
+
+    # Salva il modello utilizzando pickle
+    # with open('model.pkl', 'wb') as file:
+    #    pickle.dump(model, file)
+
+
+
