@@ -218,11 +218,8 @@ def return_strategy(y_pred, y_test, start_day, end_day):
     binary_array = combined_df['pred'].values
 
     # Creo un valore artificiale per considerare anche l'ultimo elemento, che altrimenti verrebbe
-    # tagliato fuori. tale valore artificiale sarà sempre diverso dall'ultimo valore reale, in modo
-    # tale da considerare il range temporale selezinato come a se stante:
-    # es: se termina con 1 1 1, aggiungiamo un -1 in modo tale da avere come ultimo elemento dell'array
-    # l'effettiva azione che si portava dietro dai precedenti (V)
-    binary_array = np.append(binary_array, binary_array[len(binary_array)-1]*-1)
+    # tagliato fuori. tale valore artificiale sarà uguale all'ultimo valore reale
+    binary_array = np.append(binary_array, binary_array[len(binary_array)-1])
 
     # Creo una lista di coppie (valore, azione)
     result_pairs = []
@@ -247,11 +244,49 @@ def return_strategy(y_pred, y_test, start_day, end_day):
     # Al nuovo dataframe aggiungo la data come indice
     result_df = result_df.set_index(combined_df[start_day:end_day].index)
 
-    # Rimuove le righe che presentano "N" come azione, rimuovo anche la colonna Value
-    result_df.drop(result_df[result_df['Action'] == 'N'].index, inplace=True)
-    result_df.drop('Value', axis=1, inplace=True)
+    # Shifto la colonna delle azioni perchè deve essere fatta un giorno prima
+    result_df['Action'] = result_df['Action'].shift(1)
 
     return result_df
+
+
+def compute_actions(result_df, start_day, end_day):
+
+    # Estendi la data di fine di un giorno
+    extended_end_day = pd.to_datetime(end_day) + pd.DateOffset(days=1)
+    brk = yf.download('BRK-B', start=start_day, end=extended_end_day)
+
+
+    # Partiamo con un'azione in possesso e 0 soldi
+    stocks = 1
+    print(start_day)
+    starting_value = brk.loc[start_day, 'Adj Close']
+    money = 0
+    print(f"Comprata azione il giorno {start_day} dal valore di {starting_value}")
+
+    # Scorrere il DataFrame utilizzando iterrows
+    for date, row in result_df.iterrows():
+        action = row['Action']
+        if action == "V":
+            avg = brk.loc[str(date.date()), 'Adj Close']
+            money += avg
+            stocks-=1
+            print(f"Date: {str(date.date())},Money: {money}, Stocks: {stocks}, Action: {action}")
+        if action == "C":
+            print(result_df.index, date.date())
+            print(brk['Adj Close'])
+            money -= brk.loc[str(date.date()), 'Adj Close']
+            stocks+=1
+            print(f"Date: {str(date.date())},Money: {money}, Stocks: {stocks}, Action: {action}")
+
+    # Se sono rimaste azioni, converto il valore dell'azione nel rispettivo prezzo di chiusura aggiustato
+    while stocks > 0:
+        print(f"WHILE: Money: {money}, Stocks: {stocks}")
+        money += brk.loc[end_day, 'Adj Close']
+        stocks -= 1
+
+
+    print(f"Money: {money}, Stocks: {stocks}, Money gained: {money-starting_value}")
 
 
 def main(_model):
@@ -368,13 +403,22 @@ def main(_model):
     # Rivisualizziamo come è cambiata l'importanza dele varie feature dopo l'ottimizzazione
     # plots.draw_feature_importance_plot(model, X_test, y_test)
 
+    # Salvo le predizioni e i valori di test in dei file
+    np.savetxt('y_pred.txt', y_pred, fmt='%f')
+    y_test.to_csv('y_test.csv', index=True)
+
     # A questo punto abbiamo i valori delle predizioni, sviluppiamo una strategia che li sfrutti
     print(y_pred, y_test)
 
     # Scegliamo un range di temporale di cui vogliamo sapere la strategia (formato 'YYYY-MM-DD')
-    start_day, end_day = "2022-09-12", "2022-09-30"
-    selection_dataframe = return_strategy(y_pred, y_test, start_day, end_day)
-    #print(selection_dataframe)
+    start_day, end_day = "2018-07-18", "2018-07-24"
+    start_day2, end_day2 = "2018-07-23", "2018-07-30"
+    result_df = return_strategy(y_test, y_test, start_day2, end_day2)
+    print(result_df)
+
+    # Stampiamo il dataframe: ora abbiamo un insieme di azioni, vediamo quanto saremmo riusciti a guadagnare
+    # avendo eseguito queste azioni
+    money = compute_actions(result_df, start_day2, end_day2)
 
 
 if __name__ == "__main__":
