@@ -13,7 +13,7 @@ from sklearn.inspection import permutation_importance
 
 
 def draw_candlestick_plot(stock):
-    # Creating a Candlestick chart for Berkshire Hathaway stocks
+    # Crea un grafico a candela per visualizzare il prezzo delle azioni
     candlestick = go.Candlestick(x=stock.index,
                                  open=stock['Open'],
                                  high=stock['High'],
@@ -61,8 +61,8 @@ def draw_scatter_plot(y_test, y_pred, r2, rmse):
     plt.text(plt.xlim()[1], plt.ylim()[0] * 0.85 + 0.02, f"RMSE: {rmse:.3f}", ha='right', va='bottom', wrap=True,
              bbox=box)
 
-    #lt.legend()
     plt.show()
+
 
 def draw_scatter_plot2(y_test, y_pred):
 

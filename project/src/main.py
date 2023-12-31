@@ -195,8 +195,66 @@ def objective(trial, X_train, y_train, X_test, y_test):
     rmse = np.round(mean_squared_error(y_test, preds, squared=False), 3)
     return rmse  # Returining the score
 
+def return_strategy(y_pred, y_test, start_day, end_day):
 
-def main(model):
+    # Crea un array binario (1 per valori positivi, 0 per negativi)
+    y_pred_class = np.where(y_pred > 0, 1, -1)
+    y_test_class = np.where(y_test > 0, 1, -1)
+
+    # Crea un dataframe combinato con la data e i valori predetti
+    combined_df = pd.DataFrame({
+        'date': y_test.index,
+        'pred': y_pred_class,
+        'test': y_test_class
+    })
+
+    # Imposto come indice del dataFrame la data
+    combined_df = combined_df.set_index("date")
+
+    # A questo punto ritaglio il dataframe sul range di giorni selezionati
+    combined_df = combined_df[start_day:end_day]
+
+    # Creo un array che conterrà i valori della colonna pred
+    binary_array = combined_df['pred'].values
+
+    # Creo un valore artificiale per considerare anche l'ultimo elemento, che altrimenti verrebbe
+    # tagliato fuori. tale valore artificiale sarà sempre diverso dall'ultimo valore reale, in modo
+    # tale da considerare il range temporale selezinato come a se stante:
+    # es: se termina con 1 1 1, aggiungiamo un -1 in modo tale da avere come ultimo elemento dell'array
+    # l'effettiva azione che si portava dietro dai precedenti (V)
+    binary_array = np.append(binary_array, binary_array[len(binary_array)-1]*-1)
+
+    # Creo una lista di coppie (valore, azione)
+    result_pairs = []
+
+    # Iterare sull'array binario e aggiungere le coppie in base alle inversioni
+    for i in range(len(binary_array) - 1):
+        current_value = binary_array[i]
+        next_value = binary_array[i+1]
+
+        if current_value == next_value:
+            result_pairs.append((current_value, "N"))
+        elif current_value == 1:
+            # Vuol dire che il next_value -1, quindi vendo
+            result_pairs.append((current_value, "V"))
+        else:
+            # current_value = -1 e next_value 1, quindi compro
+            result_pairs.append((current_value, "C"))
+
+    # Creo un nuovo dataframe con i valori e le azioni come colonne
+    result_df = pd.DataFrame(result_pairs, columns=['Value', "Action"])
+
+    # Al nuovo dataframe aggiungo la data come indice
+    result_df = result_df.set_index(combined_df[start_day:end_day].index)
+
+    # Rimuove le righe che presentano "N" come azione, rimuovo anche la colonna Value
+    result_df.drop(result_df[result_df['Action'] == 'N'].index, inplace=True)
+    result_df.drop('Value', axis=1, inplace=True)
+
+    return result_df
+
+
+def main(_model):
 
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
     brk = yf.download('BRK-B')
@@ -232,8 +290,9 @@ def main(model):
     # A questo punto bisogna scegliere un modello adatto, testiamo vari modelli passando prima il DataSet aggiornato
     # con le feature selezionate e poi il DataSet con tutte le features
 
+    model = _model
     # Se non esiste nessun modello preaddestrato
-    if model is None:
+    if _model is None:
         r2_mapk, rmse_mapk = test_models(X_train_kbest, y_train, X_test_kbest, y_test)
         r2_map, rmse_map = test_models(X_train, y_train, X_test, y_test)
 
@@ -249,13 +308,13 @@ def main(model):
         # modello scelto.
 
         # Istanzio il modello di regressione
-        model = GradientBoostingRegressor(random_state=42)
+        model_now = GradientBoostingRegressor(random_state=42)
 
         # Il modello riceve in pasto i dati di allenamento
-        model.fit(X_train, y_train)
+        model_now.fit(X_train, y_train)
 
         # Il modello calcola i valori predetti sulla base dei dati di testing
-        y_pred = model.predict(X_test)
+        y_pred = model_now.predict(X_test)
 
         # Vengono calcolati di nuovo la radice dell'errore quadratico medio e R²
         r2 = r2_score(y_test, y_pred)
@@ -273,38 +332,61 @@ def main(model):
         study = optuna.create_study(direction='minimize')
         study.optimize(lambda trial: objective(trial, X_train, y_train, X_test, y_test), n_trials=100, show_progress_bar=True)
 
-        # Estrai i risultati dallo studio
+        # Stampo i valori dei parametri nel miglior trial
+        print('Best parameters:', study.best_params)
+
+        # Stampo il minimo valore di RMSE trovato
+        print('Best score:', study.best_value)
+
+        # Estrae i risultati dallo studio
         trials = study.trials
 
-        # Scrivi i risultati in un file di testo
+        # Scrive i risultati in un file di testo
         with open('optuna_results.txt', 'w') as file:
             for trial in trials:
                 file.write(f'Trial {trial.number}: Params - {trial.params}, Value - {trial.value}\n')
 
+        # Ristanzio il modello con i parametri ottimizzati
+        model_now = GradientBoostingRegressor(**study.best_params)
+        model_now.fit(X_train, y_train)
+
         # Salvo il modello addestrato
-        with open('model3.pkl', 'wb') as file:
-            pickle.dump(model, file)
+        with open('model_now.pkl', 'wb') as file:
+            pickle.dump(model_now, file)
 
-    else:
-        # Se sono qui vuol dire che ho già il modello preaddestrato
+        model = model_now
+    # Da questo momento in poi il codice è condiviso,sia che venga addestrato che caricato
 
-        y_pred = model.predict(X_test)
-        print("y_pred: ", y_pred)
+    y_pred = model.predict(X_test)
+    r2 = r2_score(y_test, y_pred)
+    rmse = mean_squared_error(y_test, y_pred, squared=False)
+
+    # A questo punto ridisegnamo i plot di dispersione
+    # plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+    # plots.draw_scatter_plot2(y_test, y_pred)
+
+    # Rivisualizziamo come è cambiata l'importanza dele varie feature dopo l'ottimizzazione
+    # plots.draw_feature_importance_plot(model, X_test, y_test)
+
+    # A questo punto abbiamo i valori delle predizioni, sviluppiamo una strategia che li sfrutti
+    print(y_pred, y_test)
+
+    # Scegliamo un range di temporale di cui vogliamo sapere la strategia (formato 'YYYY-MM-DD')
+    start_day, end_day = "2022-09-12", "2022-09-30"
+    selection_dataframe = return_strategy(y_pred, y_test, start_day, end_day)
+    #print(selection_dataframe)
 
 
 if __name__ == "__main__":
 
     try:
-        with open('modelNO.pkl', 'rb') as file:
+        with open('model.pkl', 'rb') as file:
             loaded_model = pickle.load(file)
             print(loaded_model)
         main(loaded_model)
     except FileNotFoundError:
         main(None)
 
-    # Salva il modello utilizzando pickle
-    # with open('model.pkl', 'wb') as file:
-    #    pickle.dump(model, file)
 
 
 
