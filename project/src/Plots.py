@@ -12,7 +12,8 @@ import numpy as np
 from sklearn.inspection import permutation_importance
 
 
-def draw_candlestick_plot(stock):
+def draw_candlestick_plot(stock, mode = None):
+
     # Crea un grafico a candela per visualizzare il prezzo delle azioni
     candlestick = go.Candlestick(x=stock.index,
                                  open=stock['Open'],
@@ -47,7 +48,12 @@ def draw_candlestick_plot(stock):
                        showarrow=False,
                        opacity=.85)
 
-    fig.show()
+    if mode is None:
+        fig.show()
+    else:
+        # Ottieni l'URL del plot
+        url = fig.to_html(full_html=False)
+        return url
 
 
 def draw_scatter_plot(y_test, y_pred, r2, rmse):

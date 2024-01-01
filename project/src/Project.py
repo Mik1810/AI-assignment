@@ -1,3 +1,17 @@
+# Se non ho già il modello preaddestrato ho  bisogno di queste librerie
+try:
+    from xgboost import XGBRegressor
+except ImportError as e:
+    print(f"Errore: {e}")
+try:
+    from lightgbm import LGBMRegressor
+except ImportError as e:
+    print(f"Errore: {e}")
+try:
+    from catboost import CatBoostRegressor
+except ImportError as e:
+    print(f"Errore: {e}")
+
 # Per caricare un modello preaddestrato
 import pickle
 
@@ -8,16 +22,12 @@ import numpy as np
 # Financial Data Analysis
 import yfinance as yf
 import ta
-import quantstats as qs
 
 # Machine Learning Metrics
 from sklearn.metrics import r2_score, mean_squared_error
 
 # Models
 from sklearn.linear_model import LinearRegression, Ridge
-from xgboost import XGBRegressor
-from lightgbm import LGBMRegressor
-from catboost import CatBoostRegressor
 from sklearn.ensemble import AdaBoostRegressor, ExtraTreesRegressor, GradientBoostingRegressor
 from sklearn.neighbors import KNeighborsRegressor
 
@@ -30,8 +40,10 @@ import optuna
 # Hiding warnings
 import warnings
 warnings.filterwarnings("ignore")
+pd.options.mode.chained_assignment = None
 
-import plots
+import Plots as plots
+import DataManager as dm
 
 
 # Funzione che calcola ulteriori indici utili da quelli delle azioni
@@ -195,27 +207,20 @@ def objective(trial, X_train, y_train, X_test, y_test):
     rmse = np.round(mean_squared_error(y_test, preds, squared=False), 3)
     return rmse  # Returining the score
 
-def return_strategy(y_pred, y_test, start_day, end_day):
+def return_strategy(_y_pred, time_range):
 
-    # Crea un array binario (1 per valori positivi, 0 per negativi)
-    y_pred_class = np.where(y_pred > 0, 1, -1)
-    y_test_class = np.where(y_test > 0, 1, -1)
+    start_day, end_day = time_range
+    y_pred = _y_pred
 
-    # Crea un dataframe combinato con la data e i valori predetti
-    combined_df = pd.DataFrame({
-        'date': y_test.index,
-        'pred': y_pred_class,
-        'test': y_test_class
-    })
-
-    # Imposto come indice del dataFrame la data
-    combined_df = combined_df.set_index("date")
+    # Applico un treshold alla colonna dei valori predetti
+    # Se il valore è positivo allora diventa 1, se è negativo o 0 diventa -1
+    y_pred['pred'] = y_pred['pred'].apply(lambda x: 1 if x > 0 else -1)
 
     # A questo punto ritaglio il dataframe sul range di giorni selezionati
-    combined_df = combined_df[start_day:end_day]
+    y_pred = y_pred[start_day:end_day]
 
     # Creo un array che conterrà i valori della colonna pred
-    binary_array = combined_df['pred'].values
+    binary_array = y_pred['pred'].values
 
     # Creo un valore artificiale per considerare anche l'ultimo elemento, che altrimenti verrebbe
     # tagliato fuori. tale valore artificiale sarà uguale all'ultimo valore reale
@@ -224,75 +229,93 @@ def return_strategy(y_pred, y_test, start_day, end_day):
     # Creo una lista di coppie (valore, azione)
     result_pairs = []
 
-    # Iterare sull'array binario e aggiungere le coppie in base alle inversioni
+    # Itero sull'array binario e aggiungo le coppie in base alle inversioni
     for i in range(len(binary_array) - 1):
         current_value = binary_array[i]
         next_value = binary_array[i+1]
 
         if current_value == next_value:
+            # Se il valore corrente è uguale al successivo, vuol dire che non c'è
+            # un'inversione di trend
             result_pairs.append((current_value, "N"))
         elif current_value == 1:
-            # Vuol dire che il next_value -1, quindi vendo
+            # Vuol dire che il next_value -1, quindi conviene vendere perchè
+            # il giorno successivo il prezzo scenderà
             result_pairs.append((current_value, "V"))
         else:
-            # current_value = -1 e next_value 1, quindi compro
+            # current_value = -1 e next_value 1, quindi compro perchè vuol dire
+            # che il giorno successivo il prezzo salirà
             result_pairs.append((current_value, "C"))
 
     # Creo un nuovo dataframe con i valori e le azioni come colonne
     result_df = pd.DataFrame(result_pairs, columns=['Value', "Action"])
 
     # Al nuovo dataframe aggiungo la data come indice
-    result_df = result_df.set_index(combined_df[start_day:end_day].index)
+    result_df = result_df.set_index(y_pred.index)
 
     # Shifto la colonna delle azioni perchè deve essere fatta un giorno prima
-    result_df['Action'] = result_df['Action'].shift(1)
+    #result_df['Action'] = result_df['Action'].shift(1)
 
     return result_df
 
 
-def compute_actions(result_df, start_day, end_day):
+def compute_actions(result_df):
 
-    # Estendi la data di fine di un giorno
+    # Estraggo l'intervallo di tempo selezionato
+    start_day, end_day = str(result_df.index[0].date()), str(result_df.index[0-1].date())
+
+    # Estendi la data di fine di un giorno (l'ultimo giorno viene escluso)
     extended_end_day = pd.to_datetime(end_day) + pd.DateOffset(days=1)
     brk = yf.download('BRK-B', start=start_day, end=extended_end_day)
 
-
-    # Partiamo con un'azione in possesso e 0 soldi
+    # 1. Partiamo con un'azione in possesso e i soldi in negativo per aver comprato l'azione
+    # 2. Utilizziamo la variabile money come "portafoglio" per verificare alla fine quanto
+    #    abbiamo guadagnato
+    # 3. Supoponiamo di vendere e comprare sempre al prezzo di chiusura
     stocks = 1
-    print(start_day)
     starting_value = brk.loc[start_day, 'Adj Close']
-    money = 0
-    print(f"Comprata azione il giorno {start_day} dal valore di {starting_value}")
+    money = -starting_value
+    print(f"\nComprata azione il giorno {start_day} dal valore di {starting_value:.2f}")
+    print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
 
-    # Scorrere il DataFrame utilizzando iterrows
+    # Scorr0 il DataFrame utilizzando iterrows
     for date, row in result_df.iterrows():
         action = row['Action']
         if action == "V":
-            avg = brk.loc[str(date.date()), 'Adj Close']
-            money += avg
-            stocks-=1
-            print(f"Date: {str(date.date())},Money: {money}, Stocks: {stocks}, Action: {action}")
+            # Se l'azione precedentemente scelta è V di Vendi, allora cerco il prezzo di chiusura
+            # relativo al giorno dell'azione, aggiungo i soldi della vendita al mio portafoglio
+            price = brk.loc[str(date.date()), 'Adj Close']
+            money += price
+            stocks -= 1
+            print(f"\nVenduta azione il giorno {str(date.date())} al prezzo di {price:.2f}")
+            print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
         if action == "C":
-            print(result_df.index, date.date())
-            print(brk['Adj Close'])
-            money -= brk.loc[str(date.date()), 'Adj Close']
-            stocks+=1
-            print(f"Date: {str(date.date())},Money: {money}, Stocks: {stocks}, Action: {action}")
+            # Se l'azione precedentemente scelta è C di Compra, allora cerco il prezzo di chiusura
+            # relativo al giorno dell'azione e rimuovo dal mio portafoglio i soldi per l'acquisto
+            price = brk.loc[str(date.date()), 'Adj Close']
+            money -= price
+            stocks += 1
+            print(f"\nComprata azione il giorno {str(date.date())} al prezzo di {price:.2f}")
+            print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
 
     # Se sono rimaste azioni, converto il valore dell'azione nel rispettivo prezzo di chiusura aggiustato
+    # relativo all'ultimo giorno
     while stocks > 0:
-        print(f"WHILE: Money: {money}, Stocks: {stocks}")
-        money += brk.loc[end_day, 'Adj Close']
+        price = brk.loc[end_day, 'Adj Close']
+        money += price
         stocks -= 1
+        print(f"\nVenduta azione il giorno {end_day} al prezzo di {price:.2f}")
+        print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
 
-
-    print(f"Money: {money}, Stocks: {stocks}, Money gained: {money-starting_value}")
+    print("\nResoconto:")
+    print(f"Portafoglio: {money:.2f}$, la strategia ha prodotto {'del guadagno' if money > 0 else 'una perdita'}")
 
 
 def main(_model):
 
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
     brk = yf.download('BRK-B')
+    dm.save_data('brk', brk)
 
     # Crea un grafico a candela delle azioni scaricate
     # plots.draw_candlestick_plot(brk)
@@ -313,6 +336,11 @@ def main(_model):
 
     X_test = test.drop('target', axis=1)
     y_test = test.target
+
+    dm.save_data('X_train', X_train)
+    dm.save_data('y_train', y_train)
+    dm.save_data('X_test', X_test)
+    dm.save_data('y_test', y_test)
 
     # A questo punto disponiamo di ben 39 features, molte delle quali rappresentano valori ridondanti o potrebbero
     # causare overfitting, pertanto scegliamo fra queste le migliori
@@ -377,7 +405,7 @@ def main(_model):
         trials = study.trials
 
         # Scrive i risultati in un file di testo
-        with open('optuna_results.txt', 'w') as file:
+        with open('resources/optuna_results.txt', 'w') as file:
             for trial in trials:
                 file.write(f'Trial {trial.number}: Params - {trial.params}, Value - {trial.value}\n')
 
@@ -396,6 +424,11 @@ def main(_model):
     r2 = r2_score(y_test, y_pred)
     rmse = mean_squared_error(y_test, y_pred, squared=False)
 
+    dm.save_data('model', model)
+    dm.save_data('y_pred', y_pred)
+    dm.save_data('r2', r2)
+    dm.save_data('rmse', rmse)
+
     # A questo punto ridisegnamo i plot di dispersione
     # plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
     # plots.draw_scatter_plot2(y_test, y_pred)
@@ -404,33 +437,47 @@ def main(_model):
     # plots.draw_feature_importance_plot(model, X_test, y_test)
 
     # Salvo le predizioni e i valori di test in dei file
-    np.savetxt('y_pred.txt', y_pred, fmt='%f')
+    np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
     y_test.to_csv('y_test.csv', index=True)
 
     # A questo punto abbiamo i valori delle predizioni, sviluppiamo una strategia che li sfrutti
-    print(y_pred, y_test)
+    # print(y_pred, y_test)
 
-    # Scegliamo un range di temporale di cui vogliamo sapere la strategia (formato 'YYYY-MM-DD')
-    start_day, end_day = "2018-07-18", "2018-07-24"
-    start_day2, end_day2 = "2018-07-23", "2018-07-30"
-    result_df = return_strategy(y_test, y_test, start_day2, end_day2)
-    print(result_df)
+    # Estendo la colonna delle predizioni aggiungengo la data
+    # Crea un dataframe combinato con la data e i valori predetti
+    y_pred = pd.DataFrame({
+        'date': y_test.index,
+        'pred': y_pred,
+    })
+
+    # Imposto come indice del dataFrame la data
+    y_pred = y_pred.set_index("date")
+    #print(y_pred)
+
+    # Scegliamo un range temporale di cui vogliamo sapere la strategia (formato 'YYYY-MM-DD')
+    time_range = ("2018-07-23", "2018-07-30")
+    time_range2 = ("2018-07-19", "2018-07-24")
+    time_range3 = ("2020-12-18", "2021-01-19")
+    time_range_fail = ("2020-03-04", "2020-03-20")
+    result_df = return_strategy(y_pred, time_range3)
 
     # Stampiamo il dataframe: ora abbiamo un insieme di azioni, vediamo quanto saremmo riusciti a guadagnare
     # avendo eseguito queste azioni
-    money = compute_actions(result_df, start_day2, end_day2)
+    compute_actions(result_df)
+
+
+def load_model():
+
+    try:
+        with open('models/model.pkl', 'rb') as file:
+            loaded_model = pickle.load(file)
+        print("Modello caricato: ", loaded_model)
+        return loaded_model
+    except FileNotFoundError:
+        return None
 
 
 if __name__ == "__main__":
 
-    try:
-        with open('model.pkl', 'rb') as file:
-            loaded_model = pickle.load(file)
-            print(loaded_model)
-        main(loaded_model)
-    except FileNotFoundError:
-        main(None)
-
-
-
-
+    model = load_model()
+    main(model)
