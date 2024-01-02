@@ -42,8 +42,8 @@ import warnings
 warnings.filterwarnings("ignore")
 pd.options.mode.chained_assignment = None
 
-import Plots as plots
-import DataManager as dm
+import plots
+import data_handler as dh
 
 
 # Funzione che calcola ulteriori indici utili da quelli delle azioni
@@ -266,7 +266,7 @@ def compute_actions(result_df):
 
     # Estendi la data di fine di un giorno (l'ultimo giorno viene escluso)
     extended_end_day = pd.to_datetime(end_day) + pd.DateOffset(days=1)
-    brk = yf.download('BRK-B', start=start_day, end=extended_end_day)
+    brk = yf.download('BRK-B', start=start_day, end=extended_end_day, progress=False)
 
     # 1. Partiamo con un'azione in possesso e i soldi in negativo per aver comprato l'azione
     # 2. Utilizziamo la variabile money come "portafoglio" per verificare alla fine quanto
@@ -311,11 +311,29 @@ def compute_actions(result_df):
     print(f"Portafoglio: {money:.2f}$, la strategia ha prodotto {'del guadagno' if money > 0 else 'una perdita'}")
 
 
+def make_planning(y_pred, y_test, time_range):
+    # Estendo la colonna delle predizioni aggiungengo la data
+    # Crea un dataframe combinato con la data e i valori predetti
+    y_pred = pd.DataFrame({
+        'date': y_test.index,
+        'pred': y_pred,
+    })
+
+    # Imposto come indice del dataFrame la data
+    y_pred = y_pred.set_index("date")
+    # print(y_pred)
+
+    result_df = return_strategy(y_pred, time_range)
+
+    # Stampiamo il dataframe: ora abbiamo un insieme di azioni, vediamo quanto saremmo riusciti a guadagnare
+    # avendo eseguito queste azioni
+    compute_actions(result_df)
+
 def main(_model):
 
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
-    brk = yf.download('BRK-B')
-    dm.save_data('brk', brk)
+    brk = yf.download('BRK-B', progress=False)
+    dh.save_data('brk', brk)
 
     # Crea un grafico a candela delle azioni scaricate
     # plots.draw_candlestick_plot(brk)
@@ -337,10 +355,10 @@ def main(_model):
     X_test = test.drop('target', axis=1)
     y_test = test.target
 
-    dm.save_data('X_train', X_train)
-    dm.save_data('y_train', y_train)
-    dm.save_data('X_test', X_test)
-    dm.save_data('y_test', y_test)
+    dh.save_data('X_train', X_train)
+    dh.save_data('y_train', y_train)
+    dh.save_data('X_test', X_test)
+    dh.save_data('y_test', y_test)
 
     # A questo punto disponiamo di ben 39 features, molte delle quali rappresentano valori ridondanti o potrebbero
     # causare overfitting, pertanto scegliamo fra queste le migliori
@@ -424,10 +442,10 @@ def main(_model):
     r2 = r2_score(y_test, y_pred)
     rmse = mean_squared_error(y_test, y_pred, squared=False)
 
-    dm.save_data('model', model)
-    dm.save_data('y_pred', y_pred)
-    dm.save_data('r2', r2)
-    dm.save_data('rmse', rmse)
+    dh.save_data('model', model)
+    dh.save_data('y_pred', y_pred)
+    dh.save_data('r2', r2)
+    dh.save_data('rmse', rmse)
 
     # A questo punto ridisegnamo i plot di dispersione
     # plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
@@ -438,32 +456,31 @@ def main(_model):
 
     # Salvo le predizioni e i valori di test in dei file
     np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
-    y_test.to_csv('y_test.csv', index=True)
+    y_test.to_csv('resources/y_test.csv', index=True)
+
+    # Al fine di comprendere quanto le predizioni siano aderenti alla realtà,
+    # creiamo due nuovi dataframe utilizzando come treshold lo 0. Tali array
+    # presenteranno solo valori binari (1 quando il valore è maggiore di 0
+    # e -1 quando è minore di 0)
+    y_pred_class = np.where(y_pred > 0, 1, -1)
+    y_test_class = np.where(y_test > 0, 1, -1)
+
+    dh.save_data('y_pred_class', y_pred_class)
+    dh.save_data('y_test_class', y_test_class)
+
+    # Visualizziamo la matrice di confusione
+    #plots.draw_confusion_matrix(y_test_class, y_pred_class)
 
     # A questo punto abbiamo i valori delle predizioni, sviluppiamo una strategia che li sfrutti
     # print(y_pred, y_test)
-
-    # Estendo la colonna delle predizioni aggiungengo la data
-    # Crea un dataframe combinato con la data e i valori predetti
-    y_pred = pd.DataFrame({
-        'date': y_test.index,
-        'pred': y_pred,
-    })
-
-    # Imposto come indice del dataFrame la data
-    y_pred = y_pred.set_index("date")
-    #print(y_pred)
 
     # Scegliamo un range temporale di cui vogliamo sapere la strategia (formato 'YYYY-MM-DD')
     time_range = ("2018-07-23", "2018-07-30")
     time_range2 = ("2018-07-19", "2018-07-24")
     time_range3 = ("2020-12-18", "2021-01-19")
     time_range_fail = ("2020-03-04", "2020-03-20")
-    result_df = return_strategy(y_pred, time_range3)
 
-    # Stampiamo il dataframe: ora abbiamo un insieme di azioni, vediamo quanto saremmo riusciti a guadagnare
-    # avendo eseguito queste azioni
-    compute_actions(result_df)
+    #make_planning(y_pred, y_test, time_range3)
 
 
 def load_model():

@@ -4,12 +4,12 @@ LABEL authors="michaelpic"
 
 # WORKDIR /project
 
-COPY Project.py .
-COPY DataManager.py .
-COPY BottleManager.py .
+COPY project.py .
+COPY data_handler.py .
+COPY server.py .
+COPY plots.py .
 COPY requirements.txt .
 COPY models/model.pkl ./models/
-COPY Plots.py .
 
 # COPY frozen-requirements.txt .
 
@@ -24,4 +24,4 @@ RUN pip install -r requirements.txt
 # RUN pip install -r frozen-requirements.txt
 
 EXPOSE 8080
-ENTRYPOINT ["python", "BottleManager.py"]
+ENTRYPOINT ["python", "server.py"]
