@@ -14,13 +14,14 @@ def index():
     # http://localhost:8080/
 
     # Ottieni l'output e sostituisci i \n con <br>
-    output = output_buffer.getvalue().replace('\n', '<br>')
+    #output = output_buffer.getvalue().replace('\n', '<br>')
 
     # Reimposta l'output buffer
-    output_buffer.truncate(0)
-    output_buffer.seek(0)
-
-    return output
+    #output_buffer.truncate(0)
+    #output_buffer.seek(0)
+    with open("index.html", "r") as file:
+        html_home= file.read()
+    return html_home
 
 
 def cleanup():

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina con Bottoni</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #buttonContainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="buttonContainer">
+        <button onclick="loadContent('data_table')">HTML 1</button>
+        <button onclick="loadContent('html2')">HTML 2</button>
+        <button onclick="loadContent('html3')">HTML 3</button>
+        <button onclick="loadContent('html4')">HTML 4</button>
+        <button onclick="loadContent('html5')">HTML 5</button>
+        <button onclick="loadContent('html6')">HTML 6</button>
+        <button onclick="loadContent('html7')">HTML 7</button>
+        <button onclick="loadContent('html8')">HTML 8</button>
+    </div>
+
+    <script>
+        function loadContent(contentType) {
+            // Esempio di caricamento dinamico nel tuo iframe
+            if(contentType === "data_table") {
+                window.location = "http://localhost:8080/data_table"
+            }
+        }
+    </script>
+
+</body>
+</html>
