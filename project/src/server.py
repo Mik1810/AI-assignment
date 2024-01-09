@@ -53,10 +53,10 @@ def draw_scatter_plot():
     return img_buf.getvalue()
 
 
-@app.route('/draw_scatter_plot2')
-def draw_scatter_plot2():
+@app.route('/draw_wave_plot')
+def draw_wave_plot():
     # http://localhost:8080/draw_scatter_plot2
-    return plots.draw_scatter_plot2(sv['y_test'], sv['y_pred'], 'c')
+    return plots.draw_wave_plot(sv['y_test'], sv['y_pred'], 'c')
 
 
 @app.route('/draw_feature_importance_plot')
@@ -121,7 +121,6 @@ def show_data_table():
         </script>
     </head>
     <body>
-        <h1>Data Table</h1>
         {table_html}
     </body>
     </html>

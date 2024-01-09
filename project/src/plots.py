@@ -86,7 +86,7 @@ def draw_scatter_plot(y_test, y_pred, r2, rmse, mode = None):
         return img_buf
 
 
-def draw_scatter_plot2(y_test, y_pred, mode = None):
+def draw_wave_plot(y_test, y_pred, mode = None):
 
     # Daily returns plot y_pred x y_test
     fig = go.Figure()
