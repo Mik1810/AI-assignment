@@ -6,3 +6,5 @@ __pycache__
 *.png
 .DS_Store
 *.zip
+*.csv
+y_test.csv

@@ -1,4 +1,4 @@
-from bottle import Bottle, run, template, response
+from bottle import Bottle, run, template, response, static_file
 import sys
 from io import StringIO
 
@@ -19,7 +19,7 @@ def index():
     # Reimposta l'output buffer
     #output_buffer.truncate(0)
     #output_buffer.seek(0)
-    with open("index.html", "r") as file:
+    with open("web/index.html", "r") as file:
         html_home= file.read()
     return html_home
 
@@ -31,6 +31,11 @@ def cleanup():
 def run_app():
     model = load_model()
     main(model)
+
+# Definisci una route per gestire i file statici nella cartella "web"
+@app.route('/web/<filepath:path>')
+def server_static(filepath):
+    return static_file(filepath, root='web')
 
 
 @app.route('/draw_candlestick')
