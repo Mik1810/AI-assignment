@@ -455,8 +455,8 @@ def main(_model):
     # plots.draw_feature_importance_plot(model, X_test, y_test)
 
     # Salvo le predizioni e i valori di test in dei file
-    np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
-    y_test.to_csv('resources/y_test.csv', index=True)
+    #np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
+    #y_test.to_csv('resources/y_test.csv', index=True)
 
     # Al fine di comprendere quanto le predizioni siano aderenti alla realtà,
     # creiamo due nuovi dataframe utilizzando come treshold lo 0. Tali array
