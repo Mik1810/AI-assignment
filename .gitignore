@@ -8,3 +8,5 @@ __pycache__
 *.zip
 *.csv
 y_test.csv
+/project/src/catboost_info
+*.download
