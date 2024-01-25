@@ -2,7 +2,7 @@ from bottle import Bottle, run, template, response, static_file
 import sys
 from io import StringIO
 
-from project import load_model, main, make_planning
+from project import load_model, run_model, make_planning
 import plots
 from data_handler import shared_values as sv
 
@@ -12,13 +12,6 @@ app = Bottle()
 @app.route('/')
 def index():
     # http://localhost:8080/
-
-    # Ottieni l'output e sostituisci i \n con <br>
-    #output = output_buffer.getvalue().replace('\n', '<br>')
-
-    # Reimposta l'output buffer
-    #output_buffer.truncate(0)
-    #output_buffer.seek(0)
     with open("web/index.html", "r") as file:
         html_home= file.read()
     return html_home
@@ -27,10 +20,6 @@ def index():
 def cleanup():
     sys.stdout = sys.__stdout__
 
-
-def run_app():
-    model = load_model()
-    main(model)
 
 # Definisci una route per gestire i file statici nella cartella "web"
 @app.route('/web/<filepath:path>')
@@ -137,7 +126,8 @@ if __name__ == "__main__":
 
     # Esegui l'app Bottle
     try:
-        run_app()
+        model = load_model()
+        run_model(model)
         run(app, host='0.0.0.0', port=8080, debug=True)
     finally:
         cleanup()

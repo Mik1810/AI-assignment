@@ -329,7 +329,7 @@ def make_planning(y_pred, y_test, time_range):
     # avendo eseguito queste azioni
     compute_actions(result_df)
 
-def main(_model):
+def run_model(_model):
 
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
     brk = yf.download('BRK-B', progress=False)
@@ -497,4 +497,4 @@ def load_model():
 if __name__ == "__main__":
 
     model = load_model()
-    main(model)
+    run_model(model)
