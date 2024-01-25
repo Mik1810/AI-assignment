@@ -262,7 +262,7 @@ def return_strategy(_y_pred, time_range):
 def compute_actions(result_df):
 
     # Estraggo l'intervallo di tempo selezionato
-    start_day, end_day = str(result_df.index[0].date()), str(result_df.index[0-1].date())
+    start_day, end_day = str(result_df.index[0].date()), str(result_df.index[-1].date())
 
     # Estendi la data di fine di un giorno (l'ultimo giorno viene escluso)
     extended_end_day = pd.to_datetime(end_day) + pd.DateOffset(days=1)
@@ -480,7 +480,7 @@ def main(_model):
     time_range3 = ("2020-12-18", "2021-01-19")
     time_range_fail = ("2020-03-04", "2020-03-20")
 
-    #make_planning(y_pred, y_test, time_range3)
+    make_planning(y_pred, y_test, time_range3)
 
 
 def load_model():
