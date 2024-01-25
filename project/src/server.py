@@ -13,7 +13,7 @@ app = Bottle()
 def index():
     # http://localhost:8080/
     with open("web/index.html", "r") as file:
-        html_home= file.read()
+        html_home = file.read()
     return html_home
 
 
@@ -71,7 +71,6 @@ def make_plannig(start_day, end_day):
     # http://localhost:8080/make_planning/start=2020-12-18&end=2021-01-19
     time_range = (start_day, end_day)
     make_planning(sv['y_pred'], sv['y_test'], time_range)
-
 
     # Ottieni l'output e sostituisci i \n con <br>
     output = output_buffer.getvalue().replace('\n', '<br>')
