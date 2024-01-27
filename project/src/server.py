@@ -42,10 +42,10 @@ def draw_scatter_plot():
     return img_buf.getvalue()
 
 
-@app.route('/draw_wave_plot')
-def draw_wave_plot():
-    # http://localhost:8080/draw_scatter_plot2
-    return plots.draw_wave_plot(sv['y_test'], sv['y_pred'], 'c')
+@app.route('/draw_frequency_plot')
+def draw_frequency_plot():
+    # http://localhost:8080/draw_frequency_plot
+    return plots.draw_frequency_plot(sv['y_test'], sv['y_pred'], 'c')
 
 
 @app.route('/draw_feature_importance_plot')
