@@ -310,6 +310,8 @@ def compute_actions(result_df):
     print("\nResoconto:")
     print(f"Portafoglio: {money:.2f}$, la strategia ha prodotto {'del guadagno' if money > 0 else 'una perdita'}")
 
+    plots.plot_strategy(brk[['Adj Close']].copy())
+
 
 def make_planning(y_pred, y_test, time_range):
     # Estendo la colonna delle predizioni aggiungengo la data

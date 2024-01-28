@@ -162,4 +162,31 @@ def draw_confusion_matrix(y_test_class, y_pred_class, mode = None):
         plt.clf()
         return img_buf
 
+# param: data table -> columuns: 'Date' (index), 'Adj Close'
+def plot_strategy(data):
+    # Calculation of momentum
+    print(data)
+    data['momentum'] = data['Adj Close'].pct_change()
+    # Creating subplots to show momentum and buying/selling markers
+    figure = go.Figure()
+    figure.add_trace(go.Scatter(x=data.index,
+                                y=data['Adj Close'],
+                                name='Adj Close Price'))
+    # Adding the buy and sell signals
+    figure.add_trace(go.Scatter(x=data.loc[data['momentum'] < 0].index,
+                                y=data.loc[data['momentum'] < 0]['Adj Close'],
+                                mode='markers', name='Buy',
+                                marker=dict(color='green', symbol='triangle-up')))
+
+    figure.add_trace(go.Scatter(x=data.loc[data['momentum'] > 0].index,
+                                y=data.loc[data['momentum'] > 0]['Adj Close'],
+                                mode='markers', name='Sell',
+                                marker=dict(color='red', symbol='triangle-down')))
+
+    figure.update_layout(title='Momentum of the adjusted close price',
+                         xaxis_title='Date',
+                         yaxis_title='Price')
+    figure.update_yaxes(title="Momentum")
+    figure.show()
+
 
