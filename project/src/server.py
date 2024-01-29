@@ -69,59 +69,52 @@ def draw_confusion_matrix():
 @app.route('/make_planning/start=<start_day>&end=<end_day>')
 def make_plannig(start_day, end_day):
     # http://localhost:8080/make_planning/start=2020-12-18&end=2021-01-19
+
+    # Cattura l'output di print
+    output_buffer = StringIO()
+    sys.stdout = output_buffer
+
     time_range = (start_day, end_day)
     make_planning(sv['y_pred'], sv['y_test'], time_range)
 
-    # Ottieni l'output e sostituisci i \n con <br>
-    output = output_buffer.getvalue().replace('\n', '<br>')
+    # Ottengo la stringa dell'output del planning
+    # (cancellando l'output del caricamento del modello)
+    output = output_buffer.getvalue()
+    output_arr = output.split("\n")
+    output = "\n".join(output_arr[4:])
 
     # Reimposta l'output buffer
     output_buffer.truncate(0)
     output_buffer.seek(0)
 
-    return output
+    with open("web/planning.html", "r") as file:
+        html_home = file.read()
+
+    return template(html_home, output=output)
+
+
+@app.route('/draw_planning')
+def draw_frequency_plot():
+    # http://localhost:8080/draw_planning
+    return plots.plot_strategy(sv['data_brk'], sv['planning_df'], 'C')
 
 
 @app.route('/data_table')
 def show_data_table():
     # http://localhost:8080/data_table
     # Converti il DataFrame in un formato HTML utilizzando DataTables
-    table_html = sv['brk'].to_html(classes='table table-striped table-bordered', index=False, escape=False,
+    table_html = sv['brk'].to_html(classes='table table-striped table-bordered',
                                    table_id='myTable')
 
-    # Costruisci la pagina HTML direttamente in Python
-    html_content = f'''
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Data Table</title>
-        <!-- Includi le librerie DataTables -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-        <!-- Inizializza DataTables sulla tabella -->
-        <script>
-            $(document).ready( function () {{
-                $('#myTable').DataTable();
-            }} );
-        </script>
-    </head>
-    <body>
-        {table_html}
-    </body>
-    </html>
-    '''
+    # Apro il file HTML della tabella
+    with open("web/data_table.html", "r") as file:
+        html_file = file.read()
 
-    return template(html_content)
+    html_file = html_file.replace('<span>placeholder</span>', table_html)
+    return html_file
 
 
 if __name__ == "__main__":
-
-    # Cattura l'output di print
-    output_buffer = StringIO()
-    sys.stdout = output_buffer
 
     # Esegui l'app Bottle
     try:

@@ -322,10 +322,10 @@ def compute_actions(result_df):
     planning_df['Date'] = pd.to_datetime(planning_df['Date'])
     planning_df.set_index('Date', inplace=True)
 
-    dh.save_data('planning_df', planning_df)
     dh.save_data('data_brk', brk[['Adj Close']])
+    dh.save_data('planning_df', planning_df)
 
-    plots.plot_strategy(brk[['Adj Close']], planning_df)
+    # plots.plot_strategy(brk[['Adj Close']], planning_df)
 
 
 def make_planning(y_pred, y_test, time_range):

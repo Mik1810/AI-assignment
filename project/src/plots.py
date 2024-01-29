@@ -161,13 +161,13 @@ def draw_confusion_matrix(y_test_class, y_pred_class, mode=None):
 
 
 # param: data table -> columuns: 'Date' (index), 'Adj Close'
-def plot_strategy(data, planning_df):
+def plot_strategy(data_brk, planning_df, mode = None):
     # Calcolo del momentum
-    data['momentum'] = data['Adj Close'].pct_change()
+    data_brk['momentum'] = data_brk['Adj Close'].pct_change()
 
     # Trovare i punti di inversione del trend
-    buy_signals = data[(data['momentum'] < 0) & (data['momentum'].shift(-1) > 0)]
-    sell_signals = data[(data['momentum'] > 0) & (data['momentum'].shift(-1) < 0)]
+    buy_signals = data_brk[(data_brk['momentum'] < 0) & (data_brk['momentum'].shift(-1) > 0)]
+    sell_signals = data_brk[(data_brk['momentum'] > 0) & (data_brk['momentum'].shift(-1) < 0)]
 
     # Unire i giorni in cui ci sono segnali di acquisto o vendita
     marked_days = buy_signals.index.union(sell_signals.index)
@@ -176,8 +176,8 @@ def plot_strategy(data, planning_df):
     figure = go.Figure()
 
     # Aggiungere il grafico dei prezzi di chiusura
-    figure.add_trace(go.Scatter(x=data.index,
-                                y=data['Adj Close'],
+    figure.add_trace(go.Scatter(x=data_brk.index,
+                                y=data_brk['Adj Close'],
                                 name='Adj Close Price'))
 
     # Aggiungere il grafico dei prezzi di chiusura
@@ -205,15 +205,16 @@ def plot_strategy(data, planning_df):
                                         mode='text',
                                         text=['Compra'],
                                         textposition="top center",
-                                        textfont=dict(size=14, color='black', family='Arial')))
+                                        textfont=dict(size=14, color='black', family='Arial'),
+                                        showlegend=False))
         else:
             figure.add_trace(go.Scatter(x=[index],
                                         y=[row['Value']],
                                         mode='text',
                                         text=['Vendi'],
                                         textposition="top center",
-                                        textfont=dict(size=14, color='black', family='Arial')))
-
+                                        textfont=dict(size=14, color='black', family='Arial'),
+                                        showlegend=False))
 
     # Aggiungere l'asse x con i giorni marcanti
     figure.update_xaxes(
@@ -228,5 +229,9 @@ def plot_strategy(data, planning_df):
                          yaxis_title='Price')
     figure.update_yaxes(title="Momentum")
 
-    # Mostrare il grafico
-    figure.show()
+    if mode is None:
+        figure.show()
+    else:
+        # Ottieni l'URL del plot
+        url = figure.to_html(full_html=False)
+        return url
