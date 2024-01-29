@@ -18,8 +18,7 @@ from sklearn.inspection import permutation_importance
 from sklearn.metrics import confusion_matrix
 
 
-def draw_candlestick_plot(stock, mode = None):
-
+def draw_candlestick_plot(stock, mode=None):
     # Crea un grafico a candela per visualizzare il prezzo delle azioni
     candlestick = go.Candlestick(x=stock.index,
                                  open=stock['Open'],
@@ -62,7 +61,7 @@ def draw_candlestick_plot(stock, mode = None):
         return url
 
 
-def draw_scatter_plot(y_test, y_pred, r2, rmse, mode = None):
+def draw_scatter_plot(y_test, y_pred, r2, rmse, mode=None):
     plt.scatter(y_test, y_pred)
     plt.xlabel('True Values')
     plt.ylabel('Predicted Values')
@@ -86,8 +85,7 @@ def draw_scatter_plot(y_test, y_pred, r2, rmse, mode = None):
         return img_buf
 
 
-def draw_frequency_plot(y_test, y_pred, mode = None):
-
+def draw_frequency_plot(y_test, y_pred, mode=None):
     # Daily returns plot y_pred x y_test
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=np.arange(len(y_test)), y=y_test, mode='lines', name='True Values'))
@@ -101,8 +99,7 @@ def draw_frequency_plot(y_test, y_pred, mode = None):
         return url
 
 
-def draw_feature_importance_plot(model, X_test, y_test, mode = None):
-
+def draw_feature_importance_plot(model, X_test, y_test, mode=None):
     result = permutation_importance(model, X_test, y_test, n_repeats=10,
                                     random_state=42)  # Computing feature importance
 
@@ -135,7 +132,7 @@ def draw_feature_importance_plot(model, X_test, y_test, mode = None):
         return img_buf
 
 
-def draw_confusion_matrix(y_test_class, y_pred_class, mode = None):
+def draw_confusion_matrix(y_test_class, y_pred_class, mode=None):
     # Creiamo la matrice di confusione
     conf_matrix = confusion_matrix(y_test_class, y_pred_class)
 
@@ -162,31 +159,74 @@ def draw_confusion_matrix(y_test_class, y_pred_class, mode = None):
         plt.clf()
         return img_buf
 
+
 # param: data table -> columuns: 'Date' (index), 'Adj Close'
-def plot_strategy(data):
-    # Calculation of momentum
-    print(data)
+def plot_strategy(data, planning_df):
+    # Calcolo del momentum
     data['momentum'] = data['Adj Close'].pct_change()
-    # Creating subplots to show momentum and buying/selling markers
+
+    # Trovare i punti di inversione del trend
+    buy_signals = data[(data['momentum'] < 0) & (data['momentum'].shift(-1) > 0)]
+    sell_signals = data[(data['momentum'] > 0) & (data['momentum'].shift(-1) < 0)]
+
+    # Unire i giorni in cui ci sono segnali di acquisto o vendita
+    marked_days = buy_signals.index.union(sell_signals.index)
+
+    # Creare il grafico
     figure = go.Figure()
+
+    # Aggiungere il grafico dei prezzi di chiusura
     figure.add_trace(go.Scatter(x=data.index,
                                 y=data['Adj Close'],
                                 name='Adj Close Price'))
-    # Adding the buy and sell signals
-    figure.add_trace(go.Scatter(x=data.loc[data['momentum'] < 0].index,
-                                y=data.loc[data['momentum'] < 0]['Adj Close'],
+
+    # Aggiungere il grafico dei prezzi di chiusura
+    figure.add_trace(go.Scatter(x=planning_df.index,
+                                y=planning_df['Value'],
+                                name='Plan'))
+
+    # Aggiungere i triangolini per i segnali di acquisto
+    figure.add_trace(go.Scatter(x=buy_signals.index,
+                                y=buy_signals['Adj Close'],
                                 mode='markers', name='Buy',
-                                marker=dict(color='green', symbol='triangle-up')))
+                                marker=dict(color='green', symbol='triangle-up', size=13)))
 
-    figure.add_trace(go.Scatter(x=data.loc[data['momentum'] > 0].index,
-                                y=data.loc[data['momentum'] > 0]['Adj Close'],
+    # Aggiungere i triangolini per i segnali di vendita
+    figure.add_trace(go.Scatter(x=sell_signals.index,
+                                y=sell_signals['Adj Close'],
                                 mode='markers', name='Sell',
-                                marker=dict(color='red', symbol='triangle-down')))
+                                marker=dict(color='red', symbol='triangle-down', size=13)))
 
+    # Aggiungere annotazioni per gli indicatori del tempo
+    for index, row in planning_df.iterrows():
+        if row['Action'] == "C":
+            figure.add_trace(go.Scatter(x=[index],
+                                        y=[row['Value']],
+                                        mode='text',
+                                        text=['Compra'],
+                                        textposition="top center",
+                                        textfont=dict(size=14, color='black', family='Arial')))
+        else:
+            figure.add_trace(go.Scatter(x=[index],
+                                        y=[row['Value']],
+                                        mode='text',
+                                        text=['Vendi'],
+                                        textposition="top center",
+                                        textfont=dict(size=14, color='black', family='Arial')))
+
+
+    # Aggiungere l'asse x con i giorni marcanti
+    figure.update_xaxes(
+        tickvals=marked_days,
+        ticktext=marked_days.strftime('%d %b %Y'),
+        tickmode='array'
+    )
+
+    # Configurare il layout del grafico
     figure.update_layout(title='Momentum of the adjusted close price',
                          xaxis_title='Date',
                          yaxis_title='Price')
     figure.update_yaxes(title="Momentum")
+
+    # Mostrare il grafico
     figure.show()
-
-
