@@ -39,6 +39,7 @@ import optuna
 
 # Hiding warnings
 import warnings
+
 warnings.filterwarnings("ignore")
 pd.options.mode.chained_assignment = None
 
@@ -48,7 +49,6 @@ import data_handler as dh
 
 # Funzione che calcola ulteriori indici utili da quelli delle azioni
 def feature_engineering(df):
-
     # high_low_ratio indica la volatilità misurata come il rapporto tra i prezzi più alti e più bassi.
     df['high_low_ratio'] = df['High'] / df['Low']
 
@@ -115,6 +115,7 @@ def feature_engineering(df):
 
     return df
 
+
 # Funzione che consente di selezionare le migliori features per addestrare il modello
 def select_features(X_train, y_train, X_test):
     # Crea un selettore per le feature migliori utilizzando il test F
@@ -151,7 +152,6 @@ def select_features(X_train, y_train, X_test):
 # Funzione che testa vari modelli di regressione lineare cercandone uno che minimizzi la radice dell'errore
 # quadratico medio e che massimizzi il valore R²
 def test_models(X_train, y_train, X_test, y_test):
-
     # random_state = 42 è un seed che convenzionalmente viene scelto al fine di riprodurre gli stessi risultati
     # in caso di debug
     regressors = [
@@ -185,7 +185,6 @@ def test_models(X_train, y_train, X_test, y_test):
 
 # Funzione obbiettivo per il modello
 def objective(trial, X_train, y_train, X_test, y_test):
-
     # Definizione di diversi parametri con cui verrà testato il modello
     params = {
         'loss': trial.suggest_categorical('loss', ['squared_error', 'absolute_error', 'huber', 'quantile']),
@@ -207,8 +206,8 @@ def objective(trial, X_train, y_train, X_test, y_test):
     rmse = np.round(mean_squared_error(y_test, preds, squared=False), 3)
     return rmse  # Returining the score
 
-def return_strategy(_y_pred, time_range):
 
+def return_strategy(_y_pred, time_range):
     start_day, end_day = time_range
     y_pred = _y_pred
 
@@ -224,7 +223,7 @@ def return_strategy(_y_pred, time_range):
 
     # Creo un valore artificiale per considerare anche l'ultimo elemento, che altrimenti verrebbe
     # tagliato fuori. tale valore artificiale sarà uguale all'ultimo valore reale
-    binary_array = np.append(binary_array, binary_array[len(binary_array)-1])
+    binary_array = np.append(binary_array, binary_array[len(binary_array) - 1])
 
     # Creo una lista di coppie (valore, azione)
     result_pairs = []
@@ -232,7 +231,7 @@ def return_strategy(_y_pred, time_range):
     # Itero sull'array binario e aggiungo le coppie in base alle inversioni
     for i in range(len(binary_array) - 1):
         current_value = binary_array[i]
-        next_value = binary_array[i+1]
+        next_value = binary_array[i + 1]
 
         if current_value == next_value:
             # Se il valore corrente è uguale al successivo, vuol dire che non c'è
@@ -254,15 +253,14 @@ def return_strategy(_y_pred, time_range):
     result_df = result_df.set_index(y_pred.index)
 
     # Shifto la colonna delle azioni perchè deve essere fatta un giorno prima
-    #result_df['Action'] = result_df['Action'].shift(1)
+    # result_df['Action'] = result_df['Action'].shift(1)
 
     return result_df
 
 
 def compute_actions(result_df):
-
     # Estraggo l'intervallo di tempo selezionato
-    start_day, end_day = str(result_df.index[0].date()), str(result_df.index[0-1].date())
+    start_day, end_day = str(result_df.index[0].date()), str(result_df.index[-1].date())
 
     # Estendi la data di fine di un giorno (l'ultimo giorno viene escluso)
     extended_end_day = pd.to_datetime(end_day) + pd.DateOffset(days=1)
@@ -278,6 +276,9 @@ def compute_actions(result_df):
     print(f"\nComprata azione il giorno {start_day} dal valore di {starting_value:.2f}")
     print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
 
+    # Creo un lista di coppie per passare poi i dati alla funzione di plot
+    plot_list = [(start_day, starting_value, 'C')]
+
     # Scorr0 il DataFrame utilizzando iterrows
     for date, row in result_df.iterrows():
         action = row['Action']
@@ -289,6 +290,8 @@ def compute_actions(result_df):
             stocks -= 1
             print(f"\nVenduta azione il giorno {str(date.date())} al prezzo di {price:.2f}")
             print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
+
+            plot_list.append((date, price, action))
         if action == "C":
             # Se l'azione precedentemente scelta è C di Compra, allora cerco il prezzo di chiusura
             # relativo al giorno dell'azione e rimuovo dal mio portafoglio i soldi per l'acquisto
@@ -297,6 +300,8 @@ def compute_actions(result_df):
             stocks += 1
             print(f"\nComprata azione il giorno {str(date.date())} al prezzo di {price:.2f}")
             print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
+
+            plot_list.append((date, price, action))
 
     # Se sono rimaste azioni, converto il valore dell'azione nel rispettivo prezzo di chiusura aggiustato
     # relativo all'ultimo giorno
@@ -307,8 +312,20 @@ def compute_actions(result_df):
         print(f"\nVenduta azione il giorno {end_day} al prezzo di {price:.2f}")
         print(f"Portafoglio: {money:.2f}$, Azioni in possesso: {stocks}")
 
+        plot_list.append((end_day, price, 'V'))
+
     print("\nResoconto:")
     print(f"Portafoglio: {money:.2f}$, la strategia ha prodotto {'del guadagno' if money > 0 else 'una perdita'}")
+
+    # Converto la lista di prima in un DataFrame
+    planning_df = pd.DataFrame(plot_list, columns=['Date', 'Value', 'Action'])
+    planning_df['Date'] = pd.to_datetime(planning_df['Date'])
+    planning_df.set_index('Date', inplace=True)
+
+    dh.save_data('data_brk', brk[['Adj Close']])
+    dh.save_data('planning_df', planning_df)
+
+    # plots.plot_strategy(brk[['Adj Close']], planning_df)
 
 
 def make_planning(y_pred, y_test, time_range):
@@ -329,8 +346,8 @@ def make_planning(y_pred, y_test, time_range):
     # avendo eseguito queste azioni
     compute_actions(result_df)
 
-def main(_model):
 
+def run_model(_model):
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
     brk = yf.download('BRK-B', progress=False)
     dh.save_data('brk', brk)
@@ -402,16 +419,17 @@ def main(_model):
         rmse = mean_squared_error(y_test, y_pred, squared=False)
 
         # Disegna dei grafici di dispersione per vedere come sono distribuiti le predizioni rispetto ai valori reali
-        #plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-        #plots.draw_wave_plot(y_test, y_pred)
+        # plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+        # plots.draw_wave_plot(y_test, y_pred)
 
         # Verifichiamo quanto sono state incisive le feature per i calcoli delle predizioni
-        #plots.draw_feature_importance_plot(model, X_test, y_test)
+        # plots.draw_feature_importance_plot(model_now, X_test, y_test)
 
         # Si può provare a migliorare il modello attaverso il tuning degli iperparametri
         # L'obbiettivo è minimizzare dei valori di errore
         study = optuna.create_study(direction='minimize')
-        study.optimize(lambda trial: objective(trial, X_train, y_train, X_test, y_test), n_trials=100, show_progress_bar=True)
+        study.optimize(lambda trial: objective(trial, X_train, y_train, X_test, y_test), n_trials=100,
+                       show_progress_bar=True)
 
         # Stampo i valori dei parametri nel miglior trial
         print('Best parameters:', study.best_params)
@@ -455,8 +473,8 @@ def main(_model):
     # plots.draw_feature_importance_plot(model, X_test, y_test)
 
     # Salvo le predizioni e i valori di test in dei file
-    #np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
-    #y_test.to_csv('resources/y_test.csv', index=True)
+    # np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
+    # y_test.to_csv('resources/y_test.csv', index=True)
 
     # Al fine di comprendere quanto le predizioni siano aderenti alla realtà,
     # creiamo due nuovi dataframe utilizzando come treshold lo 0. Tali array
@@ -469,7 +487,7 @@ def main(_model):
     dh.save_data('y_test_class', y_test_class)
 
     # Visualizziamo la matrice di confusione
-    #plots.draw_confusion_matrix(y_test_class, y_pred_class)
+    # plots.draw_confusion_matrix(y_test_class, y_pred_class)
 
     # A questo punto abbiamo i valori delle predizioni, sviluppiamo una strategia che li sfrutti
     # print(y_pred, y_test)
@@ -480,11 +498,10 @@ def main(_model):
     time_range3 = ("2020-12-18", "2021-01-19")
     time_range_fail = ("2020-03-04", "2020-03-20")
 
-    #make_planning(y_pred, y_test, time_range3)
+    make_planning(y_pred, y_test, time_range3)
 
 
 def load_model():
-
     try:
         with open('models/model.pkl', 'rb') as file:
             loaded_model = pickle.load(file)
@@ -495,6 +512,5 @@ def load_model():
 
 
 if __name__ == "__main__":
-
     model = load_model()
-    main(model)
+    run_model(model)
