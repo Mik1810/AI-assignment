@@ -188,13 +188,13 @@ def plot_strategy(data_brk, planning_df, mode = None):
     # Aggiungere i triangolini per i segnali di acquisto
     figure.add_trace(go.Scatter(x=buy_signals.index,
                                 y=buy_signals['Adj Close'],
-                                mode='markers', name='Salita',
+                                mode='markers', name='Buy',
                                 marker=dict(color='green', symbol='triangle-up', size=13)))
 
     # Aggiungere i triangolini per i segnali di vendita
     figure.add_trace(go.Scatter(x=sell_signals.index,
                                 y=sell_signals['Adj Close'],
-                                mode='markers', name='Discesa',
+                                mode='markers', name='Sell',
                                 marker=dict(color='red', symbol='triangle-down', size=13)))
 
     # Aggiungere annotazioni per gli indicatori del tempo
@@ -224,10 +224,10 @@ def plot_strategy(data_brk, planning_df, mode = None):
     )
 
     # Configurare il layout del grafico
-    figure.update_layout(title='Grafico di investimento',
-                         xaxis_title='Data',
-                         yaxis_title='Prezzo')
-    figure.update_yaxes(title="Prezzo")
+    figure.update_layout(title='Momentum of the adjusted close price',
+                         xaxis_title='Date',
+                         yaxis_title='Price')
+    figure.update_yaxes(title="Momentum")
 
     if mode is None:
         figure.show()
