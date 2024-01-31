@@ -466,11 +466,11 @@ def run_model(_model):
     dh.save_data('rmse', rmse)
 
     # A questo punto ridisegnamo i plot di dispersione
-    # plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-    # plots.draw_scatter_plot2(y_test, y_pred)
+    plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+    plots.draw_frequency_plot(y_test, y_pred)
 
     # Rivisualizziamo come è cambiata l'importanza dele varie feature dopo l'ottimizzazione
-    # plots.draw_feature_importance_plot(model, X_test, y_test)
+    plots.draw_feature_importance_plot(model, X_test, y_test)
 
     # Salvo le predizioni e i valori di test in dei file
     # np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
