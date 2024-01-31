@@ -178,7 +178,8 @@ def plot_strategy(data_brk, planning_df, mode = None):
     # Aggiungere il grafico dei prezzi di chiusura
     figure.add_trace(go.Scatter(x=data_brk.index,
                                 y=data_brk['Adj Close'],
-                                name='Adj Close Price'))
+                                name='Adj Close Price',
+                                mode='lines'))
 
     # Aggiungere il grafico dei prezzi di chiusura
     figure.add_trace(go.Scatter(x=planning_df.index,

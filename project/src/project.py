@@ -498,7 +498,7 @@ def run_model(_model):
     time_range3 = ("2020-12-18", "2021-01-19")
     time_range_fail = ("2020-03-04", "2020-03-20")
 
-    make_planning(y_pred, y_test, time_range3)
+    #make_planning(y_pred, y_test, time_range3)
 
 
 def load_model():
