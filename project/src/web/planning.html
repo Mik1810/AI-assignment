@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Project - Piccirilli, Addario</title>
+  <link rel="icon" href="../web/icons/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      height: 100vh;
+    }
+
+    #leftContainer {
+      flex: 2;
+      position: relative;
+      width: 66.66vh;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+
+    #rightContainer {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    #spanPlanning {
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="leftContainer">
+    <iframe src="http://localhost:8080/draw_planning" loading="eager"></iframe>
+  </div>
+
+  <div id="rightContainer">
+    <span id="spanPlanning">{{output}}</span>
+  </div>
+
+</body>
+</html>

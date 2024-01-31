@@ -402,14 +402,14 @@ def main(_model):
         rmse = mean_squared_error(y_test, y_pred, squared=False)
 
         # Disegna dei grafici di dispersione per vedere come sono distribuiti le predizioni rispetto ai valori reali
-        plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-        plots.draw_wave_plot(y_test, y_pred)
+        #plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+        #plots.draw_wave_plot(y_test, y_pred)
+
         # Verifichiamo quanto sono state incisive le feature per i calcoli delle predizioni
-        plots.draw_feature_importance_plot(model_now, X_test, y_test)
+        #plots.draw_feature_importance_plot(model, X_test, y_test)
 
         # Si può provare a migliorare il modello attaverso il tuning degli iperparametri
         # L'obbiettivo è minimizzare dei valori di errore
-
         study = optuna.create_study(direction='minimize')
         study.optimize(lambda trial: objective(trial, X_train, y_train, X_test, y_test), n_trials=100, show_progress_bar=True)
 
@@ -486,7 +486,7 @@ def main(_model):
 def load_model():
 
     try:
-        with open('models/model5465.pkl', 'rb') as file:
+        with open('models/model.pkl', 'rb') as file:
             loaded_model = pickle.load(file)
         print("Modello caricato: ", loaded_model)
         return loaded_model
