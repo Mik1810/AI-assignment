@@ -406,7 +406,7 @@ def main(_model):
         #plots.draw_wave_plot(y_test, y_pred)
 
         # Verifichiamo quanto sono state incisive le feature per i calcoli delle predizioni
-        plots.draw_feature_importance_plot(model_now, X_test, y_test)
+        #plots.draw_feature_importance_plot(model, X_test, y_test)
 
         # Si può provare a migliorare il modello attaverso il tuning degli iperparametri
         # L'obbiettivo è minimizzare dei valori di errore
