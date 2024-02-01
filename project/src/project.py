@@ -420,7 +420,7 @@ def run_model(_model):
 
         # Disegna dei grafici di dispersione per vedere come sono distribuiti le predizioni rispetto ai valori reali
         # plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-        # plots.draw_wave_plot(y_test, y_pred)
+        # plots.draw_frequency_plot(y_test, y_pred)
 
         # Verifichiamo quanto sono state incisive le feature per i calcoli delle predizioni
         # plots.draw_feature_importance_plot(model_now, X_test, y_test)
