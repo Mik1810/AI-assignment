@@ -104,7 +104,7 @@ def show_data_table():
     # http://localhost:8080/data_table
     # Converti il DataFrame in un formato HTML utilizzando DataTables
     table_html = sv['brk'].to_html(classes='table table-striped table-bordered',
-                                   table_id='myTable')
+                                   table_id='myTable', index=False, escape=False)
 
     # Apro il file HTML della tabella
     with open("web/data_table.html", "r") as file:

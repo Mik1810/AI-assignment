@@ -325,7 +325,7 @@ def compute_actions(result_df):
     dh.save_data('data_brk', brk[['Adj Close']])
     dh.save_data('planning_df', planning_df)
 
-    # plots.plot_strategy(brk[['Adj Close']], planning_df)
+    plots.plot_strategy(brk[['Adj Close']], planning_df)
 
 
 def make_planning(y_pred, y_test, time_range):
@@ -466,11 +466,11 @@ def run_model(_model):
     dh.save_data('rmse', rmse)
 
     # A questo punto ridisegnamo i plot di dispersione
-    plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-    plots.draw_frequency_plot(y_test, y_pred)
+    #plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+    #plots.draw_frequency_plot(y_test, y_pred)
 
     # Rivisualizziamo come è cambiata l'importanza dele varie feature dopo l'ottimizzazione
-    plots.draw_feature_importance_plot(model, X_test, y_test)
+    #plots.draw_feature_importance_plot(model, X_test, y_test)
 
     # Salvo le predizioni e i valori di test in dei file
     # np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
@@ -498,7 +498,7 @@ def run_model(_model):
     time_range3 = ("2020-12-18", "2021-01-19")
     time_range_fail = ("2020-03-04", "2020-03-20")
 
-    #make_planning(y_pred, y_test, time_range3)
+    # make_planning(y_pred, y_test, time_range3)
 
 
 def load_model():

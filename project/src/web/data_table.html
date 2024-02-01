@@ -4,21 +4,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Data Table</title>
-        <!-- Includi le librerie DataTables -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+
+        <script rel="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script rel="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script rel="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
         <!-- Inizializza DataTables sulla tabella -->
 
     </head>
     <body>
         <span>placeholder</span>
     <script type="text/javascript">
-        let table = document.querySelector("#myTable")
-        table.DataTable();
-        table.style.width = "100%"
+        $(document).ready( function () {{
+                $('#myTable').DataTable();
+            }} );
     </script>
     </body>
     </html>

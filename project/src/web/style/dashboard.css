@@ -1,3 +1,4 @@
+
 .bi {
   display: inline-block;
   width: 1rem;
@@ -29,7 +30,7 @@
 }
 
 .sidebar-heading {
-  font-size: .75rem;
+  font-size: 1.05rem;
 }
 
 /*
@@ -45,4 +46,9 @@
 
 .company_name .form-control {
   padding: .75rem 1rem;
+}
+
+#table {
+  overflow-y: auto;
+  height: 100%;
 }

@@ -161,6 +161,7 @@ def draw_confusion_matrix(y_test_class, y_pred_class, mode=None):
 
 
 # param: data table -> columuns: 'Date' (index), 'Adj Close'
+#        planning_df -> columns: 'Date' (index), 'Value', 'Action'
 def plot_strategy(data_brk, planning_df, mode = None):
     # Calcolo del momentum
     data_brk['momentum'] = data_brk['Adj Close'].pct_change()
@@ -170,7 +171,7 @@ def plot_strategy(data_brk, planning_df, mode = None):
     sell_signals = data_brk[(data_brk['momentum'] > 0) & (data_brk['momentum'].shift(-1) < 0)]
 
     # Unire i giorni in cui ci sono segnali di acquisto o vendita
-    marked_days = buy_signals.index.union(sell_signals.index)
+    marked_days = buy_signals.index.union(sell_signals.index).union(planning_df.index)
 
     # Creare il grafico
     figure = go.Figure()

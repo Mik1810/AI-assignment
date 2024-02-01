@@ -2,20 +2,18 @@
       display: flex;
       justify-content: space-around;
       flex-direction: column;
-      margin: 5px; /* Ridotto da 10px a 5px */
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px; /* Ridotto da 15px a 10px */
+      margin: 5px;
+      padding: 3px;
     }
 
-    .datepicker-container input {
+.datepicker-container  input {
       margin: 5px 0; /* Ridotto da 10px a 5px */
       padding: 4px; /* Ridotto da 8px a 4px */
       border: 1px solid #ccc;
       border-radius: 5px;
-    }
+}
 
-    .datepicker-container button {
+.datepicker-container  button {
       margin-top: 5px; /* Ridotto da 10px a 5px */
       padding: 4px; /* Ridotto da 8px a 4px */
       border: 1px solid #007BFF;
@@ -23,7 +21,7 @@
       background-color: #007BFF;
       color: #fff;
       cursor: pointer;
-    }
+}
 
 
       .bd-placeholder-img {
