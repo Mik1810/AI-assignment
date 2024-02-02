@@ -44,6 +44,7 @@ warnings.filterwarnings("ignore")
 pd.options.mode.chained_assignment = None
 
 import plots
+from exclude_plot import exclude_plot
 import data_handler as dh
 
 
@@ -347,6 +348,7 @@ def make_planning(y_pred, y_test, time_range):
     compute_actions(result_df)
 
 
+@exclude_plot(True)
 def run_model(_model):
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
     brk = yf.download('BRK-B', progress=False)
@@ -419,11 +421,11 @@ def run_model(_model):
         rmse = mean_squared_error(y_test, y_pred, squared=False)
 
         # Disegna dei grafici di dispersione per vedere come sono distribuiti le predizioni rispetto ai valori reali
-        # plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-        # plots.draw_frequency_plot(y_test, y_pred)
+        plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+        plots.draw_frequency_plot(y_test, y_pred)
 
         # Verifichiamo quanto sono state incisive le feature per i calcoli delle predizioni
-        # plots.draw_feature_importance_plot(model_now, X_test, y_test)
+        plots.draw_feature_importance_plot(model_now, X_test, y_test)
 
         # Si può provare a migliorare il modello attaverso il tuning degli iperparametri
         # L'obbiettivo è minimizzare dei valori di errore
@@ -466,11 +468,11 @@ def run_model(_model):
     dh.save_data('rmse', rmse)
 
     # A questo punto ridisegnamo i plot di dispersione
-    #plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-    #plots.draw_frequency_plot(y_test, y_pred)
+    plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
+    plots.draw_frequency_plot(y_test, y_pred)
 
     # Rivisualizziamo come è cambiata l'importanza dele varie feature dopo l'ottimizzazione
-    #plots.draw_feature_importance_plot(model, X_test, y_test)
+    plots.draw_feature_importance_plot(model, X_test, y_test)
 
     # Salvo le predizioni e i valori di test in dei file
     # np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
@@ -487,7 +489,7 @@ def run_model(_model):
     dh.save_data('y_test_class', y_test_class)
 
     # Visualizziamo la matrice di confusione
-    # plots.draw_confusion_matrix(y_test_class, y_pred_class)
+    plots.draw_confusion_matrix(y_test_class, y_pred_class)
 
     # A questo punto abbiamo i valori delle predizioni, sviluppiamo una strategia che li sfrutti
     # print(y_pred, y_test)
@@ -498,7 +500,7 @@ def run_model(_model):
     time_range3 = ("2020-12-18", "2021-01-19")
     time_range_fail = ("2020-03-04", "2020-03-20")
 
-    # make_planning(y_pred, y_test, time_range3)
+    make_planning(y_pred, y_test, time_range3)
 
 
 def load_model():

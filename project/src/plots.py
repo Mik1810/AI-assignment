@@ -62,6 +62,7 @@ def draw_candlestick_plot(stock, mode=None):
 
 
 def draw_scatter_plot(y_test, y_pred, r2, rmse, mode=None):
+    plt.figure(figsize=(6.40, 4.80))
     plt.scatter(y_test, y_pred)
     plt.xlabel('True Values')
     plt.ylabel('Predicted Values')
@@ -121,6 +122,7 @@ def draw_feature_importance_plot(model, X_test, y_test, mode=None):
     ax.set_title('Feature Importance')
     if mode is None:
         plt.show()
+        plt.close(fig)
     else:
         # Salva il plot in un oggetto BytesIO
         img_buf = BytesIO()
@@ -139,8 +141,8 @@ def draw_confusion_matrix(y_test_class, y_pred_class, mode=None):
     # Trasformiamo i valori in %
     conf_matrix = conf_matrix / np.sum(conf_matrix) * 100
 
-    # PDisegniamo la matrice
-    plt.figure(figsize=(8, 6))
+    # Disegniamo la matrice
+    plt.figure(num=120, figsize=(8, 6))
     sns.heatmap(conf_matrix, annot=True, cmap='Blues',
                 fmt='.2f', xticklabels=[-1, 1], yticklabels=[-1, 1])
 
@@ -149,6 +151,7 @@ def draw_confusion_matrix(y_test_class, y_pred_class, mode=None):
     plt.ylabel('y_test')
     if mode is None:
         plt.show()
+        plt.clf()
     else:
         # Salva il plot in un oggetto BytesIO
         img_buf = BytesIO()

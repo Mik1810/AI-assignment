@@ -1,7 +1,5 @@
 FROM python:3.10-slim
 
-LABEL authors="michaelpic"
-
 RUN mkdir web
 RUN mkdir resources
 
