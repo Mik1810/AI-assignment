@@ -104,16 +104,16 @@ def draw_feature_importance_plot(model, X_test, y_test, mode=None):
     result = permutation_importance(model, X_test, y_test, n_repeats=10,
                                     random_state=42)  # Computing feature importance
 
-    # Computing mean scores and obtaining features' names
+    # Calcola la media e ottiene i nomi delle features
     importances = result.importances_mean
     feature_names = X_test.columns
 
-    # Sorting Features importances and names
+    # Ordina le features per importanza
     indices = importances.argsort()[::1]
     sorted_features = feature_names[indices]
     sorted_importances = importances[indices]
 
-    # Plotting Feature Importance plot
+    # Crea il grafico
     fig, ax = plt.subplots(figsize=(15, 15))
     ax.barh(sorted_features, sorted_importances)
     ax.set_yticklabels(sorted_features)
@@ -169,40 +169,40 @@ def plot_strategy(data_brk, planning_df, mode = None):
     # Calcolo del momentum
     data_brk['momentum'] = data_brk['Adj Close'].pct_change()
 
-    # Trovare i punti di inversione del trend
+    # Trova i punti di inversione del trend
     buy_signals = data_brk[(data_brk['momentum'] < 0) & (data_brk['momentum'].shift(-1) > 0)]
     sell_signals = data_brk[(data_brk['momentum'] > 0) & (data_brk['momentum'].shift(-1) < 0)]
 
-    # Unire i giorni in cui ci sono segnali di acquisto o vendita
+    # Unisce i giorni in cui ci sono segnali di acquisto o vendita
     marked_days = buy_signals.index.union(sell_signals.index).union(planning_df.index)
 
-    # Creare il grafico
+    # Crea il grafico
     figure = go.Figure()
 
-    # Aggiungere il grafico dei prezzi di chiusura
+    # Aggiunge il grafico dei prezzi di chiusura
     figure.add_trace(go.Scatter(x=data_brk.index,
                                 y=data_brk['Adj Close'],
                                 name='Adj Close Price',
                                 mode='lines'))
 
-    # Aggiungere il grafico dei prezzi di chiusura
+    # Aggiunge il grafico dei prezzi di chiusura
     figure.add_trace(go.Scatter(x=planning_df.index,
                                 y=planning_df['Value'],
                                 name='Plan'))
 
-    # Aggiungere i triangolini per i segnali di acquisto
+    # Aggiunge i triangolini per i segnali di acquisto
     figure.add_trace(go.Scatter(x=buy_signals.index,
                                 y=buy_signals['Adj Close'],
                                 mode='markers', name='Salita',
                                 marker=dict(color='green', symbol='triangle-up', size=13)))
 
-    # Aggiungere i triangolini per i segnali di vendita
+    # Aggiunge i triangolini per i segnali di vendita
     figure.add_trace(go.Scatter(x=sell_signals.index,
                                 y=sell_signals['Adj Close'],
                                 mode='markers', name='Discesa',
                                 marker=dict(color='red', symbol='triangle-down', size=13)))
 
-    # Aggiungere annotazioni per gli indicatori del tempo
+    # Aggiunge annotazioni per gli indicatori del tempo
     for index, row in planning_df.iterrows():
         if row['Action'] == "C":
             figure.add_trace(go.Scatter(x=[index],
@@ -221,14 +221,14 @@ def plot_strategy(data_brk, planning_df, mode = None):
                                         textfont=dict(size=14, color='black', family='Arial'),
                                         showlegend=False))
 
-    # Aggiungere l'asse x con i giorni marcanti
+    # Aggiunge l'asse x con i giorni marcanti
     figure.update_xaxes(
         tickvals=marked_days,
         ticktext=marked_days.strftime('%d %b %Y'),
         tickmode='array'
     )
 
-    # Configurare il layout del grafico
+    # Configura il layout del grafico
     figure.update_layout(title='Grafico di investimento',
                          xaxis_title='Data',
                          yaxis_title='Prezzo')
@@ -237,6 +237,6 @@ def plot_strategy(data_brk, planning_df, mode = None):
     if mode is None:
         figure.show()
     else:
-        # Ottieni l'URL del plot
+        # Ottiene l'URL del plot
         url = figure.to_html(full_html=False)
         return url

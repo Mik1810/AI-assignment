@@ -119,7 +119,7 @@ if __name__ == "__main__":
     # Esegui l'app Bottle
     try:
         model = load_model()
-        run_model(model)
+        run_model(model, display_plot = False)
         run(app, host='0.0.0.0', port=8080, debug=True)
     finally:
         cleanup()

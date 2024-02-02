@@ -37,15 +37,15 @@ from sklearn.feature_selection import SelectKBest, f_regression
 # Hyperparameter Tuning
 import optuna
 
-# Hiding warnings
+# Importo il file per generare i plot e per salvare i dati
+import plots
+import data_handler as dh
+
+# Nasconde i warnings
 import warnings
 
 warnings.filterwarnings("ignore")
 pd.options.mode.chained_assignment = None
-
-import plots
-from exclude_plot import exclude_plot
-import data_handler as dh
 
 
 # Funzione che calcola ulteriori indici utili da quelli delle azioni
@@ -348,14 +348,13 @@ def make_planning(y_pred, y_test, time_range):
     compute_actions(result_df)
 
 
-@exclude_plot(True)
-def run_model(_model):
+def run_model(_model, display_plot = True):
     # Scarica i valori delle azioni di Berkshire Hathaway Inc. (BRK-B) fino alla data odierna
     brk = yf.download('BRK-B', progress=False)
     dh.save_data('brk', brk)
 
     # Crea un grafico a candela delle azioni scaricate
-    # plots.draw_candlestick_plot(brk)
+    plots.draw_candlestick_plot(brk) if display_plot else None
 
     # Divide il DataSet in train e test
     train = brk[brk.index.year <= 2016]
@@ -421,11 +420,11 @@ def run_model(_model):
         rmse = mean_squared_error(y_test, y_pred, squared=False)
 
         # Disegna dei grafici di dispersione per vedere come sono distribuiti le predizioni rispetto ai valori reali
-        plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-        plots.draw_frequency_plot(y_test, y_pred)
+        plots.draw_scatter_plot(y_test, y_pred, r2, rmse) if display_plot else None
+        plots.draw_frequency_plot(y_test, y_pred) if display_plot else None
 
         # Verifichiamo quanto sono state incisive le feature per i calcoli delle predizioni
-        plots.draw_feature_importance_plot(model_now, X_test, y_test)
+        plots.draw_feature_importance_plot(model_now, X_test, y_test) if display_plot else None
 
         # Si può provare a migliorare il modello attaverso il tuning degli iperparametri
         # L'obbiettivo è minimizzare dei valori di errore
@@ -468,11 +467,11 @@ def run_model(_model):
     dh.save_data('rmse', rmse)
 
     # A questo punto ridisegnamo i plot di dispersione
-    plots.draw_scatter_plot(y_test, y_pred, r2, rmse)
-    plots.draw_frequency_plot(y_test, y_pred)
+    plots.draw_scatter_plot(y_test, y_pred, r2, rmse) if display_plot else None
+    plots.draw_frequency_plot(y_test, y_pred) if display_plot else None
 
     # Rivisualizziamo come è cambiata l'importanza dele varie feature dopo l'ottimizzazione
-    plots.draw_feature_importance_plot(model, X_test, y_test)
+    plots.draw_feature_importance_plot(model, X_test, y_test) if display_plot else None
 
     # Salvo le predizioni e i valori di test in dei file
     # np.savetxt('resources/y_pred.csv', y_pred, fmt='%f')
@@ -489,7 +488,7 @@ def run_model(_model):
     dh.save_data('y_test_class', y_test_class)
 
     # Visualizziamo la matrice di confusione
-    plots.draw_confusion_matrix(y_test_class, y_pred_class)
+    plots.draw_confusion_matrix(y_test_class, y_pred_class) if display_plot else None
 
     # A questo punto abbiamo i valori delle predizioni, sviluppiamo una strategia che li sfrutti
     # print(y_pred, y_test)
