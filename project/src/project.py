@@ -326,7 +326,7 @@ def compute_actions(result_df):
     dh.save_data('data_brk', brk[['Adj Close']])
     dh.save_data('planning_df', planning_df)
 
-    plots.plot_strategy(brk[['Adj Close']], planning_df)
+    return brk[['Adj Close']], planning_df
 
 
 def make_planning(y_pred, y_test, time_range):
@@ -345,7 +345,7 @@ def make_planning(y_pred, y_test, time_range):
 
     # Stampiamo il dataframe: ora abbiamo un insieme di azioni, vediamo quanto saremmo riusciti a guadagnare
     # avendo eseguito queste azioni
-    compute_actions(result_df)
+    return result_df
 
 
 def run_model(_model, display_plot = True):
@@ -499,7 +499,14 @@ def run_model(_model, display_plot = True):
     time_range3 = ("2020-12-18", "2021-01-19")
     time_range_fail = ("2020-03-04", "2020-03-20")
 
-    make_planning(y_pred, y_test, time_range3)
+    # Ottengo i risultati dell'algoritmo
+    result = make_planning(y_pred, y_test, time_range3)
+
+    # Ottengo i prezzi e le azioni messe in atto
+    prices, planning= compute_actions(result)
+
+    # Creo il grafico della strategia
+    plots.plot_strategy(prices, planning) if display_plot else print("OK")
 
 
 def load_model():

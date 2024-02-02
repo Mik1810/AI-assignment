@@ -2,7 +2,7 @@ from bottle import Bottle, run, template, response, static_file
 import sys
 from io import StringIO
 
-from project import load_model, run_model, make_planning
+from project import load_model, run_model, make_planning, compute_actions
 import plots
 from data_handler import shared_values as sv
 
@@ -66,17 +66,21 @@ def draw_confusion_matrix():
     return img_buf.getvalue()
 
 
+@app.route('/draw_planning')
+def draw_planning_plot():
+    # http://localhost:8080/draw_confusion_matrix
+    return plots.plot_strategy(sv['data_brk'], sv['planning_df'], 'c')
+
+
 @app.route('/make_planning/start=<start_day>&end=<end_day>')
-def make_plannig(start_day, end_day):
+def make_planning_text(start_day, end_day):
     # http://localhost:8080/make_planning/start=2020-12-18&end=2021-01-19
 
     # Cattura l'output di print
     output_buffer = StringIO()
     sys.stdout = output_buffer
-
     time_range = (start_day, end_day)
-    make_planning(sv['y_pred'], sv['y_test'], time_range)
-
+    compute_actions(make_planning(sv['y_pred'], sv['y_test'], time_range))
     # Ottengo la stringa dell'output del planning
     # (cancellando l'output del caricamento del modello)
     output = output_buffer.getvalue()
@@ -91,12 +95,6 @@ def make_plannig(start_day, end_day):
         html_home = file.read()
 
     return template(html_home, output=output)
-
-
-@app.route('/draw_planning')
-def draw_frequency_plot():
-    # http://localhost:8080/draw_planning
-    return plots.plot_strategy(sv['data_brk'], sv['planning_df'], 'C')
 
 
 @app.route('/data_table')
@@ -119,7 +117,7 @@ if __name__ == "__main__":
     # Esegui l'app Bottle
     try:
         model = load_model()
-        run_model(model, display_plot = False)
+        run_model(model, display_plot=False)
         run(app, host='0.0.0.0', port=8080, debug=True)
     finally:
         cleanup()
