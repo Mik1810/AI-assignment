@@ -504,9 +504,11 @@ def run_model(_model, display_plot = True):
 
     # Ottengo i prezzi e le azioni messe in atto
     prices, planning= compute_actions(result)
+    print(prices)
+    print("\n", planning)
 
     # Creo il grafico della strategia
-    plots.plot_strategy(prices, planning) if display_plot else print("OK")
+    plots.plot_strategy(prices, planning) if display_plot else None
 
 
 def load_model():
