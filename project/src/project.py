@@ -107,7 +107,7 @@ def feature_engineering(df):
     # della colonna 'Adj Close'. La formula è (valore_corrente - valore_precedente) / valore_precedente.
     df['returns_in_%'] = np.round((df['Adj Close'].pct_change()) * 100, 2)
 
-    # Variabile target (y) che rappresenta il ritorno in % ma spostato in avanti di un giorno al fine di indicare
+    # Variabile target (y) che rappresenta il ritorno in % ma spostato indietro di un giorno al fine di indicare
     # al modello a cosa puntare.
     df['target'] = df['returns_in_%'].shift(-1)
 
@@ -280,11 +280,12 @@ def compute_actions(result_df):
     # Creo un lista di coppie per passare poi i dati alla funzione di plot
     plot_list = [(start_day, starting_value, 'C')]
 
-    # Scorr0 il DataFrame utilizzando iterrows
+    # Scorro il DataFrame utilizzando iterrows
     for date, row in result_df.iterrows():
         action = row['Action']
         if action == "V":
             # Se l'azione precedentemente scelta è V di Vendi, allora cerco il prezzo di chiusura
+            # aggiustato
             # relativo al giorno dell'azione, aggiungo i soldi della vendita al mio portafoglio
             price = brk.loc[str(date.date()), 'Adj Close']
             money += price
@@ -504,8 +505,6 @@ def run_model(_model, display_plot = True):
 
     # Ottengo i prezzi e le azioni messe in atto
     prices, planning= compute_actions(result)
-    print(prices)
-    print("\n", planning)
 
     # Creo il grafico della strategia
     plots.plot_strategy(prices, planning) if display_plot else None
