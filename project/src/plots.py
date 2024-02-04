@@ -87,7 +87,6 @@ def draw_scatter_plot(y_test, y_pred, r2, rmse, mode=None):
 
 
 def draw_frequency_plot(y_test, y_pred, mode=None):
-    # Daily returns plot y_pred x y_test
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=np.arange(len(y_test)), y=y_test, mode='lines', name='True Values'))
     fig.add_trace(go.Scatter(x=np.arange(len(y_test)), y=y_pred, mode='lines', name='Predicted Values'))
