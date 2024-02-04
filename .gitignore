@@ -3,10 +3,14 @@
 ./*.idea
 ./1 assignment/__pycache__/
 __pycache__
-*.png
 .DS_Store
 *.zip
 *.csv
 y_test.csv
 /project/src/catboost_info
 *.download
+./1 assignment/*.png
+./3 assignment/*.png
+/1 assignment/console_print.png
+/3 assignment/crossword/crossword1.png
+/3 assignment/constraint/image.png
