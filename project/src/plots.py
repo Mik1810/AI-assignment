@@ -56,9 +56,8 @@ def draw_candlestick_plot(stock, mode=None):
     if mode is None:
         fig.show()
     else:
-        # Ottieni l'URL del plot
-        url = fig.to_html(full_html=False)
-        return url
+        # Ottieni l'HTML del plot
+        return fig.to_html(full_html=False)
 
 
 def draw_scatter_plot(y_test, y_pred, r2, rmse, mode=None):
@@ -94,9 +93,8 @@ def draw_frequency_plot(y_test, y_pred, mode=None):
     if mode is None:
         fig.show()
     else:
-        # Ottieni l'URL del plot
-        url = fig.to_html(full_html=False)
-        return url
+        # Ottieni l'HTML del plot
+        return fig.to_html(full_html=False)
 
 
 def draw_feature_importance_plot(model, X_test, y_test, mode=None):
@@ -236,6 +234,5 @@ def plot_strategy(data_brk, planning_df, mode = None):
     if mode is None:
         figure.show()
     else:
-        # Ottiene l'URL del plot
-        url = figure.to_html(full_html=False)
-        return url
+        # Ottiene l'HTML del plot
+        return figure.to_html(full_html=False)

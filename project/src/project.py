@@ -331,7 +331,7 @@ def compute_actions(result_df):
 
 
 def make_planning(y_pred, y_test, time_range):
-    # Estendo la colonna delle predizioni aggiungengo la data
+    # Estendo la colonna delle predizioni aggiungendo la data
     # Crea un dataframe combinato con la data e i valori predetti
     y_pred = pd.DataFrame({
         'date': y_test.index,
