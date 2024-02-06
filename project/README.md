@@ -11,3 +11,8 @@
 ```shell
 docker stop ai_project_module
 ```
+
+# Start the container:
+```shell
+docker start ai_project_module
+```
